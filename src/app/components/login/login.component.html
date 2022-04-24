@@ -1,0 +1,22 @@
+<div style="text-align: center;">
+  <form [formGroup]="form" class="card d-flex justify-content-center form">
+    <div>
+      <h3>Login</h3>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Usuario</mat-label>
+      <input matInput placeholder="Usuario" formControlName="user" required>
+      <mat-error>Campo requerido</mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
+      <mat-error>Campo requerido</mat-error>
+    </mat-form-field>
+    <br/>
+    <button class="btn btn-success" mat-raised-button color="primary" (click)="login()">
+      <span class="mat-body-2">Enviar</span>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col">
+        <h1>{{property.Name}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-danger">Remove</button>
+        </div>
+    </div>    
+</div>
+<hr>
+<div>
+  <mat-tab-group>
+    <mat-tab label="Property profile">
+        <dataTable [dataSource] = tableDataSource></dataTable>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>BASIC INFO</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let data of dataSource">
+        <tr>
+            <td>
+                <div>
+                    <b>{{data.Name}}</b><br>
+                    {{data.Value}}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
