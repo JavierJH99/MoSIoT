@@ -19,9 +19,6 @@ import { MenuComponent } from './components/menu/menu.component';
 import { DeviceTemplateComponent } from './components/device-template/device-template.component';
 import { DeviceTemplateDetailComponent } from './components/device-template/device-template-detail/device-template-detail.component';
 
-import { PatientDetailComponent } from "./components/patient-profile/patient-detail/patient-detail.component";
-import { PatientProfileComponent } from "./components/patient-profile/patient-profile.component";
-
 import { DeviceProfileComponent } from './components/device-template/device-profile/device-profile.component';
 import { DeviceTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry.component';
 import { DevicePropertyComponent } from './components/device-template/device-property/device-property.component';
@@ -30,7 +27,8 @@ import { DeviceTelemetryDetailComponent } from './components/device-template/dev
 import { DevicePropertyDetailComponent } from './components/device-template/device-property/device-property-detail/device-property-detail.component';
 import { DeviceCommandDetailComponent } from './components/device-template/device-command/device-command-detail/device-command-detail.component';
 
-import { PatientSubDetailComponent } from "./components/patient-profile/patient-sub-detail/patient-sub-detail.component";
+import { PatientProfileComponent } from './components/patient-profile/patient-profile.component';
+
 import { LoginComponent } from "./components/login/login.component";
 import { TableComponent } from './components/shared/table/table.component';
 import { EditDeviceProfileComponent } from './components/device-template/device-profile/edit-device-profile/edit-device-profile.component';
@@ -39,6 +37,14 @@ import { ConfirmationDialogComponent } from './components/shared/confirmation-di
 import { EditDeviceTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-device-telemetry.component';
 import { EditDevicePropertyComponent } from './components/device-template/device-property/device-property-detail/edit-device-property/edit-device-property.component';
 import { EditDeviceCommandComponent } from './components/device-template/device-command/device-command-detail/edit-device-command/edit-device-command.component';
+import { PatientProfileDetailComponent } from './components/patient-profile/patient-profile-detail/patient-profile-detail.component';
+import { PatientProfileDetailsComponent } from './components/patient-profile/patient-profile-details/patient-profile-details.component';
+import { PatientProfileConditionComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition.component';
+import { PatientProfileDisabilityComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability.component';
+import { PatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-mode.component';
+import { PatientProfileConditionDetailComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/patient-profile-condition-detail.component';
+import { PatientProfileDisabilityDetailComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/patient-profile-disability-detail.component';
+import { PatientProfileAccessDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/patient-profile-access-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +53,6 @@ import { EditDeviceCommandComponent } from './components/device-template/device-
     MenuComponent,
     DeviceTemplateDetailComponent,
     DeviceTemplateComponent,
-    PatientProfileComponent,
-    PatientDetailComponent,
     DeviceProfileComponent,
     DeviceTelemetryComponent,
     DevicePropertyComponent,
@@ -56,14 +60,22 @@ import { EditDeviceCommandComponent } from './components/device-template/device-
     DeviceTelemetryDetailComponent,
     DevicePropertyDetailComponent,
     DeviceCommandDetailComponent,
-    PatientSubDetailComponent,
     LoginComponent,
     TableComponent,
     EditDeviceProfileComponent,
     ConfirmationDialogComponent,
     EditDeviceTelemetryComponent,
     EditDevicePropertyComponent,
-    EditDeviceCommandComponent
+    EditDeviceCommandComponent,
+    PatientProfileComponent,
+    PatientProfileDetailComponent,
+    PatientProfileDetailsComponent,
+    PatientProfileConditionComponent,
+    PatientProfileDisabilityComponent,
+    PatientProfileAccessModeComponent,
+    PatientProfileConditionDetailComponent,
+    PatientProfileDisabilityDetailComponent,
+    PatientProfileAccessDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,6 @@ import { TableDataSource } from 'src/app/models/table-data-source';
   styleUrls: ['./device-profile.component.scss']
 })
 export class DeviceProfileComponent implements OnInit {
-  devices!:DeviceTemplate[];
   device!:DeviceTemplate;
 
   tableDataSource!:TableDataSource[];

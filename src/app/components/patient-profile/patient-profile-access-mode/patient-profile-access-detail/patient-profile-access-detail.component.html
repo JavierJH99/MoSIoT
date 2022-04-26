@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col">
+        <h1>{{accessMode.Name}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-danger" (click)="removeDialog()">Remove access mode</button>
+        </div>
+    </div>    
+</div>
+<hr>
+<hr>
+<div>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>receipt</mat-icon>
+            Details
+        </ng-template>
+        <dataTable [dataSource] = tableDataSource></dataTable>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>storage</mat-icon>
+            Adaptation Request
+        </ng-template>
+        <ol class="list-group mt-2" *ngFor="let adaptationRequest of accessMode.AdaptationRequest">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                <div class="fw-bold">{{adaptationRequest.AccessModeTarget}}</div>
+                {{adaptationRequest.Description}}
+                </div>
+                <span class="badge bg-primary rounded-pill">Language {{adaptationRequest.LanguageOfAdaptation}}</span>
+            </li>
+        </ol>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>accessibility</mat-icon>
+            Adaptation type required
+        </ng-template>
+        <ol class="list-group mt-2" *ngFor="let adaptationType of accessMode.AdaptationType">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                <div class="fw-bold">{{adaptationType.AdaptionRequest}}</div>
+                {{adaptationType.Description}}
+                </div>
+            </li>
+        </ol>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>fingerprint</mat-icon>
+            Adaptation detail required
+        </ng-template>
+        <ol class="list-group mt-2" *ngFor="let adaptationDetail of accessMode.AdaptationDetail">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                <div class="fw-bold">{{adaptationDetail.AdaptationRequest}}</div>
+                {{adaptationDetail.Description}}
+                </div>
+            </li>
+        </ol>
+    </mat-tab>
+  </mat-tab-group>
+</div>
