@@ -70,7 +70,7 @@ export class DeviceTemplateDetailComponent implements OnInit {
         alert("There was a problem removing the device: " + error);
       },
       complete: () => {
-        alert("Devie removed successfully");
+        alert("Device removed successfully");
         this.router.navigateByUrl("/DeviceTemplate");
       }
     })

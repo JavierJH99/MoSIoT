@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceTemplate } from 'src/app/models/device-template';
+import { Telemetry } from 'src/app/models/telemetry';
 
 @Component({
   selector: 'device-telemetry',
@@ -9,6 +10,7 @@ import { DeviceTemplate } from 'src/app/models/device-template';
 })
 export class DeviceTelemetryComponent implements OnInit {
   device!:DeviceTemplate;
+  newTelemetry!:Telemetry;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -17,6 +19,10 @@ export class DeviceTelemetryComponent implements OnInit {
 
   details(id:number){
     this.router.navigate(["DeviceTemplate/" + this.device.Name + "/Telemetry/" + id]);
+  }
+
+  createTelemetry(){
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + 0 + "/Edit");
   }
 
 }

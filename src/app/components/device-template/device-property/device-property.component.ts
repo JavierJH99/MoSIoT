@@ -18,5 +18,4 @@ export class DevicePropertyComponent implements OnInit {
   details(id:number){
     this.router.navigate(["DeviceTemplate/" + this.device.Name + "/Property/" + id]);
   }
-
 }

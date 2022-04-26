@@ -37,6 +37,8 @@ import { EditDeviceProfileComponent } from './components/device-template/device-
 import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 import { EditDeviceTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-device-telemetry.component';
+import { EditDevicePropertyComponent } from './components/device-template/device-property/device-property-detail/edit-device-property/edit-device-property.component';
+import { EditDeviceCommandComponent } from './components/device-template/device-command/device-command-detail/edit-device-command/edit-device-command.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { EditDeviceTelemetryComponent } from './components/device-template/devic
     TableComponent,
     EditDeviceProfileComponent,
     ConfirmationDialogComponent,
-    EditDeviceTelemetryComponent
+    EditDeviceTelemetryComponent,
+    EditDevicePropertyComponent,
+    EditDeviceCommandComponent
   ],
   imports: [
     BrowserModule,

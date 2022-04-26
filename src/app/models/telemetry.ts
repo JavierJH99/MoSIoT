@@ -1,6 +1,7 @@
 import { Sensor } from "./sensor";
 import { State } from "./state";
 import { Event } from "./event";
+import { Location } from "./location";
 
 export interface Telemetry {
     Id:        number;

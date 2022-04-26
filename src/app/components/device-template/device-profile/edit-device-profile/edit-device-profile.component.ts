@@ -12,6 +12,8 @@ import { Validators } from '@angular/forms';
 })
 export class EditDeviceProfileComponent implements OnInit {
   device!:DeviceTemplate;
+  newDevice!:DeviceTemplate;
+  devices!:DeviceTemplate[];
 
   deviceProfileForm = this.fb.group({
     Name:['',Validators.required],
@@ -28,6 +30,24 @@ export class EditDeviceProfileComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.deviceProfileForm.setValue({Name: this.device.Name, Type: this.device.Type, IsEdge: this.device.IsEdge});
+
+    //If not exists, create new
+    this.devices = JSON.parse('' + localStorage.getItem('devices'));
+    
+    if(!this.devices.find(device => device.Id == this.device.Id)){
+      this.deviceService.createDeviceTemplate(this.device).subscribe({
+        next: result => {
+          this.newDevice = result;
+        },
+        error: error => {
+          alert("There was a problem creating the device: " + error);
+        },
+        complete: () => {
+          this.device = this.newDevice;
+          alert("Creating new device, fill in the fields");
+        }
+      })
+    }
   }
 
   editDeviceProfile(){

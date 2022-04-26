@@ -1,13 +1,14 @@
 <div class="d-flex justify-content-between">
-    <h1>
-        <mat-icon>devices</mat-icon> Device Templates
-    </h1>
-    <div class="align-self-center p-3" *ngIf="cargando">
-        <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+    <div class="d-flex">
+        <h1>
+            <mat-icon>devices</mat-icon> Device Templates
+        </h1>
+        <div class="align-self-center p-3" *ngIf="cargando">
+            <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+        </div>
     </div>
-    
     <div class="justify-content-end">
-        <a class="btn btn-outline-primary mt-2">Create new</a>
+        <a class="btn btn-outline-primary mt-2" (click)="createDevice()">Create new</a>
     </div>
 </div>
 

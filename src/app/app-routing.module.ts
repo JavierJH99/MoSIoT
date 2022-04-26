@@ -15,6 +15,8 @@ import {PatientSubDetailComponent} from "./components/patient-profile/patient-su
 import {LoginComponent} from "./components/login/login.component";
 import { EditDeviceProfileComponent } from './components/device-template/device-profile/edit-device-profile/edit-device-profile.component';
 import { EditDeviceTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-device-telemetry.component';
+import { EditDevicePropertyComponent } from './components/device-template/device-property/device-property-detail/edit-device-property/edit-device-property.component';
+import { EditDeviceCommandComponent } from './components/device-template/device-command/device-command-detail/edit-device-command/edit-device-command.component';
 
 const routes: Routes = [
   {
@@ -46,8 +48,16 @@ const routes: Routes = [
     component:DevicePropertyDetailComponent
   },
   {
+    path:'DeviceTemplate/:deviceName/Property/:propertyId/Edit',
+    component:EditDevicePropertyComponent
+  },
+  {
     path:'DeviceTemplate/:deviceName/Command/:commandId',
     component:DeviceCommandDetailComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Command/:commandId/Edit',
+    component:EditDeviceCommandComponent
   },
   {
     path:'PatientProfile',
