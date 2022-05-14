@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientProfile } from 'src/app/models/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { LanguagePipe } from 'src/app/pipes/language.pipe';
 
 @Component({
   selector: 'patient-profile-details',
@@ -17,7 +18,7 @@ export class PatientProfileDetailsComponent implements OnInit {
   Description!:string;
   Hazard!:string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private languagePipe: LanguagePipe) { }
 
   ngOnInit(): void {
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -40,7 +41,7 @@ export class PatientProfileDetailsComponent implements OnInit {
       },
       {
         Name: "Preferred Language",
-        Value: this.patientProfile.PreferredLanguage
+        Value: this.languagePipe.transform(this.patientProfile.PreferredLanguage)
       }
     ]
   }

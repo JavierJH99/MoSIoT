@@ -5,6 +5,8 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { Telemetry } from 'src/app/models/telemetry';
+import { TelemetryTypePipe } from 'src/app/pipes/telemetry-type.pipe';
+import { TelemetryUnitTypePipe } from 'src/app/pipes/telemetry-unit-type.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 
 @Component({
@@ -19,51 +21,17 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   tableProfileDataSource!:TableDataSource[];
   tableSpecificDataSource!:TableDataSource[];
 
-  type!:string;
-  unit!:string;
-  severity!:string;
-
   constructor(private activatedRoute: ActivatedRoute, private router: Router, 
-    public dialog: MatDialog, private deviceService: DeviceTemplateService) { }
+    public dialog: MatDialog, private deviceService: DeviceTemplateService,
+    private telemetryTypePipe: TelemetryTypePipe,
+    private telemetryUnitType: TelemetryUnitTypePipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.telemetry = this.device.Telemetries.find(telemetry => telemetry.Id == this.id)!;
 
-    this.dataAtapter();
     this.loadProfileTable();
-    this.loadSpecificTable();
-  }
-
-  loadProfileTable(){
-    this.tableProfileDataSource = [
-      {
-        Name: "Frecency",
-        Value: this.telemetry.Frecuency
-      },
-      {
-        Name: "Type",
-        Value: this.type
-      },
-      {
-        Name: "Unit",
-        Value: this.unit
-      }
-    ]
-  }
-
-  loadSpecificTable(){
-    this.tableSpecificDataSource = [
-      {
-        Name: "Name",
-        Value: this.telemetry.Name
-      },
-      {
-        Name: "Severity",
-        Value: this.severity
-      }
-    ]
   }
 
   editTelemetryProfile(){
@@ -109,63 +77,20 @@ export class DeviceTelemetryDetailComponent implements OnInit {
     })
   }
 
-  dataAtapter(){
-    switch(this.telemetry.Type){
-      case 1:
-        this.type = "State"
-        break;
-      case 2:
-        this.type = "Event"
-        break;
-      case 3:
-        this.type = "Location"
-        break;
-      case 4:
-        this.type = "Sensor"
-        break;
-      default:
-        this.type = "State"
-        break;
-    }
-
-    switch(this.telemetry.Unit){
-      case 1:
-        this.unit = "Percent"
-        break;
-      case 2:
-        this.unit = "Degree farenheit"
-        break;
-      case 3:
-        this.unit = "Degree celsius"
-        break;
-      case 4:
-        this.unit = "Geolocation"
-        break;
-      case 5:
-        this.unit = "Steps"
-        break;
-      case 6:
-        this.unit = "Beats per minute"
-        break;
-      default:
-        this.unit = "Percent"
-        break;
-    }
-
-    switch(this.telemetry.Event_.Severity){
-      case 0:
-        this.severity = "Warning"
-        break;
-      case 1:
-        this.severity = "Error"
-        break;
-      case 2:
-        this.severity = "Info"
-        break;
-      default:
-        this.severity = "Warning"
-        break;
-    }
+  loadProfileTable(){
+    this.tableProfileDataSource = [
+      {
+        Name: "Frecuency",
+        Value: this.telemetry.Frecuency
+      },
+      {
+        Name: "Type",
+        Value: this.telemetryTypePipe.transform(this.telemetry.Type)
+      },
+      {
+        Name: "Unit",
+        Value: this.telemetryUnitType.transform(this.telemetry.Unit)
+      }
+    ]
   }
-
 }

@@ -30,7 +30,7 @@
                 <div class="fw-bold">{{adaptationRequest.AccessModeTarget}}</div>
                 {{adaptationRequest.Description}}
                 </div>
-                <span class="badge bg-primary rounded-pill">Language {{adaptationRequest.LanguageOfAdaptation}}</span>
+                <span *ngIf="adaptationRequest.LanguageOfAdaptation === 1" class="badge bg-primary rounded-pill">Language {{adaptationRequest.LanguageOfAdaptation}}</span>
             </li>
         </ol>
     </mat-tab>

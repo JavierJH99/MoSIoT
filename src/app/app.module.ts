@@ -45,6 +45,12 @@ import { PatientProfileAccessModeComponent } from './components/patient-profile/
 import { PatientProfileConditionDetailComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/patient-profile-condition-detail.component';
 import { PatientProfileDisabilityDetailComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/patient-profile-disability-detail.component';
 import { PatientProfileAccessDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/patient-profile-access-detail.component';
+import { LanguagePipe } from './pipes/language.pipe';
+import { DeviceSpecificTelemtryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/device-specific-telemtry/device-specific-telemtry.component';
+import { EditDeviceSpecificTelemtryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/device-specific-telemtry/edit-device-specific-telemtry/edit-device-specific-telemtry.component';
+import { SeverityPipe } from './pipes/severity.pipe';
+import { TelemetryTypePipe } from './pipes/telemetry-type.pipe';
+import { TelemetryUnitTypePipe } from './pipes/telemetry-unit-type.pipe';
 
 @NgModule({
   declarations: [
@@ -75,7 +81,13 @@ import { PatientProfileAccessDetailComponent } from './components/patient-profil
     PatientProfileAccessModeComponent,
     PatientProfileConditionDetailComponent,
     PatientProfileDisabilityDetailComponent,
-    PatientProfileAccessDetailComponent
+    PatientProfileAccessDetailComponent,
+    LanguagePipe,
+    DeviceSpecificTelemtryComponent,
+    EditDeviceSpecificTelemtryComponent,
+    SeverityPipe,
+    TelemetryTypePipe,
+    TelemetryUnitTypePipe
   ],
   imports: [
     BrowserModule,
@@ -92,6 +104,10 @@ import { PatientProfileAccessDetailComponent } from './components/patient-profil
     ReactiveFormsModule
   ],
   providers: [
+    SeverityPipe,
+    TelemetryTypePipe,
+    TelemetryUnitTypePipe,
+    LanguagePipe,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
