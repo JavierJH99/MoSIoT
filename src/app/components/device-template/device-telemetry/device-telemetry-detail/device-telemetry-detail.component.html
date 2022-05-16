@@ -14,7 +14,7 @@
     <mat-tab label="Telemetries profile">
         <dataTable [dataSource] = tableProfileDataSource></dataTable>
     </mat-tab>
-    <mat-tab label="Specific telemetry">
+    <mat-tab label="{{telemetryType}} Specifics">
         <device-specific-telemtry [telemetry]="this.telemetry"></device-specific-telemtry>
     </mat-tab>
   </mat-tab-group>

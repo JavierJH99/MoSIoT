@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TelemetryUnitTypePipe implements PipeTransform {
   unitType!:string;
+  
   transform(value: number): string {
     switch(value){
       case 1:

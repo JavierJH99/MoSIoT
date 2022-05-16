@@ -5,6 +5,7 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { Property } from 'src/app/models/property';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { BooleanToStringPipe } from 'src/app/pipes/boolean-to-string.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 
 @Component({
@@ -18,15 +19,12 @@ export class DevicePropertyDetailComponent implements OnInit {
   property!:Property;
   tableDataSource!:TableDataSource[];
 
-  writable!:string;
-  cloudable!:string;
-
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    public dialog: MatDialog, private deviceService: DeviceTemplateService) { }
+    public dialog: MatDialog, private deviceService: DeviceTemplateService,
+    private boolToString: BooleanToStringPipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['propertyId']);
-
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.property = this.device.Properties.find(property => property.Id == this.id)!;
 
@@ -34,28 +32,14 @@ export class DevicePropertyDetailComponent implements OnInit {
   }
 
   loadTable(){
-    if(this.property.IsCloudable as boolean){
-      this.cloudable = "ON"
-    }
-    else{
-      this.cloudable = "OFF"
-    }
-
-    if(this.property.IsWritable as boolean){
-      this.writable = "ON"
-    }
-    else{
-      this.writable = "OFF"
-    }
-
     this.tableDataSource = [
       {
         Name: "Writable",
-        Value: this.writable
+        Value: this.boolToString.transform(this.property.IsWritable)
       },
       {
         Name: "Cloudable",
-        Value: this.cloudable
+        Value: this.boolToString.transform(this.property.IsCloudable)
       }
     ]
   }

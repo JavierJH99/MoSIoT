@@ -21,6 +21,8 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   tableProfileDataSource!:TableDataSource[];
   tableSpecificDataSource!:TableDataSource[];
 
+  telemetryType!:string;
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router, 
     public dialog: MatDialog, private deviceService: DeviceTemplateService,
     private telemetryTypePipe: TelemetryTypePipe,
@@ -30,6 +32,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.telemetry = this.device.Telemetries.find(telemetry => telemetry.Id == this.id)!;
+    this.telemetryType = this.telemetryTypePipe.transform(this.telemetry.Type);
 
     this.loadProfileTable();
   }

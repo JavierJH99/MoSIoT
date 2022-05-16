@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { BooleanToStringPipe } from 'src/app/pipes/boolean-to-string.pipe';
+import { DeviceTypePipe } from 'src/app/pipes/device-type.pipe';
 
 @Component({
   selector: 'device-profile',
@@ -10,34 +12,13 @@ import { TableDataSource } from 'src/app/models/table-data-source';
 })
 export class DeviceProfileComponent implements OnInit {
   device!:DeviceTemplate;
-
   tableDataSource!:TableDataSource[];
 
-  Name!:string;
-  IsEdge!:string;
-  Type!:string;
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private boolToStringPipe: BooleanToStringPipe, 
+    private deviceTypePipe: DeviceTypePipe) { }
 
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
-
-    if(this.device?.IsEdge as boolean){
-      this.IsEdge = "ON";
-    }
-    else{
-      this.IsEdge = "OFF";
-    }
-
-    let deviceType = this.device?.Type as number;
-
-    if(deviceType == 1){
-      this.Type = "Sensor"
-    }
-    else if(deviceType == 2){
-      this.Type = "Actuator"
-    }
-
     this.loadTable();
   }
 
@@ -45,11 +26,11 @@ export class DeviceProfileComponent implements OnInit {
     this.tableDataSource = [
       {
         Name: "Type",
-        Value: this.Type
+        Value: this.deviceTypePipe.transform(this.device.Type)
       },
       {
         Name: "IsEdge",
-        Value: this.IsEdge
+        Value: this.boolToStringPipe.transform(this.device.IsEdge)
       }
     ]
   }

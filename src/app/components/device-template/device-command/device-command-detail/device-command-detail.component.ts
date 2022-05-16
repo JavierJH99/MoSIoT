@@ -5,6 +5,7 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { Command } from 'src/app/models/command';
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { BooleanToStringPipe } from 'src/app/pipes/boolean-to-string.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 
 @Component({
@@ -18,10 +19,9 @@ export class DeviceCommandDetailComponent implements OnInit {
   command!:Command;
   tableDataSource!:TableDataSource[];
 
-  synchronous!:string;
-
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    public dialog: MatDialog, private deviceService: DeviceTemplateService) { }
+    public dialog: MatDialog, private deviceService: DeviceTemplateService,
+    private boolToString: BooleanToStringPipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['commandId']);
@@ -33,17 +33,10 @@ export class DeviceCommandDetailComponent implements OnInit {
   }
 
   loadTable(){
-    if(this.command.IsSynchronous as boolean){
-      this.synchronous = "ON"
-    }
-    else{
-      this.synchronous = "OFF"
-    }
-
     this.tableDataSource = [
       {
         Name: "Synchronous",
-        Value: this.synchronous
+        Value: this.boolToString.transform(this.command.IsSynchronous)
       }
     ]
   }
