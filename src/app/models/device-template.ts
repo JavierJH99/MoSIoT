@@ -7,7 +7,7 @@ export interface DeviceTemplate {
     Name:        string;
     Type:        number;
     IsEdge:      boolean;
-    Properties:  Property[];
-    Commands:    Command[];
-    Telemetries: Telemetry[];
+    Properties?:  Property[];
+    Commands?:    Command[];
+    Telemetries?: Telemetry[];
 }

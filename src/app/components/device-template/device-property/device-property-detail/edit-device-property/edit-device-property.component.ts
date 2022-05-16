@@ -31,7 +31,7 @@ export class EditDevicePropertyComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['propertyId']);
-    this.property = this.device.Properties.find(property => property.Id == this.id)!;
+    this.property = this.device.Properties?.find(property => property.Id == this.id)!;
 
     this.devicePropertyForm.setValue({
       Name: this.property.Name,

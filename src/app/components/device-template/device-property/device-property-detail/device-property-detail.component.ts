@@ -26,7 +26,7 @@ export class DevicePropertyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['propertyId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
-    this.property = this.device.Properties.find(property => property.Id == this.id)!;
+    this.property = this.device.Properties?.find(property => property.Id == this.id)!;
 
     this.loadTable();
   }

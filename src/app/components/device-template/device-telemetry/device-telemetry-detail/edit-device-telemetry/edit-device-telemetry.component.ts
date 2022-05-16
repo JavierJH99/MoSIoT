@@ -38,8 +38,8 @@ export class EditDeviceTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
-    if(this.device.Telemetries.find(telemetry => telemetry.Id == this.id)){
-      this.telemetry = this.device.Telemetries.find(telemetry => telemetry.Id == this.id)!;      
+    if(this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)){
+      this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)!;      
     }
     else{
       this.createNewTelemetry();

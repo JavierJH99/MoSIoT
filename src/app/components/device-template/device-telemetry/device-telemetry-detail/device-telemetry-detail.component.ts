@@ -31,7 +31,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
-    this.telemetry = this.device.Telemetries.find(telemetry => telemetry.Id == this.id)!;
+    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)!;
     this.telemetryType = this.telemetryTypePipe.transform(this.telemetry.Type);
 
     this.loadProfileTable();

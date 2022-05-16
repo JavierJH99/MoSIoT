@@ -29,7 +29,7 @@ export class EditDeviceCommandComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['commandId']);
-    this.command = this.device.Commands.find(command => command.Id == this.id)!;
+    this.command = this.device.Commands?.find(command => command.Id == this.id)!;
 
     this.deviceCommandForm.setValue({
       Name: this.command.Name,
