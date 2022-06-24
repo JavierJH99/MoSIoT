@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -5,6 +6,8 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { Disability } from 'src/app/models/disability';
 import { PatientProfile } from 'src/app/models/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { DisabilityTypePipe } from 'src/app/pipes/PatientProfile/disability-type.pipe';
+import { PatientSeverityPipe } from 'src/app/pipes/PatientProfile/patient-severity.pipe';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({
@@ -19,7 +22,8 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
   tableDataSource!:TableDataSource[];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    public dialog: MatDialog, private patientProfileService: PatientProfileService) { }
+    public dialog: MatDialog, private patientProfileService: PatientProfileService, private severityPipe: PatientSeverityPipe,
+    private disabilityTypePipe: DisabilityTypePipe, private titleCasePipe: TitleCasePipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['disabilityId']);
@@ -34,11 +38,11 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
     this.tableDataSource = [
       {
         Name: "Disability type",
-        Value: this.disability.Type
+        Value: this.disabilityTypePipe.transform(this.disability.Type)
       },
       {
         Name: "Severity",
-        Value: this.disability.Severity
+        Value: this.severityPipe.transform(this.disability.Severity)
       },
       {
         Name: "Description",

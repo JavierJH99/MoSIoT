@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { BooleanToStringPipe } from 'src/app/pipes/boolean-to-string.pipe';
-import { DeviceTypePipe } from 'src/app/pipes/device-type.pipe';
+import { DeviceTypePipe } from 'src/app/pipes/Device/device-type.pipe';
 
 @Component({
   selector: 'device-profile',

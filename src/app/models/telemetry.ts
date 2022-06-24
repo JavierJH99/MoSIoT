@@ -10,8 +10,8 @@ export interface Telemetry {
     Unit:      number;
     Name:      string;
     Type:      number;
-    Sensor:    Sensor;
-    State:     State;
-    Location:  Location;
-    Event_:    Event;
+    Sensor?:    Sensor;
+    State?:     State;
+    Location?:  Location;
+    Event_?:    Event;
 }

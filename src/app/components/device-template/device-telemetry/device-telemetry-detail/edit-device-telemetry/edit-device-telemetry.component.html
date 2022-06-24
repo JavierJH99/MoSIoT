@@ -1,4 +1,4 @@
-<form [formGroup]="telemtryProfileForm" (ngSubmit)="editDeviceTelemetry()">
+<form [formGroup]="telemtryProfileForm" (ngSubmit)="saveDeviceTelemetry()">
     <div class="form-floating needs-validation row">
         <input type="text" class="form-control" formControlName="Name" id="name" required>
         <label for="name">Name</label>
@@ -155,22 +155,7 @@
                     <tr>
                         <td>
                             <div>
-                                <b>Severity</b><br>
-                                <select class="form-select" formControlName="Severity" *ngIf="telemetry.Event_.Severity === 0">
-                                    <option value="0">Warning</option>
-                                    <option value="1">Error</option>
-                                    <option value="2">Info</option>
-                                </select>
-                                <select class="form-select" formControlName="Severity" *ngIf="telemetry.Event_.Severity === 1">
-                                    <option value="1">Error</option>
-                                    <option value="0">Warning</option>
-                                    <option value="2">Info</option>
-                                </select>
-                                <select class="form-select" formControlName="Severity" *ngIf="telemetry.Event_.Severity === 2">
-                                    <option value="2">Info</option>
-                                    <option value="0">Warning</option>
-                                    <option value="1">Error</option>
-                                </select>
+                                
                             </div>
                         </td>
                     </tr>

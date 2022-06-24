@@ -5,8 +5,8 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { Telemetry } from 'src/app/models/telemetry';
-import { TelemetryTypePipe } from 'src/app/pipes/telemetry-type.pipe';
-import { TelemetryUnitTypePipe } from 'src/app/pipes/telemetry-unit-type.pipe';
+import { TelemetryTypePipe } from 'src/app/pipes/Device/telemetry-type.pipe';
+import { TelemetryUnitTypePipe } from 'src/app/pipes/Device/telemetry-unit-type.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 
 @Component({

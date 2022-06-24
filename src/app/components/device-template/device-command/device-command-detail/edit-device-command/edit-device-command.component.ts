@@ -31,28 +31,52 @@ export class EditDeviceCommandComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['commandId']);
     this.command = this.device.Commands?.find(command => command.Id == this.id)!;
 
-    this.deviceCommandForm.setValue({
-      Name: this.command.Name,
-      Synchronous: this.command.IsSynchronous
-    });
+    //If not exists, create new
+    if(!this.device.Commands?.some(command => command.Id == this.command.Id)){
+      alert("Creating new command, fill in the fields");
+      this.deviceCommandForm.setValue({Name: "", Synchronous: false});
+    } 
+    //If exists
+    else{
+      this.deviceCommandForm.setValue({Name: this.command.Name, Synchronous: this.command.IsSynchronous});
+    }
   }
 
   editDeviceCommand(){
     this.command.Name = this.deviceCommandForm.get('Name')?.value;
     this.command.IsSynchronous = this.deviceCommandForm.get('Synchronous')?.value;
 
-    this.deviceService.updateDeviceCommand(this.command.Id,this.command).subscribe({
-      next : result =>{
-        console.log(result);
-      },
-      error : error => {
-        alert("Failed to save changes: " + error);
-      },
-      complete : () => {
-        localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-        this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Command/" + this.command.Id);
-      }
-    });
+    if(!this.device.Commands?.some(command => command.Id == this.command.Id)){
+      this.command.Id = this.device.Id
+      this.deviceService.createCommand(this.command).subscribe({
+        next : result =>{
+          this.command = result;
+        },
+        error : error => {
+          alert("Failed to save changes: " + error);
+        },
+        complete : () => {
+          localStorage.setItem('deviceDetail',JSON.stringify(this.device));
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Command/" + this.command.Id);
+          alert("Changes saved");
+        }
+      });
+    }
+    else{
+      this.deviceService.updateDeviceCommand(this.command.Id,this.command).subscribe({
+        next : result =>{
+          console.log(result);
+        },
+        error : error => {
+          alert("Failed to save changes: " + error);
+        },
+        complete : () => {
+          localStorage.setItem('deviceDetail',JSON.stringify(this.device));
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Command/" + this.command.Id);
+          alert("Changes saved");
+        }
+      });
+    }
   }
 
   cancelDeviceCommand(){

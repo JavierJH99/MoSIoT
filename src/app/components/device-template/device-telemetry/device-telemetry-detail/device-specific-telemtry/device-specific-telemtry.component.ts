@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { Telemetry } from 'src/app/models/telemetry';
-import { SeverityPipe } from 'src/app/pipes/severity.pipe';
+import { SeverityPipe } from 'src/app/pipes/Device/severity.pipe';
 
 @Component({
   selector: 'device-specific-telemtry',
@@ -37,7 +37,7 @@ export class DeviceSpecificTelemtryComponent implements OnInit {
   }
 
   loadStateTelemetry(){
-    this.telemetry.State.States.forEach(state => {
+    this.telemetry.State?.States.forEach(state => {
       this.tableSpecificTelemetryDataSource.push(
         {
           Name: state.name,
@@ -51,7 +51,7 @@ export class DeviceSpecificTelemtryComponent implements OnInit {
     this.tableSpecificTelemetryDataSource = [
       {
         Name: "Severity",
-        Value: this.severityPipe.transform(this.telemetry.Event_.Severity)
+        Value: this.severityPipe.transform(this.telemetry.Event_?.Severity!)
       }
     ] 
   }
@@ -60,15 +60,15 @@ export class DeviceSpecificTelemtryComponent implements OnInit {
     this.tableSpecificTelemetryDataSource = [
       {
         Name: "Latitude",
-        Value: this.telemetry.Location.Latitude
+        Value: this.telemetry.Location?.Latitude
       },
       {
         Name: "Longitude",
-        Value: this.telemetry.Location.Longitude
+        Value: this.telemetry.Location?.Longitude
       },
       {
         Name: "Altitude",
-        Value: this.telemetry.Location.Altitude
+        Value: this.telemetry.Location?.Altitude
       }
     ]
   }
@@ -77,7 +77,7 @@ export class DeviceSpecificTelemtryComponent implements OnInit {
     this.tableSpecificTelemetryDataSource = [
       {
         Name: "Sensor Type",
-        Value: this.telemetry.Sensor.SensorType
+        Value: this.telemetry.Sensor?.SensorType
       }
     ]
   }

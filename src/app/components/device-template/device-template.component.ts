@@ -16,9 +16,6 @@ export class DeviceTemplateComponent implements OnInit {
     Name: "",
     IsEdge: true,
     Type: 1,
-    Properties: [],
-    Commands: [],
-    Telemetries: []
   };
 
   constructor(private router: Router, private deviceTemplateService: DeviceTemplateService) { }
@@ -47,7 +44,7 @@ export class DeviceTemplateComponent implements OnInit {
 
   createDevice(){
     localStorage.setItem('deviceDetail',JSON.stringify(this.newDevice));
-    this.router.navigateByUrl("DeviceTemplate/ " + this.newDevice.Name + "/EditProfile");
+    this.router.navigateByUrl("DeviceTemplate/New Device/EditProfile");
   }
 
 }

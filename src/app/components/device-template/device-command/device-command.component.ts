@@ -19,4 +19,8 @@ export class DeviceCommandComponent implements OnInit {
     this.router.navigate(["DeviceTemplate/" + this.device.Name + "/Command/" + id]);
   }
 
+  createCommand(){
+    this.router.navigateByUrl("DeviceTemplate/"+ this.device.Name +"/Command/New Command/Edit");
+  }
+
 }

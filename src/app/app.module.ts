@@ -53,11 +53,18 @@ import { EditDeviceProfileComponent } from './components/device-template/device-
 //#endregion Device
 //#region Pipes
 import { LanguagePipe } from './pipes/language.pipe';
-import { SeverityPipe } from './pipes/severity.pipe';
-import { TelemetryTypePipe } from './pipes/telemetry-type.pipe';
-import { TelemetryUnitTypePipe } from './pipes/telemetry-unit-type.pipe';
+import { SeverityPipe } from './pipes/Device/severity.pipe';
+import { TelemetryTypePipe } from './pipes/Device/telemetry-type.pipe';
+import { TelemetryUnitTypePipe } from './pipes/Device/telemetry-unit-type.pipe';
 import { BooleanToStringPipe } from './pipes/boolean-to-string.pipe';
-import { DeviceTypePipe } from './pipes/device-type.pipe';
+import { DeviceTypePipe } from './pipes/Device/device-type.pipe';
+import { AccessModeTypePipe } from './pipes/PatientProfile/access-mode-type.pipe';
+import { AdaptationTypePipe } from './pipes/PatientProfile/adaptation-type.pipe';
+import { AdaptationDetailPipe } from './pipes/PatientProfile/adaptation-detail.pipe';
+import { HazardValuePipe } from './pipes/PatientProfile/hazard-value.pipe';
+import { UpperCasePipe } from '@angular/common';
+import { DisabilityTypePipe } from './pipes/PatientProfile/disability-type.pipe';
+import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pipe';
 //#endregion Pipes
 
 @NgModule({
@@ -97,7 +104,13 @@ import { DeviceTypePipe } from './pipes/device-type.pipe';
     TelemetryTypePipe,
     TelemetryUnitTypePipe,
     BooleanToStringPipe,
-    DeviceTypePipe
+    DeviceTypePipe,
+    AccessModeTypePipe,
+    AdaptationTypePipe,
+    AdaptationDetailPipe,
+    HazardValuePipe,
+    DisabilityTypePipe,
+    PatientSeverityPipe
   ],
   imports: [
     BrowserModule,
@@ -120,6 +133,11 @@ import { DeviceTypePipe } from './pipes/device-type.pipe';
     LanguagePipe,
     BooleanToStringPipe,
     DeviceTypePipe,
+    AccessModeTypePipe,
+    HazardValuePipe,
+    UpperCasePipe,
+    DisabilityTypePipe,
+    PatientSeverityPipe,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

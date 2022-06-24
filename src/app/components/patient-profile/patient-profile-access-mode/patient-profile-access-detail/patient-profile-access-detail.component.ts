@@ -5,6 +5,7 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { AccessMode } from 'src/app/models/access-mode';
 import { PatientProfile } from 'src/app/models/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { AccessModeTypePipe } from 'src/app/pipes/PatientProfile/access-mode-type.pipe';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class PatientProfileAccessDetailComponent implements OnInit {
   tableDataSource!:TableDataSource[];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    public dialog: MatDialog, private patientProfileService: PatientProfileService) { }
+    public dialog: MatDialog, private patientProfileService: PatientProfileService,
+    private accessModeTypePipe: AccessModeTypePipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['accessModeId']);
@@ -27,14 +29,14 @@ export class PatientProfileAccessDetailComponent implements OnInit {
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.accessMode = this.patientProfile.AccessMode.find(accessMode => accessMode.Id == this.id)!;
     
-    this.loadTable();
+    this.loadTable(); 
   }
 
   loadTable(){
     this.tableDataSource = [
       {
         Name: "Access mode type",
-        Value: this.accessMode.TypeAccessMode
+        Value: this.accessModeTypePipe.transform(this.accessMode.TypeAccessMode)
       },
       {
         Name: "Description",

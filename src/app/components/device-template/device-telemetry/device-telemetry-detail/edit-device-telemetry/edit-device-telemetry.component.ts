@@ -22,15 +22,13 @@ export class EditDeviceTelemetryComponent implements OnInit {
     Name:['',Validators.required],
     Frecuency:['',Validators.required],
     Type:[''],
-    Unit:[''],
-    Severity:['']
+    Unit:['']
   })
 
   get Name() { return this.telemtryProfileForm.get('Name'); }
   get Frecuency() { return this.telemtryProfileForm.get('Frecuency'); }
   get Type() { return this.telemtryProfileForm.get('Type'); }
   get Unit() { return this.telemtryProfileForm.get('Unit'); }
-  get Severity() { return this.telemtryProfileForm.get('Severity'); }
   
   constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, 
     private router:Router, private activatedRoute: ActivatedRoute) { }
@@ -38,28 +36,32 @@ export class EditDeviceTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
-    if(this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)){
-      this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)!;      
+    
+    let finTelemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)
+    if(finTelemetry){
+      this.telemetry = finTelemetry!;      
     }
     else{
       this.createNewTelemetry();
     }
 
-    console.log("Telemetria creada " + this.telemetry);
     this.telemtryProfileForm.setValue({
       Name: this.telemetry.Name,
       Frecuency: this.telemetry.Frecuency ,
       Type: this.telemetry.Type, 
       Unit: this.telemetry.Unit,
-      Severity: this.telemetry.Event_.Severity});
+      Severity: this.telemetry.Event_?.Severity});
   }
 
-  editDeviceTelemetry(){
-    this.telemetry.Name = this.telemtryProfileForm.get('Name')?.value;
-    this.telemetry.Frecuency = this.telemtryProfileForm.get('Frecuency')?.value;
-    this.telemetry.Unit = this.telemtryProfileForm.get('Unit')?.value;
-    this.telemetry.Type = this.telemtryProfileForm.get('Type')?.value;
-    this.telemetry.Event_.Severity = this.telemtryProfileForm.get('Severity')?.value;
+  saveDeviceTelemetry(){
+    this.telemetry = {
+      Id: 0,
+      Schema: 0,
+      Name: this.telemtryProfileForm.get('Name')?.value,
+      Frecuency: this.telemtryProfileForm.get('Frecuency')?.value,
+      Unit: this.telemtryProfileForm.get('Unit')?.value,
+      Type: this.telemtryProfileForm.get('Type')?.value,
+    }
 
     console.log(this.telemetry);
     this.deviceService.updateDeviceTelemetry(this.telemetry.Id,this.telemetry).subscribe({
@@ -88,33 +90,6 @@ export class EditDeviceTelemetryComponent implements OnInit {
       Name:"",
     }
 
-    this.telemetry = {
-      Id: 1,
-      Name: "",
-      Type: 1,
-      Unit: 1,
-      Frecuency: 1,
-      Event_: {
-        Id: 1,
-        Severity: 1
-      },
-      Location: {
-        Id: 1,
-        Altitude: 1,
-        Latitude: 1,
-        Longitude: 1
-      },
-      Schema: 1,
-      Sensor: {
-        Id: 1,
-        SensorType: ""
-      },
-      State: {
-        Id: 1,
-        States: []
-      }
-    }
-
     this.deviceService.createTelemetry(this.newTelemetry).subscribe({
       next: result => {
         this.telemetry.Id = result.Id;
@@ -128,11 +103,11 @@ export class EditDeviceTelemetryComponent implements OnInit {
     })
 
     this.telemtryProfileForm.setValue({
-      Name: this.telemetry.Name,
-      Frecuency: this.telemetry.Frecuency ,
-      Type: this.telemetry.Type, 
-      Unit: this.telemetry.Unit,
-      Severity: this.telemetry.Event_.Severity});
+      Name: this.newTelemetry.Name,
+      Frecuency: this.newTelemetry.Frecuency ,
+      Type: this.newTelemetry.Type, 
+      Unit: this.newTelemetry.Unit,
+      Severity: this.newTelemetry.Event_.Severity});
   }
 
   cancelDeviceTelemetry(){

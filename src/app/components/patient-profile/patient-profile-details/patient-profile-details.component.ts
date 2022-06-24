@@ -1,7 +1,9 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientProfile } from 'src/app/models/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { HazardValuePipe } from 'src/app/pipes/PatientProfile/hazard-value.pipe';
 import { LanguagePipe } from 'src/app/pipes/language.pipe';
 
 @Component({
@@ -18,7 +20,8 @@ export class PatientProfileDetailsComponent implements OnInit {
   Description!:string;
   Hazard!:string;
 
-  constructor(private router: Router, private languagePipe: LanguagePipe) { }
+  constructor(private router: Router, private languagePipe: LanguagePipe, private hazardValuePipe: HazardValuePipe,
+    private upperCasePipe: UpperCasePipe) { }
 
   ngOnInit(): void {
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -33,7 +36,7 @@ export class PatientProfileDetailsComponent implements OnInit {
       },
       {
         Name: "Hazard Value",
-        Value: this.patientProfile.HazardAvoidance
+        Value: this.hazardValuePipe.transform(this.patientProfile.HazardAvoidance)
       },
       {
         Name: "Region",
@@ -41,7 +44,7 @@ export class PatientProfileDetailsComponent implements OnInit {
       },
       {
         Name: "Preferred Language",
-        Value: this.languagePipe.transform(this.patientProfile.PreferredLanguage)
+        Value: this.upperCasePipe.transform(this.languagePipe.transform(this.patientProfile.PreferredLanguage))
       }
     ]
   }
