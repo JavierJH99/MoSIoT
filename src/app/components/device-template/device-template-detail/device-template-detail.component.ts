@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DeviceTemplate } from 'src/app/models/device-template';
+import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 

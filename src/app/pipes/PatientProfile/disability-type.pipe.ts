@@ -9,22 +9,22 @@ export class DisabilityTypePipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 1:
-        this.disabilityType = "auditory"
+        this.disabilityType = "Auditory"
         break;
       case 2:
-        this.disabilityType = "cognitive"
+        this.disabilityType = "Cognitive"
         break;
       case 3:
-        this.disabilityType = "physical"
+        this.disabilityType = "Physical"
         break;
       case 4:
-        this.disabilityType = "speech"
+        this.disabilityType = "Speech"
         break;
       case 5:
-        this.disabilityType = "visual"
+        this.disabilityType = "Visual"
         break;
       default:
-        this.disabilityType = "auditory"
+        this.disabilityType = "Auditory"
         break;
     }
     return this.disabilityType;

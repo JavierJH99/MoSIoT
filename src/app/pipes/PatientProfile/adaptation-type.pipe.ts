@@ -9,34 +9,34 @@ export class AdaptationTypePipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 1:
-        this.adaptationType = "alternativeText"
+        this.adaptationType = "Alternative Text"
         break;
       case 2:
-        this.adaptationType = "audioDescription"
+        this.adaptationType = "Audio Description"
         break;
       case 3:
-        this.adaptationType = "captions"
+        this.adaptationType = "Captions"
         break;
       case 4:
         this.adaptationType = "e_book"
         break;
       case 5:
-        this.adaptationType = "haptic"
+        this.adaptationType = "Haptic"
         break;
       case 6:
-        this.adaptationType = "highContrast"
+        this.adaptationType = "High Contrast"
         break;
       case 7:
-        this.adaptationType = "longDescription"
+        this.adaptationType = "Long Description"
         break;
       case 8:
-        this.adaptationType = "signLanguage"
+        this.adaptationType = "Sign Language"
         break;
       case 9:
-        this.adaptationType = "transcript"
+        this.adaptationType = "Transcript"
         break;
       default:
-        this.adaptationType = "alternativeText"
+        this.adaptationType = "Alternative Text"
         break;
     }
     return this.adaptationType;

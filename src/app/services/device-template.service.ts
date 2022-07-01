@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DeviceTemplate } from '../models/device-template';
+import { DeviceTemplate } from '../models/Device Template/device-template';
 import { environment } from 'src/environments/environment';
-import { Telemetry } from '../models/telemetry';
-import { Property } from '../models/property';
-import { Command } from '../models/command';
-import { NewTelemetry } from '../models/new-telemetry';
+import { Telemetry } from '../models/Device Template/telemetry';
+import { Property } from '../models/Device Template/property';
+import { Command } from '../models/Device Template/command';
+import { NewTelemetry } from '../models/Device Template/new-telemetry';
 
 @Injectable({
   providedIn: 'root'

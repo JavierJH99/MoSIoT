@@ -9,37 +9,37 @@ export class AccessModeTypePipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 1:
-        this.accessMode = "auditory"
+        this.accessMode = "Auditory"
         break;
       case 2:
-        this.accessMode = "colour"
+        this.accessMode = "Colour"
         break;
       case 3:
-        this.accessMode = "itemSize"
+        this.accessMode = "Item Size"
         break;
       case 4:
-        this.accessMode = "olfactory"
+        this.accessMode = "Olfactory"
         break;
       case 5:
-        this.accessMode = "orientation"
+        this.accessMode = "Orientation"
         break;
       case 6:
-        this.accessMode = "position"
+        this.accessMode = "Position"
         break;
       case 7:
-        this.accessMode = "tactile"
+        this.accessMode = "Tactile"
         break;
       case 8:
-        this.accessMode = "textOnImage"
+        this.accessMode = "Text On Image"
         break;
       case 9:
-        this.accessMode = "textual"
+        this.accessMode = "Textual"
         break;
       case 10:
-        this.accessMode = "visual"
+        this.accessMode = "Visual"
         break;
       default:
-        this.accessMode = "auditory"
+        this.accessMode = "Auditory"
         break;
     }
 

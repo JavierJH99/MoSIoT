@@ -18,7 +18,7 @@ export class DiseaseTypePipe implements PipeTransform {
         this.type = "Cancer"
         break;
       case 4:
-        this.type = "Heart_Disease"
+        this.type = "Heart Disease"
         break;
       case 5:
         this.type = "Obesity"
@@ -36,7 +36,7 @@ export class DiseaseTypePipe implements PipeTransform {
         this.type = "Narcolepsy"
         break;
       case 10:
-        this.type = "Eating_disorders"
+        this.type = "Eating disorders"
         break;
       case 11:
         this.type = "Osteoporosis"
@@ -48,7 +48,7 @@ export class DiseaseTypePipe implements PipeTransform {
         this.type = "Fibrosis"
         break;
       case 14:
-        this.type = "Oral_Health"
+        this.type = "Oral Health"
         break;
       default:
         this.type = "Alzheimer"

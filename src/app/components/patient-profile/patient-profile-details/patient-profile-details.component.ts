@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PatientProfile } from 'src/app/models/patient-profile';
+import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { HazardValuePipe } from 'src/app/pipes/PatientProfile/hazard-value.pipe';
 import { LanguagePipe } from 'src/app/pipes/language.pipe';

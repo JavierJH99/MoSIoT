@@ -78,6 +78,8 @@ import { EditPatientProfileDisabilityComponent } from './components/patient-prof
 import { EditPatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-access-mode.component';
 import { EditPatientProfileAdaptationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-request/edit-patient-profile-adaptation-request.component';
 import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
+import { DisabilityAdapterComponent } from './adapters/Patient Profile/disability-adapter/disability-adapter.component';
+import { ConditionAdapterComponent } from './adapters/Patient Profile/condition-adapter/condition-adapter.component';
 //#endregion Pipes
 
 @NgModule({
@@ -135,7 +137,9 @@ import { CreatePatientProfileAdapatationRequestComponent } from './components/pa
     EditPatientProfileDisabilityComponent,
     EditPatientProfileAccessModeComponent,
     EditPatientProfileAdaptationRequestComponent,
-    CreatePatientProfileAdapatationRequestComponent
+    CreatePatientProfileAdapatationRequestComponent,
+    DisabilityAdapterComponent,
+    ConditionAdapterComponent
   ],
   imports: [
     BrowserModule,
@@ -166,6 +170,8 @@ import { CreatePatientProfileAdapatationRequestComponent } from './components/pa
     SchemaTypePipe,
     ClinicalStatusPipe,
     DiseaseTypePipe,
+    DisabilityAdapterComponent,
+    ConditionAdapterComponent,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

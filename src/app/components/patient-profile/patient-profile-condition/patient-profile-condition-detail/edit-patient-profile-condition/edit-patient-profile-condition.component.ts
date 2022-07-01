@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Condition } from 'src/app/models/condition';
-import { PatientProfile } from 'src/app/models/patient-profile';
+import { ConditionAdapterComponent } from 'src/app/adapters/Patient Profile/condition-adapter/condition-adapter.component';
+import { Condition } from 'src/app/models/Patient Profile/condition';
+import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { PatientProfileService } from 'src/app/services/patient-profile.service'
 export class EditPatientProfileConditionComponent implements OnInit {
   patient!:PatientProfile;
   condition!:Condition;
+  isNew:boolean = false;
   id!:number;
 
   patientConditionForm = this.fb.group({
@@ -28,7 +30,7 @@ export class EditPatientProfileConditionComponent implements OnInit {
   get Description() { return this.patientConditionForm.get('Description'); }
   
   constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
-    private router:Router, private activatedRoute: ActivatedRoute) { }
+    private router:Router, private activatedRoute: ActivatedRoute, private conditionAdapter: ConditionAdapterComponent) { }
 
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -38,11 +40,20 @@ export class EditPatientProfileConditionComponent implements OnInit {
     //If not exists, create new
     if(!this.patient.Condition.some(condition => condition.Id == this.id)){
       alert("Creating new condition, fill in the fields");
-      this.patientConditionForm.setValue({Name: "", Clinical: 1, Disease: 1, Description: ""});
-    } 
-    //If exists
-    else{
-      this.patientConditionForm.setValue({Name: this.condition.Name, Clinical: this.condition.ClinicalStatus, Disease: this.condition.Disease, Description: this.condition.Description});
+      this.isNew = true;
+      this.initDefaults();
+    }
+
+    this.patientConditionForm.setValue({Name: this.condition.Name, Clinical: this.condition.ClinicalStatus, Disease: this.condition.Disease, Description: this.condition.Description});
+  }
+
+  initDefaults(){
+    this.condition = {
+      Id: 0,
+      Name: "",
+      ClinicalStatus: 1,
+      Description: "",
+      Disease: 1
     }
   }
 
@@ -52,9 +63,8 @@ export class EditPatientProfileConditionComponent implements OnInit {
     this.condition.Disease = this.patientConditionForm.get('Disease')?.value;
     this.condition.Description = this.patientConditionForm.get('Description')?.value;
 
-    if(!this.patient.Condition.some(condition => condition.Id == this.condition.Id)){
-      // this.condition.Id = this.patient.Id
-      this.patientService.createCondition(this.condition).subscribe({
+    if(this.isNew){
+      this.patientService.createCondition(this.conditionAdapter.newCondition(this.condition, this.patient.Id)).subscribe({
         next : result =>{
           this.condition = result;
         },

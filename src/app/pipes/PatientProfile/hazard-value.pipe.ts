@@ -12,10 +12,10 @@ export class HazardValuePipe implements PipeTransform {
         this.hazardValue = "flashing"
         break;
       case 2:
-        this.hazardValue = "motionSimulation"
+        this.hazardValue = "motion Simulation"
         break;
       case 3:
-        this.hazardValue = "olfactoryHazard"
+        this.hazardValue = "olfactory Hazard"
         break;
       case 4:
         this.hazardValue = "sound"

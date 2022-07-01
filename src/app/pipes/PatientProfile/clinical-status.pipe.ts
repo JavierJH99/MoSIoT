@@ -9,25 +9,25 @@ export class ClinicalStatusPipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 1:
-        this.type = "active"
+        this.type = "Active"
         break;
       case 2:
-        this.type = "recurrrence"
+        this.type = "Recurrrence"
         break;
       case 3:
-        this.type = "release"
+        this.type = "Release"
         break;
       case 4:
-        this.type = "inactive"
+        this.type = "Inactive"
         break;
       case 5:
-        this.type = "remission"
+        this.type = "Remission"
         break;
       case 6:
-        this.type = "resolved"
+        this.type = "Resolved"
         break;
       default:
-        this.type = "active"
+        this.type = "Active"
         break;
     }
     

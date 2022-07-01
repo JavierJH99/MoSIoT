@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Disability } from 'src/app/models/disability';
-import { PatientProfile } from 'src/app/models/patient-profile';
+import { DisabilityAdapterComponent } from 'src/app/adapters/Patient Profile/disability-adapter/disability-adapter.component';
+import { Disability } from 'src/app/models/Patient Profile/disability';
+import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
   patient!:PatientProfile;
   disability!:Disability;
   id!:number;
+  newDisability:boolean = false;
 
   patientDisabilityForm = this.fb.group({
     Name:['',Validators.required],
@@ -28,7 +30,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
   get Description() { return this.patientDisabilityForm.get('Description'); }
   
   constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
-    private router:Router, private activatedRoute: ActivatedRoute) { }
+    private router:Router, private activatedRoute: ActivatedRoute, private disabilityAdapater: DisabilityAdapterComponent) { }
 
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -38,11 +40,20 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
     //If not exists, create new
     if(!this.patient.Disabilities.some(disability => disability.Id == this.id)){
       alert("Creating new condition, fill in the fields");
-      this.patientDisabilityForm.setValue({Name: "", Type: 1, Severity: 1, Description: ""});
-    } 
-    //If exists
-    else{
-      this.patientDisabilityForm.setValue({Name: this.disability.Name, Type: this.disability.Type, Severity: this.disability.Severity, Description: this.disability.Description});
+      this.newDisability = true;
+      this.initDefaults();
+    }
+
+    this.patientDisabilityForm.setValue({Name: this.disability.Name, Type: this.disability.Type, Severity: this.disability.Severity, Description: this.disability.Description});
+  }
+
+  initDefaults(){
+    this.disability = {
+      Id: 0,
+      Name: "",
+      Description: "",
+      Severity: 1,
+      Type: 1
     }
   }
 
@@ -52,9 +63,8 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
     this.disability.Severity = this.patientDisabilityForm.get('Severity')?.value;
     this.disability.Description = this.patientDisabilityForm.get('Description')?.value;
 
-    if(!this.patient.Disabilities.some(disability => disability.Id == this.disability.Id)){
-      // this.condition.Id = this.patient.Id
-      this.patientService.createDisability(this.disability).subscribe({
+    if(this.newDisability){
+      this.patientService.createDisability(this.disabilityAdapater.newDisability(this.disability, this.patient.Id)).subscribe({
         next : result =>{
           this.disability = result;
         },

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AccessMode } from 'src/app/models/access-mode';
-import { PatientProfile } from 'src/app/models/patient-profile';
+import { AccessMode } from 'src/app/models/Patient Profile/access-mode';
+import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({

@@ -9,25 +9,25 @@ export class AdaptationDetailPipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 1:
-        this.adaptationDetail = "enhanced"
+        this.adaptationDetail = "Enhanced"
         break;
       case 2:
-        this.adaptationDetail = "realTime"
+        this.adaptationDetail = "Real Time"
         break;
       case 3:
-        this.adaptationDetail = "record"
+        this.adaptationDetail = "Record"
         break;
       case 4:
-        this.adaptationDetail = "symbolic"
+        this.adaptationDetail = "Symbolic"
         break;
       case 5:
-        this.adaptationDetail = "synthesized"
+        this.adaptationDetail = "Synthesized"
         break;
       case 6:
-        this.adaptationDetail = "verbatim"
+        this.adaptationDetail = "Verbatim"
         break;
       default:
-        this.adaptationDetail = "enhanced"
+        this.adaptationDetail = "Enhanced"
         break;
     }
     return this.adaptationDetail;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Command } from 'src/app/models/command';
-import { DeviceTemplate } from 'src/app/models/device-template';
+import { Command } from 'src/app/models/Device Template/command';
+import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 
 @Component({

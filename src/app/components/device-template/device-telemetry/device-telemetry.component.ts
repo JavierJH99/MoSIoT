@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeviceTemplate } from 'src/app/models/device-template';
-import { Telemetry } from 'src/app/models/telemetry';
+import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
+import { Telemetry } from 'src/app/models/Device Template/telemetry';
 
 @Component({
   selector: 'device-telemetry',

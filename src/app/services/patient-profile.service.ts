@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AccessMode } from '../models/access-mode';
-import { AdaptationRequest } from '../models/adaptation-request';
-import { Condition } from '../models/condition';
-import { Disability } from '../models/disability';
-import { NewAdaptationRequest } from '../models/new-adaptation-request';
-import { PatientProfile } from '../models/patient-profile';
+import { AccessMode } from '../models/Patient Profile/access-mode';
+import { AdaptationRequest } from '../models/Patient Profile/adaptation-request';
+import { Condition } from '../models/Patient Profile/condition';
+import { Disability } from '../models/Patient Profile/disability';
+import { NewAdaptationRequest } from '../models/Patient Profile/new-adaptation-request';
+import { NewCondition } from '../models/Patient Profile/new-condition';
+import { NewDisability } from '../models/Patient Profile/new-disability';
+import { PatientProfile } from '../models/Patient Profile/patient-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +29,11 @@ export class PatientProfileService {
     return this.http.post<PatientProfile>(environment.base_url + '/PatientProfile/New_', data);
   }
 
-  createCondition(data: Condition){
+  createCondition(data: NewCondition){
     return this.http.post<Condition>(environment.base_url + '/Condition/New_', data);
   }
 
-  createDisability(data: Disability){
+  createDisability(data: NewDisability){
     return this.http.post<Disability>(environment.base_url + '/Disability/New_', data);
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TableDataSource } from 'src/app/models/table-data-source';
-import { Telemetry } from 'src/app/models/telemetry';
+import { Telemetry } from 'src/app/models/Device Template/telemetry';
 import { SeverityPipe } from 'src/app/pipes/Device/severity.pipe';
 
 @Component({
