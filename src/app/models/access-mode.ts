@@ -7,7 +7,7 @@ export interface AccessMode {
     TypeAccessMode:    number;
     Description:       string;
     Name:              string;
-    AdaptationType:    AdaptationType[];
-    AdaptationDetail:  AdaptationDetail[];
-    AdaptationRequest: AdaptationRequest[];
+    AdaptationType?:    AdaptationType[];
+    AdaptationDetail?:  AdaptationDetail[];
+    AdaptationRequest?: AdaptationRequest[];
 }

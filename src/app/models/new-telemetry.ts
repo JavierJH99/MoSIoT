@@ -4,7 +4,4 @@ export interface NewTelemetry {
     Unit:      number;
     Name:      string;
     Type:      number;
-    Event_: {
-        Severity: number;
-    };
 }

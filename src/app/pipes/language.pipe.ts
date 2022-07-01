@@ -9,34 +9,34 @@ export class LanguagePipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 1:
-        this.language = "es"
+        this.language = "ES"
         break;
       case 2:
-        this.language = "en"
+        this.language = "EN"
         break;
       case 3:
-        this.language = "fr"
+        this.language = "FR"
         break;
       case 4:
-        this.language = "it"
+        this.language = "IT"
         break;
       case 5:
-        this.language = "pr"
+        this.language = "PR"
         break;
       case 6:
-        this.language = "de"
+        this.language = "DE"
         break;
       case 7:
-        this.language = "ja"
+        this.language = "JA"
         break;
       case 8:
-        this.language = "ko"
+        this.language = "KO"
         break;
       case 9:
-        this.language = "zh"
+        this.language = "ZH"
         break;
       default:
-        this.language = "es"
+        this.language = "ES"
         break;
     }
     return this.language;

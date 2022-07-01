@@ -5,6 +5,7 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { DeviceTemplate } from 'src/app/models/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { Telemetry } from 'src/app/models/telemetry';
+import { SchemaTypePipe } from 'src/app/pipes/Device/schema-type.pipe';
 import { TelemetryTypePipe } from 'src/app/pipes/Device/telemetry-type.pipe';
 import { TelemetryUnitTypePipe } from 'src/app/pipes/Device/telemetry-unit-type.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
@@ -21,18 +22,14 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   tableProfileDataSource!:TableDataSource[];
   tableSpecificDataSource!:TableDataSource[];
 
-  telemetryType!:string;
-
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, 
-    public dialog: MatDialog, private deviceService: DeviceTemplateService,
-    private telemetryTypePipe: TelemetryTypePipe,
-    private telemetryUnitType: TelemetryUnitTypePipe) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, 
+    private deviceService: DeviceTemplateService, private telemetryTypePipe: TelemetryTypePipe, 
+    private telemetryUnitType: TelemetryUnitTypePipe, private schemaTypePipe: SchemaTypePipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)!;
-    this.telemetryType = this.telemetryTypePipe.transform(this.telemetry.Type);
 
     this.loadProfileTable();
   }
@@ -93,6 +90,10 @@ export class DeviceTelemetryDetailComponent implements OnInit {
       {
         Name: "Unit",
         Value: this.telemetryUnitType.transform(this.telemetry.Unit)
+      },
+      {
+        Name: "Schema",
+        Value: this.schemaTypePipe.transform(this.telemetry.Schema)
       }
     ]
   }

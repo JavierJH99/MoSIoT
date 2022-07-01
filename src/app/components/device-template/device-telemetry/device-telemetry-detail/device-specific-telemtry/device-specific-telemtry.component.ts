@@ -12,9 +12,7 @@ export class DeviceSpecificTelemtryComponent implements OnInit {
   @Input() telemetry !:Telemetry;
   tableSpecificTelemetryDataSource!:TableDataSource[];
 
-  constructor(private severityPipe: SeverityPipe) {
-    this.tableSpecificTelemetryDataSource = [];
-  }
+  constructor(private severityPipe: SeverityPipe) { }
 
   ngOnInit(): void {
     switch(this.telemetry.Type){
@@ -37,6 +35,8 @@ export class DeviceSpecificTelemtryComponent implements OnInit {
   }
 
   loadStateTelemetry(){
+    this.tableSpecificTelemetryDataSource = [];
+
     this.telemetry.State?.States.forEach(state => {
       this.tableSpecificTelemetryDataSource.push(
         {

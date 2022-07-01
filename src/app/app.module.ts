@@ -1,3 +1,4 @@
+//#region Utilities
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
@@ -8,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from "./components/login/login.component";
 import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
-
+//#endregion Utilities
 //#region Angular Material
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -48,7 +49,6 @@ import { EditDeviceTelemetryComponent } from './components/device-template/devic
 import { EditDevicePropertyComponent } from './components/device-template/device-property/device-property-detail/edit-device-property/edit-device-property.component';
 import { EditDeviceCommandComponent } from './components/device-template/device-command/device-command-detail/edit-device-command/edit-device-command.component';
 import { DeviceSpecificTelemtryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/device-specific-telemtry/device-specific-telemtry.component';
-import { EditDeviceSpecificTelemtryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/device-specific-telemtry/edit-device-specific-telemtry/edit-device-specific-telemtry.component';
 import { EditDeviceProfileComponent } from './components/device-template/device-profile/edit-device-profile/edit-device-profile.component';
 //#endregion Device
 //#region Pipes
@@ -65,6 +65,19 @@ import { HazardValuePipe } from './pipes/PatientProfile/hazard-value.pipe';
 import { UpperCasePipe } from '@angular/common';
 import { DisabilityTypePipe } from './pipes/PatientProfile/disability-type.pipe';
 import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pipe';
+import { SchemaTypePipe } from './pipes/Device/schema-type.pipe';
+import { EditTelemetryStateComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-state/edit-telemetry-state.component';
+import { EditTelemetryEventComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-event/edit-telemetry-event.component';
+import { EditTelemetryLocationComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-location/edit-telemetry-location.component';
+import { EditTelemetrySensorComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-sensor/edit-telemetry-sensor.component';
+import { ClinicalStatusPipe } from './pipes/PatientProfile/clinical-status.pipe';
+import { DiseaseTypePipe } from './pipes/PatientProfile/disease-type.pipe';
+import { EditPatientProfileDetailsComponent } from './components/patient-profile/patient-profile-details/edit-patient-profile-details/edit-patient-profile-details.component';
+import { EditPatientProfileConditionComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/edit-patient-profile-condition/edit-patient-profile-condition.component';
+import { EditPatientProfileDisabilityComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/edit-patient-profile-disability/edit-patient-profile-disability.component';
+import { EditPatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-access-mode.component';
+import { EditPatientProfileAdaptationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-request/edit-patient-profile-adaptation-request.component';
+import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
 //#endregion Pipes
 
 @NgModule({
@@ -99,7 +112,6 @@ import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pip
     PatientProfileAccessDetailComponent,
     LanguagePipe,
     DeviceSpecificTelemtryComponent,
-    EditDeviceSpecificTelemtryComponent,
     SeverityPipe,
     TelemetryTypePipe,
     TelemetryUnitTypePipe,
@@ -110,7 +122,20 @@ import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pip
     AdaptationDetailPipe,
     HazardValuePipe,
     DisabilityTypePipe,
-    PatientSeverityPipe
+    PatientSeverityPipe,
+    SchemaTypePipe,
+    EditTelemetryStateComponent,
+    EditTelemetryEventComponent,
+    EditTelemetryLocationComponent,
+    EditTelemetrySensorComponent,
+    ClinicalStatusPipe,
+    DiseaseTypePipe,
+    EditPatientProfileDetailsComponent,
+    EditPatientProfileConditionComponent,
+    EditPatientProfileDisabilityComponent,
+    EditPatientProfileAccessModeComponent,
+    EditPatientProfileAdaptationRequestComponent,
+    CreatePatientProfileAdapatationRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -138,6 +163,9 @@ import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pip
     UpperCasePipe,
     DisabilityTypePipe,
     PatientSeverityPipe,
+    SchemaTypePipe,
+    ClinicalStatusPipe,
+    DiseaseTypePipe,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

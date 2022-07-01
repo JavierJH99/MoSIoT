@@ -31,13 +31,9 @@
                 <td>
                     <div>
                         <b>Type</b><br>
-                        <select class="form-select" formControlName="Type" *ngIf="device.Type === 1">
+                        <select class="form-select" formControlName="Type">
                             <option value="1">Sensor</option>
                             <option value="2">Actuator</option>
-                        </select>
-                        <select class="form-select" formControlName="Type" *ngIf="device.Type === 2">
-                            <option value="2">Actuator</option>
-                            <option value="1">Sensor</option>
                         </select>
                     </div>
                 </td>

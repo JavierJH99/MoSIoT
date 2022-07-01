@@ -5,6 +5,8 @@ import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmat
 import { Condition } from 'src/app/models/condition';
 import { PatientProfile } from 'src/app/models/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
+import { ClinicalStatusPipe } from 'src/app/pipes/PatientProfile/clinical-status.pipe';
+import { DiseaseTypePipe } from 'src/app/pipes/PatientProfile/disease-type.pipe';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({
@@ -19,11 +21,11 @@ export class PatientProfileConditionDetailComponent implements OnInit {
   tableDataSource!:TableDataSource[];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    public dialog: MatDialog, private patientProfileService: PatientProfileService) { }
+    public dialog: MatDialog, private patientProfileService: PatientProfileService, private diseaseType: DiseaseTypePipe,
+    private clinicalType: ClinicalStatusPipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['conditionId']);
-
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.condition = this.patientProfile.Condition.find(condition => condition.Id == this.id)!;
 
@@ -34,11 +36,11 @@ export class PatientProfileConditionDetailComponent implements OnInit {
     this.tableDataSource = [
       {
         Name: "Clinical status",
-        Value: this.condition.ClinicalStatus
+        Value: this.clinicalType.transform(this.condition.ClinicalStatus)
       },
       {
         Name: "Disease",
-        Value: this.condition.Disease
+        Value: this.diseaseType.transform(this.condition.Disease)
       },
       {
         Name: "Description",

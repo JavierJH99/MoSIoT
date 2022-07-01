@@ -19,6 +19,12 @@ import { PatientProfileDetailComponent } from './components/patient-profile/pati
 import { PatientProfileConditionDetailComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/patient-profile-condition-detail.component';
 import { PatientProfileDisabilityDetailComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/patient-profile-disability-detail.component';
 import { PatientProfileAccessDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/patient-profile-access-detail.component';
+import { EditPatientProfileDetailsComponent } from './components/patient-profile/patient-profile-details/edit-patient-profile-details/edit-patient-profile-details.component';
+import { EditPatientProfileConditionComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/edit-patient-profile-condition/edit-patient-profile-condition.component';
+import { EditPatientProfileDisabilityComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/edit-patient-profile-disability/edit-patient-profile-disability.component';
+import { EditPatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-access-mode.component';
+import { EditPatientProfileAdaptationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-request/edit-patient-profile-adaptation-request.component';
+import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
 
 const routes: Routes = [
   {
@@ -38,16 +44,40 @@ const routes: Routes = [
     component:PatientProfileDetailComponent
   },
   {
+    path:'PatientProfile/:patientProfileName/EditDetails',
+    component:EditPatientProfileDetailsComponent
+  },
+  {
     path:'PatientProfile/:patientProfileName/Condition/:conditionId',
     component:PatientProfileConditionDetailComponent
+  },
+  {
+    path:'PatientProfile/:patientProfileName/Condition/:conditionId/Edit',
+    component:EditPatientProfileConditionComponent
   },
   {
     path:'PatientProfile/:patientProfileName/Disability/:disabilityId',
     component:PatientProfileDisabilityDetailComponent
   },
   {
+    path:'PatientProfile/:patientProfileName/Disability/:disabilityId/Edit',
+    component:EditPatientProfileDisabilityComponent
+  },
+  {
     path:'PatientProfile/:patientProfileName/AccessMode/:accessModeId',
     component:PatientProfileAccessDetailComponent
+  },
+  {
+    path:'PatientProfile/:patientProfileName/AccessMode/:accessModeId/Edit',
+    component:EditPatientProfileAccessModeComponent
+  },
+  {
+    path:'PatientProfile/:patientProfileName/AccessMode/:accessModeId/AdaptationRequest/:adaptationRequestId/Edit',
+    component:EditPatientProfileAdaptationRequestComponent
+  },
+  {
+    path:'PatientProfile/:patientProfileName/AccessMode/:accessModeId/AdaptationRequest/New',
+    component:CreatePatientProfileAdapatationRequestComponent
   },
   {
     path:'DeviceTemplate/:deviceId',

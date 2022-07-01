@@ -1,4 +1,3 @@
-import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -23,7 +22,7 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private patientProfileService: PatientProfileService, private severityPipe: PatientSeverityPipe,
-    private disabilityTypePipe: DisabilityTypePipe, private titleCasePipe: TitleCasePipe) { }
+    private disabilityTypePipe: DisabilityTypePipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['disabilityId']);

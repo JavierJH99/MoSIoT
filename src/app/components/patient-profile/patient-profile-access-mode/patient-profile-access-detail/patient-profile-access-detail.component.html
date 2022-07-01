@@ -4,11 +4,10 @@
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-danger" (click)="removeDialog()">Remove access mode</button>
+            <button class="btn btn-outline-danger" (click)="removeDialog(accessMode.Name,1 )">Remove access mode</button>
         </div>
     </div>    
 </div>
-<hr>
 <hr>
 <div>
   <mat-tab-group animationDuration="0ms">
@@ -18,6 +17,10 @@
             Details
         </ng-template>
         <dataTable [dataSource] = tableDataSource></dataTable>
+        
+        <div class="d-flex justify-content-end mt-2">
+            <a class="btn btn-success" (click)="editAccessMode()">Edit</a>
+        </div>
     </mat-tab>
     <mat-tab>
         <ng-template mat-tab-label>
@@ -25,14 +28,21 @@
             Adaptation Request
         </ng-template>
         <ol class="list-group mt-2" *ngFor="let adaptationRequest of accessMode.AdaptationRequest">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class="list-group-item d-flex align-items-start">
                 <div class="ms-2 me-auto">
-                <div class="fw-bold">{{adaptationRequest.AccessModeTarget | accessModeType | titlecase}}</div>
-                {{adaptationRequest.Description | titlecase}}
+                    <div class="fw-bold">{{adaptationRequest.AccessModeTarget | accessModeType | titlecase}}</div>
+                    {{adaptationRequest.Description | titlecase}}
                 </div>
                 <span class="badge bg-primary rounded-pill">Language: {{adaptationRequest.LanguageOfAdaptation | language | uppercase}}</span>
+                <div>
+                    <button class="btn btn-outline-success" (click)="editAdaptationRequest(adaptationRequest.Id)">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation Request', 2, adaptationRequest.Id)">Remove</button>
+                </div>
             </li>
         </ol>
+        <div class="d-flex justify-content-end mt-2">
+            <a class="btn btn-primary" (click)="createAdaptationRequest()">Create new</a>
+        </div>
     </mat-tab>
     <mat-tab>
         <ng-template mat-tab-label>
@@ -40,13 +50,20 @@
             Adaptation type required
         </ng-template>
         <ol class="list-group mt-2" *ngFor="let adaptationType of accessMode.AdaptationType">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class="list-group-item d-flex align-items-start">
                 <div class="ms-2 me-auto">
                 <div class="fw-bold">{{adaptationType.AdaptionRequest | adaptationType | titlecase}}</div>
                 {{adaptationType.Description}}
                 </div>
+                <div>
+                    <button class="btn btn-outline-success" (click)="editAccessMode()">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation type', 3, adaptationType.Id)">Remove</button>
+                </div>
             </li>
         </ol>
+        <div class="d-flex justify-content-end mt-2">
+            <a class="btn btn-primary">Create new</a>
+        </div>
     </mat-tab>
     <mat-tab>
         <ng-template mat-tab-label>
@@ -54,13 +71,20 @@
             Adaptation detail required
         </ng-template>
         <ol class="list-group mt-2" *ngFor="let adaptationDetail of accessMode.AdaptationDetail">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class="list-group-item d-flex align-items-start">
                 <div class="ms-2 me-auto">
                 <div class="fw-bold">{{adaptationDetail.AdaptationRequest | adaptationDetail | titlecase}}</div>
                 {{adaptationDetail.Description}}
                 </div>
+                <div>
+                    <button class="btn btn-outline-success" (click)="editAccessMode()">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation detail', 4, adaptationDetail.Id)">Remove</button>
+                </div>
             </li>
         </ol>
+        <div class="d-flex justify-content-end mt-2">
+            <a class="btn btn-primary">Create new</a>
+        </div>
     </mat-tab>
   </mat-tab-group>
 </div>

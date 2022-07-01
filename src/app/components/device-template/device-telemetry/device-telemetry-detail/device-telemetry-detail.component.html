@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <h1>{{telemetry.Name}}</h1>
+        <h1>{{telemetry.Name | titlecase}}</h1>
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
@@ -14,7 +14,7 @@
     <mat-tab label="Telemetries profile">
         <dataTable [dataSource] = tableProfileDataSource></dataTable>
     </mat-tab>
-    <mat-tab label="{{telemetryType}} Specifics">
+    <mat-tab label="{{telemetry.Type | telemetryType}} Specifics">
         <device-specific-telemtry [telemetry]="this.telemetry"></device-specific-telemtry>
     </mat-tab>
   </mat-tab-group>
