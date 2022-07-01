@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ConditionAdapterComponent } from 'src/app/adapters/Patient Profile/condition-adapter/condition-adapter.component';
+import { PatientProfileAdapterComponent } from 'src/app/adapters/patient-profile-adapter/patient-profile-adapter.component';
 import { Condition } from 'src/app/models/Patient Profile/condition';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
@@ -30,7 +30,7 @@ export class EditPatientProfileConditionComponent implements OnInit {
   get Description() { return this.patientConditionForm.get('Description'); }
   
   constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
-    private router:Router, private activatedRoute: ActivatedRoute, private conditionAdapter: ConditionAdapterComponent) { }
+    private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -64,7 +64,7 @@ export class EditPatientProfileConditionComponent implements OnInit {
     this.condition.Description = this.patientConditionForm.get('Description')?.value;
 
     if(this.isNew){
-      this.patientService.createCondition(this.conditionAdapter.newCondition(this.condition, this.patient.Id)).subscribe({
+      this.patientService.createCondition(this.patientProfileAdapter.newCondition(this.condition, this.patient.Id)).subscribe({
         next : result =>{
           this.condition = result;
         },

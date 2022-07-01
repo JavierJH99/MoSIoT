@@ -18,4 +18,8 @@ export class PatientProfileAccessModeComponent implements OnInit {
   details(id:number){
     this.router.navigate(["PatientProfile/" + this.patientProfile.Name + "/AccessMode/" + id]);
   }
+
+  createAccessMode(){
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + -999 + "/Edit");
+  }
 }

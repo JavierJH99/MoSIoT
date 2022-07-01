@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DisabilityAdapterComponent } from 'src/app/adapters/Patient Profile/disability-adapter/disability-adapter.component';
+import { PatientProfileAdapterComponent } from 'src/app/adapters/patient-profile-adapter/patient-profile-adapter.component';
 import { Disability } from 'src/app/models/Patient Profile/disability';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
@@ -30,7 +30,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
   get Description() { return this.patientDisabilityForm.get('Description'); }
   
   constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
-    private router:Router, private activatedRoute: ActivatedRoute, private disabilityAdapater: DisabilityAdapterComponent) { }
+    private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -64,7 +64,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
     this.disability.Description = this.patientDisabilityForm.get('Description')?.value;
 
     if(this.newDisability){
-      this.patientService.createDisability(this.disabilityAdapater.newDisability(this.disability, this.patient.Id)).subscribe({
+      this.patientService.createDisability(this.patientProfileAdapter.newDisability(this.disability, this.patient.Id)).subscribe({
         next : result =>{
           this.disability = result;
         },

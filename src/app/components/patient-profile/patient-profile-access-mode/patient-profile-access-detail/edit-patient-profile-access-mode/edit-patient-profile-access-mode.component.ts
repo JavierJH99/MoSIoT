@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { PatientProfileAdapterComponent } from 'src/app/adapters/patient-profile-adapter/patient-profile-adapter.component';
 import { AccessMode } from 'src/app/models/Patient Profile/access-mode';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
@@ -14,6 +15,7 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
   patient!:PatientProfile;
   accessMode!:AccessMode;
   id!:number;
+  newAccessMode:boolean = false;
 
   patientAccessForm = this.fb.group({
     Name:['',Validators.required],
@@ -26,7 +28,7 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
   get Description() { return this.patientAccessForm.get('Description'); }
   
   constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
-    private router:Router, private activatedRoute: ActivatedRoute) { }
+    private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
@@ -36,11 +38,19 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
     //If not exists, create new
     if(!this.patient.AccessMode.some(access => access.Id == this.id)){
       alert("Creating new access mode, fill in the fields");
-      this.patientAccessForm.setValue({Name: "", Type: 1, Description: ""});
-    } 
-    //If exists
-    else{
-      this.patientAccessForm.setValue({Name: this.accessMode.Name, Type: this.accessMode.TypeAccessMode, Description: this.accessMode.Description});
+      this.initDefaults();
+      this.newAccessMode = true;
+    }
+
+    this.patientAccessForm.setValue({Name: this.accessMode.Name, Type: this.accessMode.TypeAccessMode, Description: this.accessMode.Description});
+  }
+
+  initDefaults(){
+    this.accessMode = {
+      Id: 0,
+      Description: "",
+      Name: "",
+      TypeAccessMode: 1,
     }
   }
 
@@ -49,9 +59,8 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
     this.accessMode.TypeAccessMode = this.patientAccessForm.get('Type')?.value;
     this.accessMode.Description = this.patientAccessForm.get('Description')?.value;
 
-    if(!this.patient.AccessMode.some(access => access.Id == this.accessMode.Id)){
-      // this.condition.Id = this.patient.Id
-      this.patientService.createPatientAccessMode(this.accessMode).subscribe({
+    if(this.newAccessMode){
+      this.patientService.createPatientAccessMode(this.patientProfileAdapter.newAccessMode(this.accessMode, this.patient.Id, this.patient.Disabilities[0].Id)).subscribe({
         next : result =>{
           this.accessMode = result;
         },

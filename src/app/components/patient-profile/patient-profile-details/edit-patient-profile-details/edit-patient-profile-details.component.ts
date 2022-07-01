@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PatientProfileAdapterComponent } from 'src/app/adapters/patient-profile-adapter/patient-profile-adapter.component';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
@@ -11,8 +12,8 @@ import { PatientProfileService } from 'src/app/services/patient-profile.service'
 })
 export class EditPatientProfileDetailsComponent implements OnInit {
   patient!:PatientProfile;
-  newPatient!:PatientProfile;
   patients!:PatientProfile[];
+  newPatient:boolean = false;
 
   patientProfileForm = this.fb.group({
     Name:['',Validators.required],
@@ -28,7 +29,7 @@ export class EditPatientProfileDetailsComponent implements OnInit {
   get Region() { return this.patientProfileForm.get('Region'); }
   get Language() { return this.patientProfileForm.get('Language'); }
   
-  constructor(private fb:FormBuilder, private patientService:PatientProfileService, private router:Router) { }
+  constructor(private fb:FormBuilder, private patientService:PatientProfileService, private router:Router, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
   ngOnInit(): void {
     this.patients = JSON.parse('' + localStorage.getItem('patientProfiles'));
@@ -36,12 +37,11 @@ export class EditPatientProfileDetailsComponent implements OnInit {
     //If not exists, create new
     if(!this.patients.some(patient => patient.Id == this.patient.Id)){
       alert("Creating new patient, fill in the fields");
-      this.patientProfileForm.setValue({Name: "", Description: "", Hazard: 1, Region: "", Language: 1});
+      this.newPatient = true;
     } 
-    //If exists
-    else{
-      this.patientProfileForm.setValue({Name: this.patient.Name, Description: this.patient.Description, Hazard: this.patient.HazardAvoidance, Region: this.patient.Region, Language: this.patient.PreferredLanguage});
-    }
+
+    this.patientProfileForm.setValue({Name: this.patient.Name, Description: this.patient.Description, Hazard: this.patient.HazardAvoidance, Region: this.patient.Region, Language: this.patient.PreferredLanguage});
+  
   }
 
   editPatientProfile(){
@@ -51,17 +51,17 @@ export class EditPatientProfileDetailsComponent implements OnInit {
     this.patient.Region = this.patientProfileForm.get('Region')?.value
     this.patient.PreferredLanguage = this.patientProfileForm.get('Language')?.value
 
-    if(!this.patients.some(patient => patient.Id == this.patient.Id)){
-      this.patientService.createPatientProfile(this.patient).subscribe({
+    if(this.newPatient){
+      this.patientService.createPatientProfile(this.patientProfileAdapter.newPatientProfile(this.patient)).subscribe({
         next: result => {
-          this.newPatient = result;
+          this.patient = result;
         },
         error: error => {
           alert("There was a problem creating the device: " + error);
         },
         complete: () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.newPatient));
-          this.router.navigateByUrl("PatientProfile/ " + this.newPatient.Id);
+          this.router.navigateByUrl("PatientProfile");
           alert(this.patient.Name + " created");
         }
       })

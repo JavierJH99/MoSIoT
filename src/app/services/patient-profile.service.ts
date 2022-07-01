@@ -5,9 +5,11 @@ import { AccessMode } from '../models/Patient Profile/access-mode';
 import { AdaptationRequest } from '../models/Patient Profile/adaptation-request';
 import { Condition } from '../models/Patient Profile/condition';
 import { Disability } from '../models/Patient Profile/disability';
+import { NewAccessMode } from '../models/Patient Profile/new-access-mode';
 import { NewAdaptationRequest } from '../models/Patient Profile/new-adaptation-request';
 import { NewCondition } from '../models/Patient Profile/new-condition';
 import { NewDisability } from '../models/Patient Profile/new-disability';
+import { NewPatientProfile } from '../models/Patient Profile/new-patient-profile';
 import { PatientProfile } from '../models/Patient Profile/patient-profile';
 
 @Injectable({
@@ -25,7 +27,7 @@ export class PatientProfileService {
     return this.http.get<PatientProfile>(environment.base_url + '/PatientProfile/' + id);
   }
 
-  createPatientProfile(data: PatientProfile){
+  createPatientProfile(data: NewPatientProfile){
     return this.http.post<PatientProfile>(environment.base_url + '/PatientProfile/New_', data);
   }
 
@@ -37,7 +39,7 @@ export class PatientProfileService {
     return this.http.post<Disability>(environment.base_url + '/Disability/New_', data);
   }
 
-  createPatientAccessMode(data: AccessMode){
+  createPatientAccessMode(data: NewAccessMode){
     return this.http.post<AccessMode>(environment.base_url + '/AccessMode/New_', data);
   }
 

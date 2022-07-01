@@ -35,8 +35,20 @@ export class PatientProfileComponent implements OnInit {
     this.router.navigate(["PatientProfile/" + id]);
   }
 
-  // createPatientProfile(){
-  //   localStorage.setItem('deviceDetail',JSON.stringify(this.newDevice));
-  //   this.router.navigateByUrl("DeviceTemplate/ " + this.newDevice.Name + "/EditProfile");
-  // }
+  createPatientProfile(){
+    let patientProfile:PatientProfile = {
+      Id: -999,
+      AccessMode: [],
+      Condition: [],
+      Description: "",
+      Disabilities: [],
+      HazardAvoidance: 1,
+      Name: "",
+      PreferredLanguage: 1,
+      Region: ""
+    }
+    
+    localStorage.setItem('patientProfileDetail',JSON.stringify(patientProfile));
+    this.router.navigateByUrl("PatientProfile/NewPatient/EditDetails");
+  }
 }

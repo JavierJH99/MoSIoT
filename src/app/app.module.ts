@@ -78,8 +78,8 @@ import { EditPatientProfileDisabilityComponent } from './components/patient-prof
 import { EditPatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-access-mode.component';
 import { EditPatientProfileAdaptationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-request/edit-patient-profile-adaptation-request.component';
 import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
-import { DisabilityAdapterComponent } from './adapters/Patient Profile/disability-adapter/disability-adapter.component';
-import { ConditionAdapterComponent } from './adapters/Patient Profile/condition-adapter/condition-adapter.component';
+import { PatientProfileAdapterComponent } from './adapters/patient-profile-adapter/patient-profile-adapter.component';
+import { DeviceTemplateAdapterComponent } from './adapters/device-template-adapter/device-template-adapter.component';
 //#endregion Pipes
 
 @NgModule({
@@ -138,8 +138,8 @@ import { ConditionAdapterComponent } from './adapters/Patient Profile/condition-
     EditPatientProfileAccessModeComponent,
     EditPatientProfileAdaptationRequestComponent,
     CreatePatientProfileAdapatationRequestComponent,
-    DisabilityAdapterComponent,
-    ConditionAdapterComponent
+    PatientProfileAdapterComponent,
+    DeviceTemplateAdapterComponent
   ],
   imports: [
     BrowserModule,
@@ -170,8 +170,7 @@ import { ConditionAdapterComponent } from './adapters/Patient Profile/condition-
     SchemaTypePipe,
     ClinicalStatusPipe,
     DiseaseTypePipe,
-    DisabilityAdapterComponent,
-    ConditionAdapterComponent,
+    PatientProfileAdapterComponent,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
