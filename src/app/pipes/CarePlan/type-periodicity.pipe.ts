@@ -1,9 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'periodicityPeriodicity'
+  name: 'typePeriodicity'
 })
-export class periodicityPeriodicityPipe implements PipeTransform {
+export class TypePeriodicityPipe implements PipeTransform {
+
   periodicity!:string;
 
   transform(value: number): string {
@@ -27,4 +28,5 @@ export class periodicityPeriodicityPipe implements PipeTransform {
 
     return this.periodicity;
   }
+
 }
