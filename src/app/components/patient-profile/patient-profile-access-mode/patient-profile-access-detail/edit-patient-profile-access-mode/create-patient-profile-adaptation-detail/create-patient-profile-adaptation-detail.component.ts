@@ -2,32 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AccessMode } from 'src/app/models/Patient Profile/access-mode';
-import { AdaptationRequest } from 'src/app/models/Patient Profile/adaptation-request';
-import { NewAdaptationRequest } from 'src/app/models/Patient Profile/new-adaptation-request';
+import { NewAdaptationDetail } from 'src/app/models/Patient Profile/new-adaptation-detail';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
 @Component({
-  selector: 'app-create-patient-profile-adapatation-request',
-  templateUrl: './create-patient-profile-adapatation-request.component.html',
-  styleUrls: ['./create-patient-profile-adapatation-request.component.scss']
+  selector: 'app-create-patient-profile-adaptation-detail',
+  templateUrl: './create-patient-profile-adaptation-detail.component.html',
+  styleUrls: ['./create-patient-profile-adaptation-detail.component.scss']
 })
-export class CreatePatientProfileAdapatationRequestComponent implements OnInit {
-  adaptationRequest!:NewAdaptationRequest;
+export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
+  adaptationDetail!:NewAdaptationDetail;
   accessMode!:AccessMode;
   patient!:PatientProfile;
 
   idAccessMode!:number;
-  idAdapatationRequest!:number;
+  idAdapatationType!:number;
 
   patientAdaptationForm = this.fb.group({
-    Target:[''],
-    Language:[''],
+    Type:[''],
     Description:['',Validators.required]
   })
 
-  get Target() { return this.patientAdaptationForm.get('Target'); }
-  get Language() { return this.patientAdaptationForm.get('Language'); }
+  get Type() { return this.patientAdaptationForm.get('Type'); }
   get Description() { return this.patientAdaptationForm.get('Description'); }
   
   constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
@@ -40,33 +37,31 @@ export class CreatePatientProfileAdapatationRequestComponent implements OnInit {
 
     this.initDefaults();
 
-    this.patientAdaptationForm.setValue({Target: this.adaptationRequest.AccessModeTarget, Language: this.adaptationRequest.LanguageOfAdaptation, Description: this.adaptationRequest.Description});
+    this.patientAdaptationForm.setValue({Type: this.adaptationDetail.AdaptationRequest, Description: this.adaptationDetail.Description});
   }
 
   initDefaults(){
-    this.adaptationRequest = {
+    this.adaptationDetail = {
       AccessMode_oid: this.accessMode.Id,
-      AccessModeTarget: 1,
-      Description: "",
-      LanguageOfAdaptation: 1
+      AdaptationRequest: 1,
+      Description: ""
     }
   }
 
   createPatientAdaptation(){
-    this.adaptationRequest.AccessModeTarget = this.patientAdaptationForm.get('Target')?.value;
-    this.adaptationRequest.LanguageOfAdaptation = this.patientAdaptationForm.get('Language')?.value;
-    this.adaptationRequest.Description = this.patientAdaptationForm.get('Description')?.value;
+    this.adaptationDetail.AdaptationRequest = this.patientAdaptationForm.get('Type')?.value;
+    this.adaptationDetail.Description = this.patientAdaptationForm.get('Description')?.value;
     
-    this.patientService.createPatientAdaptationRequest(this.adaptationRequest).subscribe({
+    this.patientService.createPatientadAptationDetail(this.adaptationDetail).subscribe({
       next : result =>{
         console.log(result);
       },
       error : error => {
-        alert("Failed to create Adaptation Request: " + error);
+        alert("Failed to create Adaptation Detail Required: " + error);
       },
       complete : () => {
         this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-        alert("Adaptation Request created");
+        alert("Adaptation Detail Required created");
       }
     });
   }

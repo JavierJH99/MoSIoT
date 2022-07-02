@@ -22,9 +22,12 @@
                     <span class="badge bg-primary rounded-pill">Language: {{adaptationRequestItem.LanguageOfAdaptation | language | uppercase}}</span>
                 </li>
 
-                <li class="list-group-item d-flex align-items-start">
+                <hr>
+
+                <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">
+                            <b>Access Mode Target</b><br>
                             <select class="form-select" formControlName="Target">
                                 <option value="1">Auditory</option>
                                 <option value="2">Colour</option>
@@ -39,13 +42,17 @@
                             </select>
                         </div>
 
-                        <input type="text" class="form-control" formControlName="Description" required>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
-                                <div class="invalid-feedback">A description is required</div>
+                        <div class="mt-2">
+                            <b>Description</b><br>
+                            <input type="text" class="form-control" formControlName="Description" required>
+                            <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                                <div *ngIf="Description?.errors?.['required']">
+                                    <div class="invalid-feedback">A description is required</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
                     <span class="badge bg-primary rounded-pill">
                         Language:
                         <select class="form-select" formControlName="Language">
@@ -60,9 +67,10 @@
                             <option value="9">ZH</option>
                         </select>
                     </span>
+
                     <div>
                         <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientAdaptation()">Cancel</button>
-                        <button type="submit" class="btn btn-primary" [disabled]="!patientAdaptationForm.valid">Save</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!patientAdaptationForm.valid">Create</button>
                     </div>
                 </li>
             </ol>

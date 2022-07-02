@@ -39,7 +39,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
 
     //If not exists, create new
     if(!this.patient.Disabilities.some(disability => disability.Id == this.id)){
-      alert("Creating new condition, fill in the fields");
+      alert("Creating new disability, fill in the fields");
       this.newDisability = true;
       this.initDefaults();
     }
@@ -69,12 +69,12 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
           this.disability = result;
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          alert("Failed to create disability: " + error);
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
           this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-          alert("Changes saved");
+          alert("New disability created");
         }
       });
     }

@@ -53,8 +53,24 @@ export class PatientProfileAccessDetailComponent implements OnInit {
     this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationRequest/" + adaptationRequestId + "/Edit");
   }
 
+  editAdaptationType(adaptationTypeId:number){
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationType/" + adaptationTypeId + "/Edit");
+  }
+
+  editAdaptationDetail(adaptationDetailId:number){
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationDetail/" + adaptationDetailId + "/Edit");
+  }
+
   createAdaptationRequest(){
     this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationRequest/New");
+  }
+
+  createAdaptationType(){
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationType/New");
+  }
+
+  createAdaptationDetail(){
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationDetail/New");
   }
 
   removeDialog(name:string, type:number, id?:number){
@@ -77,7 +93,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         if(removeConfirm == 1){
           switch(type){
             case 1:
-              this.removePatientProfileCondition();
+              this.removePatientProfileAccessMode();
               break;
             case 2:
               this.removeAdaptationRequest(id!);
@@ -97,11 +113,12 @@ export class PatientProfileAccessDetailComponent implements OnInit {
     });
   }
 
-  removePatientProfileCondition(){
+  removePatientProfileAccessMode(){
     console.log("Access mode ID to remove: " + this.accessMode.Id);
-    this.patientProfileService.deleteCondition(this.accessMode.Id).subscribe({
+    this.patientProfileService.deleteAccessMode(this.accessMode.Id).subscribe({
       next: result => {
         console.log("Removing access mode...");
+        console.log(result);
       },
       error: error => {
         alert("There was a problem removing the access mode: " + error);
@@ -115,7 +132,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
 
   removeAdaptationRequest(id:number){
     if(id!= null){
-      this.patientProfileService.deleteAdaptationRequest(this.accessMode.Id).subscribe({
+      this.patientProfileService.deleteAdaptationRequest(id).subscribe({
         next: result => {
           console.log("Removing adaptation request...");
         },
@@ -124,7 +141,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         },
         complete: () => {
           alert("Adaptation request removed successfully");
-          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id + "AccessMode" + this.accessModeId);
+          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
         }
       })
     }
@@ -132,7 +149,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
 
   removeAdaptationType(id:number){
     if(id!= null){
-      this.patientProfileService.deleteAdaptationType(this.accessMode.Id).subscribe({
+      this.patientProfileService.deleteAdaptationType(id).subscribe({
         next: result => {
           console.log("Removing adaptation type...");
         },
@@ -141,7 +158,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         },
         complete: () => {
           alert("Adaptation type removed successfully");
-          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id + "AccessMode" + this.accessModeId);
+          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
         }
       })
     }
@@ -149,7 +166,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
 
   removeAdaptationDetail(id:number){
     if(id!= null){
-      this.patientProfileService.deleteAdaptationDetail(this.accessMode.Id).subscribe({
+      this.patientProfileService.deleteAdaptationDetail(id).subscribe({
         next: result => {
           console.log("Removing adaptation detail...");
         },
@@ -158,7 +175,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         },
         complete: () => {
           alert("Adaptation detail removed successfully");
-          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id + "AccessMode" + this.accessModeId);
+          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
         }
       })
     }

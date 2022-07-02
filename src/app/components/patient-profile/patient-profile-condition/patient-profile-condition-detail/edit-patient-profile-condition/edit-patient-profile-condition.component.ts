@@ -69,12 +69,12 @@ export class EditPatientProfileConditionComponent implements OnInit {
           this.condition = result;
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          alert("Failed to create condition: " + error);
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
           this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-          alert("Changes saved");
+          alert("New condition created");
         }
       });
     }

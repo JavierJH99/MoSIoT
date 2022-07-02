@@ -4,7 +4,7 @@
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-danger" (click)="removeDialog(accessMode.Name,1 )">Remove access mode</button>
+            <button class="btn btn-outline-danger" (click)="removeDialog(accessMode.Name, 1)">Remove access mode</button>
         </div>
     </div>    
 </div>
@@ -56,13 +56,13 @@
                 {{adaptationType.Description}}
                 </div>
                 <div>
-                    <button class="btn btn-outline-success" (click)="editAccessMode()">Edit</button>
+                    <button class="btn btn-outline-success" (click)="editAdaptationType(adaptationType.Id)">Edit</button>
                     <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation type', 3, adaptationType.Id)">Remove</button>
                 </div>
             </li>
         </ol>
         <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-primary">Create new</a>
+            <a class="btn btn-primary" (click)="createAdaptationType()">Create new</a>
         </div>
     </mat-tab>
     <mat-tab>
@@ -77,13 +77,13 @@
                 {{adaptationDetail.Description}}
                 </div>
                 <div>
-                    <button class="btn btn-outline-success" (click)="editAccessMode()">Edit</button>
+                    <button class="btn btn-outline-success" (click)="editAdaptationDetail(adaptationDetail.Id)">Edit</button>
                     <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation detail', 4, adaptationDetail.Id)">Remove</button>
                 </div>
             </li>
         </ol>
         <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-primary">Create new</a>
+            <a class="btn btn-primary" (click)="createAdaptationDetail()">Create new</a>
         </div>
     </mat-tab>
   </mat-tab-group>

@@ -80,6 +80,10 @@ import { EditPatientProfileAdaptationRequestComponent } from './components/patie
 import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
 import { PatientProfileAdapterComponent } from './adapters/patient-profile-adapter/patient-profile-adapter.component';
 import { DeviceTemplateAdapterComponent } from './adapters/device-template-adapter/device-template-adapter.component';
+import { EditPatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-type/edit-patient-profile-adaptation-type.component';
+import { CreatePatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-type/create-patient-profile-adaptation-type.component';
+import { CreatePatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-detail/create-patient-profile-adaptation-detail.component';
+import { EditPatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-detail/edit-patient-profile-adaptation-detail.component';
 //#endregion Pipes
 
 @NgModule({
@@ -139,7 +143,11 @@ import { DeviceTemplateAdapterComponent } from './adapters/device-template-adapt
     EditPatientProfileAdaptationRequestComponent,
     CreatePatientProfileAdapatationRequestComponent,
     PatientProfileAdapterComponent,
-    DeviceTemplateAdapterComponent
+    DeviceTemplateAdapterComponent,
+    EditPatientProfileAdaptationTypeComponent,
+    CreatePatientProfileAdaptationTypeComponent,
+    CreatePatientProfileAdaptationDetailComponent,
+    EditPatientProfileAdaptationDetailComponent
   ],
   imports: [
     BrowserModule,

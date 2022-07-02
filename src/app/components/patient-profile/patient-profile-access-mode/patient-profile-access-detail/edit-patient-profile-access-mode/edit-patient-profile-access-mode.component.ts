@@ -65,12 +65,12 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
           this.accessMode = result;
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          alert("Failed to create access mode: " + error);
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
           this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-          alert("Changes saved");
+          alert("New access mode created");
         }
       });
     }

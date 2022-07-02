@@ -17,9 +17,10 @@
                 <div *ngIf="adaptationRequestItem.Id == adaptationRequest.Id; then liToEdit else liNormal"></div>
 
                 <ng-template #liToEdit>
-                    <li class="list-group-item d-flex align-items-start">
+                    <li class="list-group-item d-flex align-items-start"  style="background-color: aliceblue;">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">
+                                <b>Access Mode Target</b><br>
                                 <select class="form-select" formControlName="Target">
                                     <option value="1">Auditory</option>
                                     <option value="2">Colour</option>
@@ -34,10 +35,13 @@
                                 </select>
                             </div>
 
-                            <input type="text" class="form-control" formControlName="Description" required>
-                            <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                                <div *ngIf="Description?.errors?.['required']">
-                                    <div class="invalid-feedback">A description is required</div>
+                            <div class="mt-2">
+                                <b>Description</b><br>
+                                <input type="text" class="form-control" formControlName="Description" required>
+                                <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                                    <div *ngIf="Description?.errors?.['required']">
+                                        <div class="invalid-feedback">A description is required</div>
+                                </div>
                                 </div>
                             </div>
                         </div>
