@@ -84,6 +84,13 @@ import { EditPatientProfileAdaptationTypeComponent } from './components/patient-
 import { CreatePatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-type/create-patient-profile-adaptation-type.component';
 import { CreatePatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-detail/create-patient-profile-adaptation-detail.component';
 import { EditPatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-detail/edit-patient-profile-adaptation-detail.component';
+import { TypePeriodicityPipe } from './pipes/CarePlan/type-periodicity.pipe';
+import { CategoryGoalPipe } from './pipes/CarePlan/category-goal.pipe';
+import { CareStatusPipe } from './pipes/CarePlan/care-status.pipe';
+import { CarePlanIntentPipe } from './pipes/CarePlan/care-plan-intent.pipe';
+import { TypeActivityPipe } from './pipes/CarePlan/type-activity.pipe';
+import { FormTypePipe } from './pipes/CarePlan/form-type.pipe';
+import { PriorityTypePipe } from './pipes/CarePlan/priority-type.pipe';
 //#endregion Pipes
 
 @NgModule({
@@ -147,7 +154,14 @@ import { EditPatientProfileAdaptationDetailComponent } from './components/patien
     EditPatientProfileAdaptationTypeComponent,
     CreatePatientProfileAdaptationTypeComponent,
     CreatePatientProfileAdaptationDetailComponent,
-    EditPatientProfileAdaptationDetailComponent
+    EditPatientProfileAdaptationDetailComponent,
+    TypePeriodicityPipe,
+    CategoryGoalPipe,
+    CareStatusPipe,
+    CarePlanIntentPipe,
+    TypeActivityPipe,
+    FormTypePipe,
+    PriorityTypePipe
   ],
   imports: [
     BrowserModule,
