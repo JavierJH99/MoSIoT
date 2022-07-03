@@ -29,16 +29,53 @@ import { CreatePatientProfileAdaptationTypeComponent } from './components/patien
 import { EditPatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-type/edit-patient-profile-adaptation-type.component';
 import { CreatePatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-detail/create-patient-profile-adaptation-detail.component';
 import { EditPatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-detail/edit-patient-profile-adaptation-detail.component';
+import { CarePlanDetailComponent } from './components/care-plan/care-plan-detail/care-plan-detail.component';
 
 const routes: Routes = [
   {
     path:'Home',
     component:HomeComponent
   },
+
+  //#region DeviceTemplate routes
   {
     path:'DeviceTemplate',
     component:DeviceTemplateComponent
   },
+  {
+    path:'DeviceTemplate/:deviceId',
+    component:DeviceTemplateDetailComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/EditProfile',
+    component:EditDeviceProfileComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId',
+    component:DeviceTelemetryDetailComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/Edit',
+    component:EditDeviceTelemetryComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Property/:propertyId',
+    component:DevicePropertyDetailComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Property/:propertyId/Edit',
+    component:EditDevicePropertyComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Command/:commandId',
+    component:DeviceCommandDetailComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Command/:commandId/Edit',
+    component:EditDeviceCommandComponent
+  },
+  //#endregion
+  //#region PatientProfile routes
   {
     path:'PatientProfile',
     component:PatientProfileComponent
@@ -99,42 +136,17 @@ const routes: Routes = [
     path:'PatientProfile/:patientProfileName/AccessMode/:accessModeId/AdaptationDetail/New',
     component:CreatePatientProfileAdaptationDetailComponent
   },
-  {
-    path:'DeviceTemplate/:deviceId',
-    component:DeviceTemplateDetailComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/EditProfile',
-    component:EditDeviceProfileComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId',
-    component:DeviceTelemetryDetailComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/Edit',
-    component:EditDeviceTelemetryComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/Property/:propertyId',
-    component:DevicePropertyDetailComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/Property/:propertyId/Edit',
-    component:EditDevicePropertyComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/Command/:commandId',
-    component:DeviceCommandDetailComponent
-  },
-  {
-    path:'DeviceTemplate/:deviceName/Command/:commandId/Edit',
-    component:EditDeviceCommandComponent
-  },
+  //#endregion
+  //#region CarePlan routes
   {
     path:'CarePlan',
     component:CarePlanComponent
   },
+  {
+    path:'CarePlan/:carePlanId',
+    component:CarePlanDetailComponent
+  },
+  //#endregion
   {
     path:'Login',
     component:LoginComponent

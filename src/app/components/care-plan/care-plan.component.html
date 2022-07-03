@@ -1,13 +1,21 @@
-<h1>Care Plan Templates</h1>
-<hr>
-<div>
-    <ul class="list-group">
-        <a href="/CarePlan" class="list-group-item list-group-item-action">Alzheimer's care</a>
-        <a href="#" class="list-group-item list-group-item-action">Musculoeskeletal Disorder's care</a>
-        <a href="#" class="list-group-item list-group-item-action">Respiratory Disroder's care</a>
-    </ul>
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-primary mt-2">Create new</a>
+<div class="d-flex justify-content-between">
+    <div class="d-flex">
+        <h1>
+            <mat-icon>assignment_ind</mat-icon> Care Plan Templates
+        </h1>
+        <div class="align-self-center p-3" *ngIf="cargando">
+            <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </div>
+    <div class="justify-content-end">
+        <a class="btn btn-outline-primary mt-2" (click)="createCarePlan()">Create new</a>
     </div>
 </div>
 
+<hr>
+
+<div>
+    <ul class="list-group" *ngFor="let carePlan of carePlans">
+        <li (click)="details(carePlan.Id)" class="list-group-item list-group-item-action d-flex justify-content-between" role='button'>{{carePlan.Name | titlecase}} <mat-icon>keyboard_arrow_right</mat-icon></li>
+    </ul>
+</div>

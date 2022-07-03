@@ -62,7 +62,7 @@ import { AccessModeTypePipe } from './pipes/PatientProfile/access-mode-type.pipe
 import { AdaptationTypePipe } from './pipes/PatientProfile/adaptation-type.pipe';
 import { AdaptationDetailPipe } from './pipes/PatientProfile/adaptation-detail.pipe';
 import { HazardValuePipe } from './pipes/PatientProfile/hazard-value.pipe';
-import { UpperCasePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 import { DisabilityTypePipe } from './pipes/PatientProfile/disability-type.pipe';
 import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pipe';
 import { SchemaTypePipe } from './pipes/Device/schema-type.pipe';
@@ -91,6 +91,13 @@ import { CarePlanIntentPipe } from './pipes/CarePlan/care-plan-intent.pipe';
 import { TypeActivityPipe } from './pipes/CarePlan/type-activity.pipe';
 import { FormTypePipe } from './pipes/CarePlan/form-type.pipe';
 import { PriorityTypePipe } from './pipes/CarePlan/priority-type.pipe';
+import { CarePlanComponent } from './components/care-plan/care-plan.component';
+import { CarePlanDetailComponent } from './components/care-plan/care-plan-detail/care-plan-detail.component';
+import { CarePlanDetailsComponent } from './components/care-plan/care-plan-details/care-plan-details.component';
+import { CarePlanCareActivityComponent } from './components/care-plan/care-plan-care-activity/care-plan-care-activity.component';
+import { CarePlanGoalComponent } from './components/care-plan/care-plan-goal/care-plan-goal.component';
+import { CarePlanAdressConditionComponent } from './components/care-plan/care-plan-adress-condition/care-plan-adress-condition.component';
+import { IsAssignedPipe } from './pipes/is-assigned.pipe';
 //#endregion Pipes
 
 @NgModule({
@@ -161,7 +168,14 @@ import { PriorityTypePipe } from './pipes/CarePlan/priority-type.pipe';
     CarePlanIntentPipe,
     TypeActivityPipe,
     FormTypePipe,
-    PriorityTypePipe
+    PriorityTypePipe,
+    CarePlanComponent,
+    CarePlanDetailComponent,
+    CarePlanDetailsComponent,
+    CarePlanCareActivityComponent,
+    CarePlanGoalComponent,
+    CarePlanAdressConditionComponent,
+    IsAssignedPipe
   ],
   imports: [
     BrowserModule,
@@ -193,6 +207,10 @@ import { PriorityTypePipe } from './pipes/CarePlan/priority-type.pipe';
     ClinicalStatusPipe,
     DiseaseTypePipe,
     PatientProfileAdapterComponent,
+    CarePlanIntentPipe,
+    CareStatusPipe,
+    DatePipe,
+    IsAssignedPipe,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

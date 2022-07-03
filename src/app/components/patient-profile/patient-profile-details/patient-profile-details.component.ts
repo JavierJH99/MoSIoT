@@ -12,12 +12,7 @@ import { LanguagePipe } from 'src/app/pipes/language.pipe';
 })
 export class PatientProfileDetailsComponent implements OnInit {
   patientProfile!:PatientProfile;
-
   tableDataSource!:TableDataSource[];
-
-  Name!:string;
-  Description!:string;
-  Hazard!:string;
 
   constructor(private router: Router, private languagePipe: LanguagePipe, private hazardValuePipe: HazardValuePipe) { }
 
