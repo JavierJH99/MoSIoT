@@ -31,7 +31,7 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <input type="text" class="form-control" formControlName="Description" required>
+                        <textarea type="text" class="form-control" formControlName="Description" required></textarea>
                         <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
                             <div *ngIf="Description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
@@ -44,7 +44,7 @@
                 <td>
                     <div>
                         <b>Hazard Avoidance</b><br>
-                        <select class="form-select" formControlName="Hazard">
+                        <select class="form-select" formControlName="Hazard" required>
                             <option value="1">Flashing</option>
                             <option value="2">Motion Simulation</option>
                             <option value="3">Olfactory Hazard</option>
@@ -70,7 +70,7 @@
                 <td>
                     <div>
                         <b>Preferred Language</b><br>
-                        <select class="form-select" formControlName="Language">
+                        <select class="form-select" formControlName="Language" required>
                             <option value="1">ES</option>
                             <option value="2">EN</option>
                             <option value="3">FR</option>

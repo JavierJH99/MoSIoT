@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class IsAssignedPipe implements PipeTransform {
   transform(value: any): any {
-    if(value == null || value == ""){
-      return "Has not been assigned yet";
+    if(value == null || value == "" || value == " "){
+      return "Undefined";
     }
     else{
       return value;

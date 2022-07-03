@@ -20,8 +20,8 @@ export class EditPatientProfileAdaptationRequestComponent implements OnInit {
   idAdapatationRequest!:number;
 
   patientAdaptationForm = this.fb.group({
-    Target:[''],
-    Language:[''],
+    Target:['',Validators.required],
+    Language:['',Validators.required],
     Description:['',Validators.required]
   })
 

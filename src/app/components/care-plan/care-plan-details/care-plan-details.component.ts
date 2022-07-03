@@ -51,7 +51,7 @@ export class CarePlanDetailsComponent implements OnInit {
       },
       {
         Name: "Patient",
-        Value: this.isAssignedPipe.transform(this.carePlan.Patient?.Name)
+        Value: this.carePlan.Patient?.Name
       }
     ]
   }

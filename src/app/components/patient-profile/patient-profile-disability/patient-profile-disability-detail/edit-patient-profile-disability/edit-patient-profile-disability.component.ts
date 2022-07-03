@@ -19,8 +19,8 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
 
   patientDisabilityForm = this.fb.group({
     Name:['',Validators.required],
-    Type:[''],
-    Severity:[''],
+    Type:['',Validators.required],
+    Severity:['',Validators.required],
     Description:['',Validators.required]
   })
 

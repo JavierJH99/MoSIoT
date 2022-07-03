@@ -8,8 +8,8 @@
         <tr>
             <td>
                 <b>{{data.Name}}</b><br>
-                <div *ngIf ="isString(data.Value);else notStringValue">{{data.Value | titlecase}}</div>
-                <ng-template #notStringValue>{{data.Value}}</ng-template>
+                <div *ngIf ="isString(data.Value);else notStringValue">{{data.Value | titlecase | isAssigned}}</div>
+                <ng-template #notStringValue>{{data.Value | isAssigned}}</ng-template>
             </td>
         </tr>
     </tbody>

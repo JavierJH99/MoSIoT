@@ -19,8 +19,8 @@ export class EditPatientProfileConditionComponent implements OnInit {
 
   patientConditionForm = this.fb.group({
     Name:['',Validators.required],
-    Clinical:[''],
-    Disease:[''],
+    Clinical:['', Validators.required],
+    Disease:['', Validators.required],
     Description:['',Validators.required]
   })
 

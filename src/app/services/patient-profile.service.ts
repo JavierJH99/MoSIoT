@@ -100,7 +100,7 @@ export class PatientProfileService {
   }
 
   deleteAccessMode(id:number) {
-    return this.http.delete(environment.base_url + '/AcessMode/Destroy?p_accessmode_oid=' + id);
+    return this.http.delete(environment.base_url + '/AccessMode/Destroy?p_accessmode_oid=' + id);
   }
 
   deleteAdaptationRequest(id:number) {

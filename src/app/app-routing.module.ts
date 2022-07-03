@@ -30,6 +30,10 @@ import { EditPatientProfileAdaptationTypeComponent } from './components/patient-
 import { CreatePatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-detail/create-patient-profile-adaptation-detail.component';
 import { EditPatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-detail/edit-patient-profile-adaptation-detail.component';
 import { CarePlanDetailComponent } from './components/care-plan/care-plan-detail/care-plan-detail.component';
+import { CareActivityDetailComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/care-activity-detail.component';
+import { CarePlanGoalDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-goal-detail.component';
+import { EditCarePlanDetailsComponent } from './components/care-plan/care-plan-details/edit-care-plan-details/edit-care-plan-details.component';
+import { EditCareActivityDetailComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-detail/edit-care-activity-detail.component';
 
 const routes: Routes = [
   {
@@ -145,6 +149,22 @@ const routes: Routes = [
   {
     path:'CarePlan/:carePlanId',
     component:CarePlanDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/EditDetails',
+    component:EditCarePlanDetailsComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/CareActivity/:careActivtyId',
+    component:CareActivityDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/CareActivity/:careActivityId/Edit',
+    component:EditCareActivityDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/Goal/:goalId',
+    component:CarePlanGoalDetailComponent
   },
   //#endregion
   {

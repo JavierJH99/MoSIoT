@@ -19,7 +19,7 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
 
   patientAccessForm = this.fb.group({
     Name:['',Validators.required],
-    Type:[''],
+    Type:['',Validators.required],
     Description:['',Validators.required]
   })
 

@@ -21,7 +21,7 @@
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">
                                 <b>Adaptation Request</b><br>
-                                <select class="form-select" formControlName="Type">
+                                <select class="form-select" formControlName="Type" required>
                                     <option value="1">Enhanced</option>
                                     <option value="2">Real Time</option>
                                     <option value="3">Record</option>
@@ -33,7 +33,7 @@
 
                             <div class="mt-2">
                                 <b>Description</b><br>
-                                <input type="text" class="form-control" formControlName="Description" required>
+                                <textarea type="text" class="form-control" formControlName="Description" required></textarea>
                                 <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
                                     <div *ngIf="Description?.errors?.['required']">
                                         <div class="invalid-feedback">A description is required</div>

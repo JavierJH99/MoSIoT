@@ -30,7 +30,7 @@
                 <td>
                     <div>
                         <b>Disability type</b><br>
-                        <select class="form-select" formControlName="Type">
+                        <select class="form-select" formControlName="Type" required>
                             <option value="1">Auditory</option>
                             <option value="2">Cognitive</option>
                             <option value="3">Physical</option>
@@ -45,7 +45,7 @@
                 <td>
                     <div>
                         <b>Severity</b><br>
-                        <select class="form-select" formControlName="Severity">
+                        <select class="form-select" formControlName="Severity" required>
                             <option value="1">Severe</option>
                             <option value="2">Moderate</option>
                             <option value="3">Mild</option>
@@ -58,7 +58,7 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <input type="text" class="form-control" formControlName="Description" required>
+                        <textarea type="text" class="form-control" formControlName="Description" required></textarea>
                         <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
                             <div *ngIf="Description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>

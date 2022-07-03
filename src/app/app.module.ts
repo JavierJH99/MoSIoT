@@ -24,6 +24,10 @@ import { TableComponent } from './components/shared/table/table.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 //#endregion Shared
+//#region Adapters
+import { PatientProfileAdapterComponent } from './adapters/patient-profile-adapter/patient-profile-adapter.component';
+import { DeviceTemplateAdapterComponent } from './adapters/device-template-adapter/device-template-adapter.component';
+//#endregion Adapters
 //#region Patient
 import { PatientProfileComponent } from './components/patient-profile/patient-profile.component';
 import { PatientProfileDetailComponent } from './components/patient-profile/patient-profile-detail/patient-profile-detail.component';
@@ -34,6 +38,16 @@ import { PatientProfileAccessModeComponent } from './components/patient-profile/
 import { PatientProfileConditionDetailComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/patient-profile-condition-detail.component';
 import { PatientProfileDisabilityDetailComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/patient-profile-disability-detail.component';
 import { PatientProfileAccessDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/patient-profile-access-detail.component';
+import { EditPatientProfileDetailsComponent } from './components/patient-profile/patient-profile-details/edit-patient-profile-details/edit-patient-profile-details.component';
+import { EditPatientProfileConditionComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/edit-patient-profile-condition/edit-patient-profile-condition.component';
+import { EditPatientProfileDisabilityComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/edit-patient-profile-disability/edit-patient-profile-disability.component';
+import { EditPatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-access-mode.component';
+import { EditPatientProfileAdaptationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-request/edit-patient-profile-adaptation-request.component';
+import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
+import { EditPatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-type/edit-patient-profile-adaptation-type.component';
+import { CreatePatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-type/create-patient-profile-adaptation-type.component';
+import { CreatePatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-detail/create-patient-profile-adaptation-detail.component';
+import { EditPatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-detail/edit-patient-profile-adaptation-detail.component';
 //#endregion Patient
 //#region Device
 import { DeviceTemplateComponent } from './components/device-template/device-template.component';
@@ -50,7 +64,20 @@ import { EditDevicePropertyComponent } from './components/device-template/device
 import { EditDeviceCommandComponent } from './components/device-template/device-command/device-command-detail/edit-device-command/edit-device-command.component';
 import { DeviceSpecificTelemtryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/device-specific-telemtry/device-specific-telemtry.component';
 import { EditDeviceProfileComponent } from './components/device-template/device-profile/edit-device-profile/edit-device-profile.component';
+import { EditTelemetryStateComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-state/edit-telemetry-state.component';
+import { EditTelemetryEventComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-event/edit-telemetry-event.component';
+import { EditTelemetryLocationComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-location/edit-telemetry-location.component';
+import { EditTelemetrySensorComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-sensor/edit-telemetry-sensor.component';
 //#endregion Device
+//#region CarePlan
+import { CarePlanComponent } from './components/care-plan/care-plan.component';
+import { CarePlanDetailComponent } from './components/care-plan/care-plan-detail/care-plan-detail.component';
+import { CarePlanDetailsComponent } from './components/care-plan/care-plan-details/care-plan-details.component';
+import { CarePlanCareActivityComponent } from './components/care-plan/care-plan-care-activity/care-plan-care-activity.component';
+import { CarePlanGoalComponent } from './components/care-plan/care-plan-goal/care-plan-goal.component';
+import { CarePlanAdressConditionComponent } from './components/care-plan/care-plan-adress-condition/care-plan-adress-condition.component';
+import { CareActivityDetailComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/care-activity-detail.component';
+//#endregion CarePlan
 //#region Pipes
 import { LanguagePipe } from './pipes/language.pipe';
 import { SeverityPipe } from './pipes/Device/severity.pipe';
@@ -66,24 +93,8 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 import { DisabilityTypePipe } from './pipes/PatientProfile/disability-type.pipe';
 import { PatientSeverityPipe } from './pipes/PatientProfile/patient-severity.pipe';
 import { SchemaTypePipe } from './pipes/Device/schema-type.pipe';
-import { EditTelemetryStateComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-state/edit-telemetry-state.component';
-import { EditTelemetryEventComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-event/edit-telemetry-event.component';
-import { EditTelemetryLocationComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-location/edit-telemetry-location.component';
-import { EditTelemetrySensorComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-sensor/edit-telemetry-sensor.component';
 import { ClinicalStatusPipe } from './pipes/PatientProfile/clinical-status.pipe';
 import { DiseaseTypePipe } from './pipes/PatientProfile/disease-type.pipe';
-import { EditPatientProfileDetailsComponent } from './components/patient-profile/patient-profile-details/edit-patient-profile-details/edit-patient-profile-details.component';
-import { EditPatientProfileConditionComponent } from './components/patient-profile/patient-profile-condition/patient-profile-condition-detail/edit-patient-profile-condition/edit-patient-profile-condition.component';
-import { EditPatientProfileDisabilityComponent } from './components/patient-profile/patient-profile-disability/patient-profile-disability-detail/edit-patient-profile-disability/edit-patient-profile-disability.component';
-import { EditPatientProfileAccessModeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-access-mode.component';
-import { EditPatientProfileAdaptationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-request/edit-patient-profile-adaptation-request.component';
-import { CreatePatientProfileAdapatationRequestComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adapatation-request/create-patient-profile-adapatation-request.component';
-import { PatientProfileAdapterComponent } from './adapters/patient-profile-adapter/patient-profile-adapter.component';
-import { DeviceTemplateAdapterComponent } from './adapters/device-template-adapter/device-template-adapter.component';
-import { EditPatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-type/edit-patient-profile-adaptation-type.component';
-import { CreatePatientProfileAdaptationTypeComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-type/create-patient-profile-adaptation-type.component';
-import { CreatePatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/create-patient-profile-adaptation-detail/create-patient-profile-adaptation-detail.component';
-import { EditPatientProfileAdaptationDetailComponent } from './components/patient-profile/patient-profile-access-mode/patient-profile-access-detail/edit-patient-profile-access-mode/edit-patient-profile-adaptation-detail/edit-patient-profile-adaptation-detail.component';
 import { TypePeriodicityPipe } from './pipes/CarePlan/type-periodicity.pipe';
 import { CategoryGoalPipe } from './pipes/CarePlan/category-goal.pipe';
 import { CareStatusPipe } from './pipes/CarePlan/care-status.pipe';
@@ -91,13 +102,12 @@ import { CarePlanIntentPipe } from './pipes/CarePlan/care-plan-intent.pipe';
 import { TypeActivityPipe } from './pipes/CarePlan/type-activity.pipe';
 import { FormTypePipe } from './pipes/CarePlan/form-type.pipe';
 import { PriorityTypePipe } from './pipes/CarePlan/priority-type.pipe';
-import { CarePlanComponent } from './components/care-plan/care-plan.component';
-import { CarePlanDetailComponent } from './components/care-plan/care-plan-detail/care-plan-detail.component';
-import { CarePlanDetailsComponent } from './components/care-plan/care-plan-details/care-plan-details.component';
-import { CarePlanCareActivityComponent } from './components/care-plan/care-plan-care-activity/care-plan-care-activity.component';
-import { CarePlanGoalComponent } from './components/care-plan/care-plan-goal/care-plan-goal.component';
-import { CarePlanAdressConditionComponent } from './components/care-plan/care-plan-adress-condition/care-plan-adress-condition.component';
 import { IsAssignedPipe } from './pipes/is-assigned.pipe';
+import { CarePlanGoalDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-goal-detail.component';
+import { CarePlanTargetDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/care-plan-target-detail.component';
+import { EditCarePlanDetailsComponent } from './components/care-plan/care-plan-details/edit-care-plan-details/edit-care-plan-details.component';
+import { CarePlanAdapterComponent } from './adapters/care-plan-adapter/care-plan-adapter.component';
+import { EditCareActivityDetailComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-detail/edit-care-activity-detail.component';
 //#endregion Pipes
 
 @NgModule({
@@ -175,7 +185,13 @@ import { IsAssignedPipe } from './pipes/is-assigned.pipe';
     CarePlanCareActivityComponent,
     CarePlanGoalComponent,
     CarePlanAdressConditionComponent,
-    IsAssignedPipe
+    IsAssignedPipe,
+    CareActivityDetailComponent,
+    CarePlanGoalDetailComponent,
+    CarePlanTargetDetailComponent,
+    EditCarePlanDetailsComponent,
+    CarePlanAdapterComponent,
+    EditCareActivityDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -211,6 +227,13 @@ import { IsAssignedPipe } from './pipes/is-assigned.pipe';
     CareStatusPipe,
     DatePipe,
     IsAssignedPipe,
+    TypePeriodicityPipe,
+    TypeActivityPipe,
+    FormTypePipe,
+    CategoryGoalPipe,
+    PriorityTypePipe,
+    CareStatusPipe,
+    CarePlanAdapterComponent,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

@@ -19,10 +19,7 @@ export class CarePlanDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargando = true;
-
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['carePlanId']);
-
-    console.log("Params: " + this.id);
 
     this.carePlanService.getCarePlanById(this.id).subscribe({
       next: result => {

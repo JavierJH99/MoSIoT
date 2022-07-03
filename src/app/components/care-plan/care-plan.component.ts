@@ -22,7 +22,7 @@ export class CarePlanComponent implements OnInit {
       },
       error: error => {
         this.cargando = false;
-        alert("There was a problem getting the devices: " + error); 
+        alert("There was a problem getting the care plan templates: " + error); 
       },
       complete: () => {
         localStorage.setItem('carePlanTemplates',JSON.stringify(this.carePlans));

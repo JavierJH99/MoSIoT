@@ -20,7 +20,7 @@ export class EditPatientProfileAdaptationTypeComponent implements OnInit {
   idAdapatationType!:number;
 
   patientAdaptationForm = this.fb.group({
-    Type:[''],
+    Type:['',Validators.required],
     Description:['',Validators.required]
   })
 

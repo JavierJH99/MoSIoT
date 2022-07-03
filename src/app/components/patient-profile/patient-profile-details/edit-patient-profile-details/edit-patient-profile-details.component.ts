@@ -18,9 +18,9 @@ export class EditPatientProfileDetailsComponent implements OnInit {
   patientProfileForm = this.fb.group({
     Name:['',Validators.required],
     Description:['', Validators.required],
-    Hazard:[''],
+    Hazard:['', Validators.required],
     Region:['', Validators.required],
-    Language:['']
+    Language:['', Validators.required]
   })
 
   get Name() { return this.patientProfileForm.get('Name'); }
