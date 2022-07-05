@@ -63,12 +63,7 @@ import { DeviceCommandDetailComponent } from './components/device-template/devic
 import { EditDeviceTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-device-telemetry.component';
 import { EditDevicePropertyComponent } from './components/device-template/device-property/device-property-detail/edit-device-property/edit-device-property.component';
 import { EditDeviceCommandComponent } from './components/device-template/device-command/device-command-detail/edit-device-command/edit-device-command.component';
-import { DeviceSpecificTelemtryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/device-specific-telemtry/device-specific-telemtry.component';
 import { EditDeviceProfileComponent } from './components/device-template/device-profile/edit-device-profile/edit-device-profile.component';
-import { EditTelemetryStateComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-state/edit-telemetry-state.component';
-import { EditTelemetryEventComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-event/edit-telemetry-event.component';
-import { EditTelemetryLocationComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-location/edit-telemetry-location.component';
-import { EditTelemetrySensorComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-device-telemetry/edit-telemetry-sensor/edit-telemetry-sensor.component';
 //#endregion Device
 //#region CarePlan
 import { CarePlanComponent } from './components/care-plan/care-plan.component';
@@ -122,6 +117,11 @@ import { CarePlanMeasureTelemetryComponent } from './components/care-plan/care-p
 import { EditCarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/edit-care-plan-measure-details/edit-care-plan-measure-details.component';
 import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/create-careplan-target/create-careplan-target.component';
 import { CommandTypePipe } from './pipes/Device/command-type.pipe';
+import { EditTelemetrySpecificComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-telemetry-specific.component';
+import { EditSensorTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-sensor-telemetry/edit-sensor-telemetry.component';
+import { EditStateTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-state-telemetry/edit-state-telemetry.component';
+import { EditLocationTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-location-telemetry/edit-location-telemetry.component';
+import { EditEventTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-event-telemetry/edit-event-telemetry.component';
 //#endregion Pipes
 
 @NgModule({
@@ -155,7 +155,6 @@ import { CommandTypePipe } from './pipes/Device/command-type.pipe';
     PatientProfileDisabilityDetailComponent,
     PatientProfileAccessDetailComponent,
     LanguagePipe,
-    DeviceSpecificTelemtryComponent,
     SeverityPipe,
     TelemetryTypePipe,
     TelemetryUnitTypePipe,
@@ -168,10 +167,6 @@ import { CommandTypePipe } from './pipes/Device/command-type.pipe';
     DisabilityTypePipe,
     PatientSeverityPipe,
     SchemaTypePipe,
-    EditTelemetryStateComponent,
-    EditTelemetryEventComponent,
-    EditTelemetryLocationComponent,
-    EditTelemetrySensorComponent,
     ClinicalStatusPipe,
     DiseaseTypePipe,
     EditPatientProfileDetailsComponent,
@@ -217,7 +212,12 @@ import { CommandTypePipe } from './pipes/Device/command-type.pipe';
     CarePlanMeasureTelemetryComponent,
     EditCarePlanMeasureDetailsComponent,
     CreateCareplanTargetComponent,
-    CommandTypePipe
+    CommandTypePipe,
+    EditTelemetrySpecificComponent,
+    EditSensorTelemetryComponent,
+    EditStateTelemetryComponent,
+    EditLocationTelemetryComponent,
+    EditEventTelemetryComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,10 @@ import { NewTelemetry } from '../models/Device Template/new-telemetry';
 import { NewProperty } from '../models/Device Template/new-property';
 import { NewCommand } from '../models/Device Template/new-command';
 import { NewDevice } from '../models/Device Template/new-device';
+import { Sensor } from '../models/Device Template/sensor';
+import { State } from '../models/Device Template/state';
+import { Event } from '../models/Device Template/event';
+import { NewStateTelemetry } from '../models/Device Template/new-state-telemetry';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +68,10 @@ export class DeviceTemplateService {
     return this.http.delete(environment.base_url + '/Property/Destroy?p_property_oid=' + id);
   }
 
+  deleteDeviceCommand(id:number) {
+    return this.http.delete(environment.base_url + '/Command/Destroy?p_command_oid=' + id);
+  }
+
   createCommand(data: NewCommand){
     return this.http.post<Command>(environment.base_url + '/Command/New_', data);
   }
@@ -72,7 +80,35 @@ export class DeviceTemplateService {
     return this.http.put(environment.base_url + '/Command/Modify?idCommand=' + id, data);
   }
 
-  deleteDeviceCommand(id:number) {
-    return this.http.delete(environment.base_url + '/Command/Destroy?p_command_oid=' + id);
+  createStateTelemetry(data:NewStateTelemetry) {
+    return this.http.post<State>(environment.base_url + '/StateTelemetry/New_', data);
+  }
+
+  deleteStateTelemetry(id:number) {
+    return this.http.delete(environment.base_url + '/StateTelemetry/Destroy?p_statetelemetry_oid=' + id);
+  }
+
+  createLocationTelemetry(data:Location) {
+    return this.http.post<Location>(environment.base_url + '/LocationTelemetry/New_', data);
+  }
+
+  deleteLocationTelemetry(id:number) {
+    return this.http.delete(environment.base_url + '/LocationTelemetry/Destroy?p_locationtelemetry_oid=' + id);
+  }
+
+  createSensorTelemetry(data:Sensor) {
+    return this.http.post<Sensor>(environment.base_url + '/SensorTelemtetry/New_', data);
+  }
+
+  deleteSensorTelemetry(id:number) {
+    return this.http.delete(environment.base_url + '/SensorTelemetry/Destroy?p_sensortelemetry_oid=' + id);
+  }
+
+  createEventTelemetry(data:Event) {
+    return this.http.post<Event>(environment.base_url + '/EventTelemetry/New_', data);
+  }
+
+  deleteEventTelemetry(id:number) {
+    return this.http.delete(environment.base_url + '/EventTelemetry/Destroy?p_eventtelemetry_oid=' + id);
   }
 }

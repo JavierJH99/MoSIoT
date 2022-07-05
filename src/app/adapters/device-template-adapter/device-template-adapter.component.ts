@@ -4,7 +4,11 @@ import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { NewCommand } from 'src/app/models/Device Template/new-command';
 import { NewDevice } from 'src/app/models/Device Template/new-device';
 import { NewProperty } from 'src/app/models/Device Template/new-property';
+import { NewStateTelemetry } from 'src/app/models/Device Template/new-state-telemetry';
+import { NewTelemetry } from 'src/app/models/Device Template/new-telemetry';
 import { Property } from 'src/app/models/Device Template/property';
+import { State } from 'src/app/models/Device Template/state';
+import { Telemetry } from 'src/app/models/Device Template/telemetry';
 
 @Component({
   selector: 'app-device-template-adapter',
@@ -55,6 +59,32 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     }
 
     return newCommand;
+  }
+
+  newTelemetry(telemetry: Telemetry, idDeviceTemplate: number): NewTelemetry{
+    let newTelemetry: NewTelemetry;
+
+    newTelemetry = {
+      DeviceTemplate_oid: idDeviceTemplate,
+      Frecuency: telemetry.Frecuency,
+      Name: telemetry.Name,
+      Type: telemetry.Type,
+      Unit: telemetry.Unit,
+      Schema: telemetry.Schema
+    }
+
+    return newTelemetry;
+  }
+
+  newStateTelemetry(name: string, idTelemetry: number): NewStateTelemetry{
+    let newState: NewStateTelemetry;
+
+    newState = {
+      Telemetry_oid: idTelemetry,
+      Name: name
+    }
+
+    return newState;
   }
 
 }

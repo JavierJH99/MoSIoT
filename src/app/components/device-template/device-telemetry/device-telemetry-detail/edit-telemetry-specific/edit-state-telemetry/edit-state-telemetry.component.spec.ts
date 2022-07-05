@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditTelemetryEventComponent } from './edit-telemetry-event.component';
+import { EditStateTelemetryComponent } from './edit-state-telemetry.component';
 
-describe('EditTelemetryEventComponent', () => {
-  let component: EditTelemetryEventComponent;
-  let fixture: ComponentFixture<EditTelemetryEventComponent>;
+describe('EditStateTelemetryComponent', () => {
+  let component: EditStateTelemetryComponent;
+  let fixture: ComponentFixture<EditStateTelemetryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTelemetryEventComponent ]
+      declarations: [ EditStateTelemetryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditTelemetryEventComponent);
+    fixture = TestBed.createComponent(EditStateTelemetryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

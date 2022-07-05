@@ -1,5 +1,5 @@
 export interface StateDevice {
-    id:number,
+    Id:number,
     name:string,
     value:string
 }
