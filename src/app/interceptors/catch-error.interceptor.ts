@@ -29,6 +29,9 @@ export class CatchErrorInterceptor implements HttpInterceptor {
     else if(error.status == 401){
       errorMessage = "(" + error.status + ") --> Unauthorized";
     }
+    else if(error.status == 403){
+      errorMessage = "(" + error.status + ") --> Forbidden";
+    }
     else if(error.status == 404){
       errorMessage = "(" + error.status + ") --> Not found";
     } 

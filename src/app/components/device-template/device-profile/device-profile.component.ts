@@ -36,7 +36,7 @@ export class DeviceProfileComponent implements OnInit {
   }
 
   editProfile(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/EditProfile");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id + "/EditProfile");
   }
 
 }

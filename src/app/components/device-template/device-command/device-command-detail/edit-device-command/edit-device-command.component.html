@@ -36,6 +36,40 @@
                     </div>
                 </td>
             </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <b>Type</b><br>
+                        <select class="form-select" formControlName="Type">
+                            <option value="1">Create</option>
+                            <option value="2">Execute</option>
+                            <option value="3">Delete</option>
+                            <option value="4">Update</option>
+                            <option value="5">Get By ID</option>
+                            <option value="6">Get Property</option>
+                            <option value="7">Set Property</option>
+                            <option value="8">List</option>
+                            <option value="9">Reboot</option>
+                            <option value="10">Login</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 

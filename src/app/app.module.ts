@@ -121,6 +121,7 @@ import { CarePlanMeasureDetailsComponent } from './components/care-plan/care-pla
 import { CarePlanMeasureTelemetryComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-telemetry/care-plan-measure-telemetry.component';
 import { EditCarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/edit-care-plan-measure-details/edit-care-plan-measure-details.component';
 import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/create-careplan-target/create-careplan-target.component';
+import { CommandTypePipe } from './pipes/Device/command-type.pipe';
 //#endregion Pipes
 
 @NgModule({
@@ -215,7 +216,8 @@ import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-
     CarePlanMeasureDetailsComponent,
     CarePlanMeasureTelemetryComponent,
     EditCarePlanMeasureDetailsComponent,
-    CreateCareplanTargetComponent
+    CreateCareplanTargetComponent,
+    CommandTypePipe
   ],
   imports: [
     BrowserModule,
@@ -261,6 +263,8 @@ import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-
     PriorityTypePipe,
     CareStatusPipe,
     CarePlanAdapterComponent,
+    DeviceTemplateAdapterComponent,
+    CommandTypePipe,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

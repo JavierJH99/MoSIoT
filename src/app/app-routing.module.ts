@@ -59,7 +59,7 @@ const routes: Routes = [
     component:DeviceTemplateDetailComponent
   },
   {
-    path:'DeviceTemplate/:deviceName/EditProfile',
+    path:'DeviceTemplate/:deviceId/EditProfile',
     component:EditDeviceProfileComponent
   },
   {

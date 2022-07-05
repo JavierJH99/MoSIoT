@@ -6,6 +6,9 @@ import { Telemetry } from '../models/Device Template/telemetry';
 import { Property } from '../models/Device Template/property';
 import { Command } from '../models/Device Template/command';
 import { NewTelemetry } from '../models/Device Template/new-telemetry';
+import { NewProperty } from '../models/Device Template/new-property';
+import { NewCommand } from '../models/Device Template/new-command';
+import { NewDevice } from '../models/Device Template/new-device';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +28,7 @@ export class DeviceTemplateService {
     return this.http.get<DeviceTemplate>(environment.base_url + '/DeviceTemplate/' + id);
   }
 
-  createDeviceTemplate(data: DeviceTemplate){
+  createDeviceTemplate(data: NewDevice){
     return this.http.post<DeviceTemplate>(environment.base_url + '/DeviceTemplate/NEW_', data);
   }
 
@@ -49,7 +52,7 @@ export class DeviceTemplateService {
     return this.http.delete(environment.base_url + '/Telemetry/Destroy?p_telemetry_oid=' + id);
   }
 
-  createProperty(data: Property){
+  createProperty(data: NewProperty){
     return this.http.post<Property>(environment.base_url + '/Property/New_', data);
   }
 
@@ -61,7 +64,7 @@ export class DeviceTemplateService {
     return this.http.delete(environment.base_url + '/Property/Destroy?p_property_oid=' + id);
   }
 
-  createCommand(data: Command){
+  createCommand(data: NewCommand){
     return this.http.post<Command>(environment.base_url + '/Command/New_', data);
   }
 

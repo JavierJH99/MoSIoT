@@ -11,12 +11,6 @@ import { DeviceTemplateService } from 'src/app/services/device-template.service'
 export class DeviceTemplateComponent implements OnInit {
   deviceTemplates!: DeviceTemplate[];
   cargando!:boolean;
-  newDevice:DeviceTemplate = {
-    Id: 0,
-    Name: "",
-    IsEdge: true,
-    Type: 1,
-  };
 
   constructor(private router: Router, private deviceTemplateService: DeviceTemplateService) { }
 
@@ -43,8 +37,7 @@ export class DeviceTemplateComponent implements OnInit {
   }
 
   createDevice(){
-    localStorage.setItem('deviceDetail',JSON.stringify(this.newDevice));
-    this.router.navigateByUrl("DeviceTemplate/New Device/EditProfile");
+    this.router.navigateByUrl("DeviceTemplate/" + -999 + "/EditProfile");
   }
 
 }

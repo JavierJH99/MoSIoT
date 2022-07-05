@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 import { Validators } from '@angular/forms';
+import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
 
 @Component({
   selector: 'app-edit-device-profile',
@@ -11,9 +12,10 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./edit-device-profile.component.scss']
 })
 export class EditDeviceProfileComponent implements OnInit {
-  device!:DeviceTemplate;
-  newDevice!:DeviceTemplate;
   devices!:DeviceTemplate[];
+  device!:DeviceTemplate;
+  isNew:boolean = false;
+  idDevice!:number;
 
   deviceProfileForm = this.fb.group({
     Name:['',Validators.required],
@@ -25,19 +27,30 @@ export class EditDeviceProfileComponent implements OnInit {
   get Type() { return this.deviceProfileForm.get('Type'); }
   get IsEdge() { return this.deviceProfileForm.get('IsEdge'); }
   
-  constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, private router:Router) { }
+  constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, private router:Router, private deviceTemplateAdapter: DeviceTemplateAdapterComponent,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.devices = JSON.parse('' + localStorage.getItem('devices'));
-    this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
+    this.activatedRoute.params.subscribe((params: Params) => this.idDevice = params['deviceId']);
+    this.devices.find(device => device.Id == this.idDevice);
+
     //If not exists, create new
-    if(!this.devices.some(device => device.Id == this.device.Id)){
+    if(this.device == undefined){
       alert("Creating new device, fill in the fields");
-      this.deviceProfileForm.setValue({Name: "", Type: null, IsEdge: false});
-    } 
-    //If exists
-    else{
-      this.deviceProfileForm.setValue({Name: this.device.Name, Type: this.device.Type, IsEdge: this.device.IsEdge});
+      this.isNew = true;
+      this.initDefaults();
+    }
+    
+    this.deviceProfileForm.setValue({Name: this.device.Name, Type: this.device.Type, IsEdge: this.device.IsEdge});
+  }
+
+  initDefaults(){
+    this.device = {
+      Id: 0,
+      IsEdge: false,
+      Name: "",
+      Type: 1
     }
   }
 
@@ -46,17 +59,17 @@ export class EditDeviceProfileComponent implements OnInit {
     this.device.IsEdge = this.deviceProfileForm.get('IsEdge')?.value
     this.device.Type = this.deviceProfileForm.get('Type')?.value
 
-    if(!this.devices.some(device => device.Id == this.device.Id)){
-      this.deviceService.createDeviceTemplate(this.device).subscribe({
+    if(this.isNew){
+      this.deviceService.createDeviceTemplate(this.deviceTemplateAdapter.newDevice(this.device)).subscribe({
         next: result => {
-          this.newDevice = result;
+          this.device = result;
         },
         error: error => {
           alert("There was a problem creating the device: " + error);
         },
         complete: () => {
-          localStorage.setItem('deviceDetail',JSON.stringify(this.newDevice));
-          this.router.navigateByUrl("DeviceTemplate/ " + this.newDevice.Id);
+          localStorage.setItem('deviceDetail',JSON.stringify(this.device));
+          this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
           alert(this.device.Name + " created");
         }
       })

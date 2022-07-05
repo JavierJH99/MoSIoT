@@ -6,6 +6,7 @@ import { Command } from 'src/app/models/Device Template/command';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
 import { BooleanToStringPipe } from 'src/app/pipes/boolean-to-string.pipe';
+import { CommandTypePipe } from 'src/app/pipes/Device/command-type.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class DeviceCommandDetailComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private deviceService: DeviceTemplateService,
-    private boolToString: BooleanToStringPipe) { }
+    private boolToString: BooleanToStringPipe, private commandTypePipe: CommandTypePipe) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['commandId']);
@@ -35,8 +36,16 @@ export class DeviceCommandDetailComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
+        Name: "Type",
+        Value: this.commandTypePipe.transform(this.command.Type)
+      },
+      {
         Name: "Synchronous",
         Value: this.boolToString.transform(this.command.IsSynchronous)
+      },
+      {
+        Name: "Description",
+        Value: this.command.Description
       }
     ]
   }
@@ -63,14 +72,14 @@ export class DeviceCommandDetailComponent implements OnInit {
       },
       complete: () => {
         if(removeConfirm == 1){
-          this.removeDeviceProperty();
+          this.removeDevicCommand();
         }
       }
     });
   }
 
-  removeDeviceProperty(){
-    this.deviceService.deleteDeviceProperty(this.command.Id).subscribe({
+  removeDevicCommand(){
+    this.deviceService.deleteDeviceCommand(this.command.Id).subscribe({
       next: result => {
         console.log("Removing device command...");
       },
