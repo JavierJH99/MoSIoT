@@ -28,7 +28,7 @@
         </ng-template>
         <dataTable [dataSource] = tableMedicationDataSource></dataTable>
         <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-success" (click)="editCareActivity()">Edit</a>
+            <a class="btn btn-success" (click)="editCareActivityMedication()">Edit</a>
         </div>
     </mat-tab>
     <mat-tab>
@@ -38,7 +38,7 @@
         </ng-template>
         <dataTable [dataSource] = tableNutritionOrderDataSource></dataTable>
         <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-success" (click)="editCareActivity()">Edit</a>
+            <a class="btn btn-success" (click)="editCareActivityNutrition()">Edit</a>
         </div>
     </mat-tab>
     <mat-tab>
@@ -48,7 +48,7 @@
         </ng-template>
         <dataTable [dataSource] = tableAppoinmentsDataSource></dataTable>
         <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-success" (click)="editCareActivity()">Edit</a>
+            <a class="btn btn-success" (click)="editCareActivityAppointment()">Edit</a>
         </div>
     </mat-tab>
   </mat-tab-group>

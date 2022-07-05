@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule} from '@angular/material/datepicker';
 //#endregion Angular Material
 //#region Shared
 import { TableComponent } from './components/shared/table/table.component';
@@ -108,6 +109,18 @@ import { CarePlanTargetDetailComponent } from './components/care-plan/care-plan-
 import { EditCarePlanDetailsComponent } from './components/care-plan/care-plan-details/edit-care-plan-details/edit-care-plan-details.component';
 import { CarePlanAdapterComponent } from './adapters/care-plan-adapter/care-plan-adapter.component';
 import { EditCareActivityDetailComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-detail/edit-care-activity-detail.component';
+import { EditCareActivityMedicationComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-medication/edit-care-activity-medication.component';
+import { EditCareActivityNutritionOrderComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-nutrition-order/edit-care-activity-nutrition-order.component';
+import { EditCareActivityAppoinmentsComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-appoinments/edit-care-activity-appoinments.component';
+import { EditCarePlanGoalDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/edit-care-plan-goal-detail/edit-care-plan-goal-detail.component';
+import { EditCarePlanTargetDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/edit-care-plan-target-detail/edit-care-plan-target-detail.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CarePlanMeasureComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure.component';
+import { CarePlanMeasureDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-detail/care-plan-measure-detail.component';
+import { CarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/care-plan-measure-details.component';
+import { CarePlanMeasureTelemetryComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-telemetry/care-plan-measure-telemetry.component';
+import { EditCarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/edit-care-plan-measure-details/edit-care-plan-measure-details.component';
+import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/create-careplan-target/create-careplan-target.component';
 //#endregion Pipes
 
 @NgModule({
@@ -191,7 +204,18 @@ import { EditCareActivityDetailComponent } from './components/care-plan/care-pla
     CarePlanTargetDetailComponent,
     EditCarePlanDetailsComponent,
     CarePlanAdapterComponent,
-    EditCareActivityDetailComponent
+    EditCareActivityDetailComponent,
+    EditCareActivityMedicationComponent,
+    EditCareActivityNutritionOrderComponent,
+    EditCareActivityAppoinmentsComponent,
+    EditCarePlanGoalDetailComponent,
+    EditCarePlanTargetDetailComponent,
+    CarePlanMeasureComponent,
+    CarePlanMeasureDetailComponent,
+    CarePlanMeasureDetailsComponent,
+    CarePlanMeasureTelemetryComponent,
+    EditCarePlanMeasureDetailsComponent,
+    CreateCareplanTargetComponent
   ],
   imports: [
     BrowserModule,
@@ -205,9 +229,12 @@ import { EditCareActivityDetailComponent } from './components/care-plan/care-pla
     MatTabsModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule
   ],
   providers: [
+    MatDatepickerModule,
     SeverityPipe,
     TelemetryTypePipe,
     TelemetryUnitTypePipe,

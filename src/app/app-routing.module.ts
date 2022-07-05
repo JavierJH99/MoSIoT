@@ -34,6 +34,14 @@ import { CareActivityDetailComponent } from './components/care-plan/care-plan-ca
 import { CarePlanGoalDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-goal-detail.component';
 import { EditCarePlanDetailsComponent } from './components/care-plan/care-plan-details/edit-care-plan-details/edit-care-plan-details.component';
 import { EditCareActivityDetailComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-detail/edit-care-activity-detail.component';
+import { EditCareActivityMedicationComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-medication/edit-care-activity-medication.component';
+import { EditCareActivityNutritionOrderComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-nutrition-order/edit-care-activity-nutrition-order.component';
+import { EditCareActivityAppoinmentsComponent } from './components/care-plan/care-plan-care-activity/care-activity-detail/edit-care-activity-appoinments/edit-care-activity-appoinments.component';
+import { EditCarePlanGoalDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/edit-care-plan-goal-detail/edit-care-plan-goal-detail.component';
+import { EditCarePlanTargetDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/edit-care-plan-target-detail/edit-care-plan-target-detail.component';
+import { CarePlanMeasureDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-detail/care-plan-measure-detail.component';
+import { EditCarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/edit-care-plan-measure-details/edit-care-plan-measure-details.component';
+import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/create-careplan-target/create-careplan-target.component';
 
 const routes: Routes = [
   {
@@ -163,8 +171,40 @@ const routes: Routes = [
     component:EditCareActivityDetailComponent
   },
   {
+    path:'CarePlan/:carePlanName/CareActivity/:careActivityId/Medication/Edit',
+    component:EditCareActivityMedicationComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/CareActivity/:careActivityId/Nutrition/Edit',
+    component:EditCareActivityNutritionOrderComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/CareActivity/:careActivityId/Appointment/Edit',
+    component:EditCareActivityAppoinmentsComponent
+  },
+  {
     path:'CarePlan/:carePlanName/Goal/:goalId',
     component:CarePlanGoalDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/Goal/:goalId/Edit',
+    component:EditCarePlanGoalDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/Goal/:goalId/Target/:targetId/Edit',
+    component:EditCarePlanTargetDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/Goal/:goalId/Target/New',
+    component:CreateCareplanTargetComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/Goal/:goalId/Measure/:measureId',
+    component:CarePlanMeasureDetailComponent
+  },
+  {
+    path:'CarePlan/:carePlanName/Goal/:goalId/Target/:targetId/Measure/:measureId/Edit',
+    component:EditCarePlanMeasureDetailsComponent
   },
   //#endregion
   {

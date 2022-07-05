@@ -74,6 +74,18 @@ export class CareActivityDetailComponent implements OnInit {
     this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Edit");
   }
 
+  editCareActivityMedication(){
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Medication/Edit");
+  }
+
+  editCareActivityNutrition(){
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Nutrition/Edit");
+  }
+
+  editCareActivityAppointment(){
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Appointment/Edit");
+  }
+
   removeDialog(){
     let removeConfirm:number = 0;
 
@@ -149,7 +161,7 @@ export class CareActivityDetailComponent implements OnInit {
         Value: medication.Description
       },
       {
-        Name: "Product Referebce",
+        Name: "Product Reference",
         Value: medication.ProductReference
       },
       {

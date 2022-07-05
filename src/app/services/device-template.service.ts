@@ -17,6 +17,10 @@ export class DeviceTemplateService {
     return this.http.get<DeviceTemplate[]>(environment.base_url + '/DeviceTemplate/ReadAll');
   }
 
+  getAllTelemetry(){
+    return this.http.get<Telemetry[]>(environment.base_url + '/Telemetry/ReadAll');
+  }
+
   getDeviceTemplateById(id: number){
     return this.http.get<DeviceTemplate>(environment.base_url + '/DeviceTemplate/' + id);
   }

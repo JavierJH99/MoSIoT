@@ -60,9 +60,7 @@ export class EditCareActivityDetailComponent implements OnInit {
       Location: "",
       Periodicity: 1,
       TypeActivity: 1,
-      Id: 0,
-      ActivityCode: "",
-      OutcomeCode: ""
+      Id: 0
     }
   }
 
@@ -90,7 +88,7 @@ export class EditCareActivityDetailComponent implements OnInit {
       });
     }
     else{
-      this.carePlanService.updateCareActivity(this.careActivity.Id,this.careActivity).subscribe({
+      this.carePlanService.updateCareActivity(this.careActivity.Id,this.carePlanAdapter.newCareActivity(this.careActivity, this.carePlan.Id)).subscribe({
         next : result =>{
           console.log(result);
         },

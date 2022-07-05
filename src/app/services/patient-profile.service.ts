@@ -27,9 +27,18 @@ export class PatientProfileService {
     return this.http.get<PatientProfile[]>(environment.base_url + '/PatientProfile/ReadAll');
   }
 
+  getAllCondition(){
+    return this.http.get<Condition[]>(environment.base_url + '/Condition/ReadAll');
+  }
+
   getPatientProfileById(id: number){
     return this.http.get<PatientProfile>(environment.base_url + '/PatientProfile/' + id);
   }
+
+  getConditionById(id: number){
+    return this.http.get<Condition>(environment.base_url + '/Condition/' + id);
+  }
+
 
   createPatientProfile(data: NewPatientProfile){
     return this.http.post<PatientProfile>(environment.base_url + '/PatientProfile/New_', data);

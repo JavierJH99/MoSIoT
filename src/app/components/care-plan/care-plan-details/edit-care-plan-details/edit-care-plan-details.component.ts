@@ -66,11 +66,8 @@ export class EditCarePlanDetailsComponent implements OnInit {
     this.carePlan.Intent = this.carePlanForm.get('Intent')?.value;
     this.carePlan.Status = this.carePlanForm.get('Status')?.value;
     this.carePlan.Modified = new Date();
-    
-    console.log(this.carePlan.Patient);
 
     if(this.newCarePlan){
-      console.log(this.carePlan);
       this.carePlanService.createCarePlanTemplate(this.carePlanAdapter.newCarePlan(this.carePlan)).subscribe({
         next: result => {
           this.carePlan = result;

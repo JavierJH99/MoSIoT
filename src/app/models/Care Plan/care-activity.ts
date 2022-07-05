@@ -8,9 +8,7 @@ export interface CareActivity {
     Description:     string;
     Duration:        number;
     Location:        string;
-    OutcomeCode:          string;
-    TypeActivity:         number;
-    ActivityCode:         string;
+    TypeActivity:    number;
     Name:            string;
     Medications?:     Medication;
     NutritionOrders?: NutritionOrder;

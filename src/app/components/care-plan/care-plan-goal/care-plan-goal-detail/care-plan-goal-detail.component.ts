@@ -38,15 +38,9 @@ export class CarePlanGoalDetailComponent implements OnInit {
     this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.goal.Id + "/Edit");
   }
 
-  editTarget(idTarget:number){
-    alert("Not implemented");
-  }
+  
 
-  createTarget(){
-    alert("Not implemented");
-  }
-
-  removeDialog(name:string, type:number, id?:number){
+  removeDialog(){
     let removeConfirm:number = 0;
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
@@ -64,17 +58,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
       },
       complete: () => {
         if(removeConfirm == 1){
-          switch(type){
-            case 1:
-              this.removeGoal();
-              break;
-            case 2:
-              this.removeTarget(id!);
-              break;
-            default:
-              alert("There was a problem removing");
-              break;
-          }
+            this.removeGoal();
         }
       }
     });
@@ -90,21 +74,6 @@ export class CarePlanGoalDetailComponent implements OnInit {
       },
       complete: () => {
         alert("Goal removed successfully");
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-      }
-    })
-  }
-
-  removeTarget(idTarget:number){
-    this.carePlanService.deleteTarget(idTarget).subscribe({
-      next: result => {
-        console.log("Removing target...");
-      },
-      error: error => {
-        alert("There was a problem removing the target: " + error);
-      },
-      complete: () => {
-        alert("Target removed successfully");
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
       }
     })

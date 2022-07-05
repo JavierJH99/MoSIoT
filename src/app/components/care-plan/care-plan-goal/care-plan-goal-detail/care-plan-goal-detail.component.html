@@ -4,7 +4,7 @@
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-danger" (click)="removeDialog('Goal', 1, goal.Id)">Remove goal</button>
+            <button class="btn btn-outline-danger" (click)="removeDialog()">Remove goal</button>
         </div>
     </div>    
 </div>
@@ -26,22 +26,7 @@
             <mat-icon>list_alt</mat-icon>
             Target
         </ng-template>
-        <ol class="list-group mt-2" *ngFor="let target of goal.Targets">
-            <li class="list-group-item d-flex align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{target.DueDate | date}}</div>
-                    <div>Desired Value: {{target.DesiredValue}}</div>
-                    <div>Description: {{target.Description | titlecase}}</div>
-                </div>
-                <div>
-                    <button class="btn btn-outline-success" (click)="editTarget(target.Id)">Edit</button>
-                    <button class="btn btn-outline-danger" (click)="removeDialog('Target', 2, target.Id)">Remove</button>
-                </div>
-            </li>
-        </ol>
-        <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-primary" (click)="createTarget()">Create new</a>
-        </div>
+        <care-plan-target-detail [goal]="goal"></care-plan-target-detail>
     </mat-tab>
   </mat-tab-group>
 </div>
