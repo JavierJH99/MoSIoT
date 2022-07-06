@@ -1,4 +1,5 @@
-export interface Event {
+export interface Event{
+    Name:     string;
     Id:       number;
     Severity: number;
 }

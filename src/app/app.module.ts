@@ -117,11 +117,17 @@ import { CarePlanMeasureTelemetryComponent } from './components/care-plan/care-p
 import { EditCarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/edit-care-plan-measure-details/edit-care-plan-measure-details.component';
 import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/create-careplan-target/create-careplan-target.component';
 import { CommandTypePipe } from './pipes/Device/command-type.pipe';
-import { EditTelemetrySpecificComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-telemetry-specific.component';
-import { EditSensorTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-sensor-telemetry/edit-sensor-telemetry.component';
-import { EditStateTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-state-telemetry/edit-state-telemetry.component';
-import { EditLocationTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-location-telemetry/edit-location-telemetry.component';
-import { EditEventTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/edit-telemetry-specific/edit-event-telemetry/edit-event-telemetry.component';
+import { TelemetrySpecificDetailComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/telemetry-specific-detail.component';
+import { StateTelemetryDetailComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/state-telemetry-detail.component';
+import { EventTelemtryDetailComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/event-telemtry-detail/event-telemtry-detail.component';
+import { LocationTelemtryDetailComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/location-telemtry-detail/location-telemtry-detail.component';
+import { SensorTelemtryDetailComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/sensor-telemtry-detail/sensor-telemtry-detail.component';
+import { EditEventTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/event-telemtry-detail/edit-event-telemetry/edit-event-telemetry.component';
+import { EditLocationTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/location-telemtry-detail/edit-location-telemetry/edit-location-telemetry.component';
+import { EditSensorTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/sensor-telemtry-detail/edit-sensor-telemetry/edit-sensor-telemetry.component';
+import { EditStateTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-telemetry/edit-state-telemetry.component';
+import { EditStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-device/edit-state-device.component';
+import { CreateStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/create-state-device/create-state-device.component';
 //#endregion Pipes
 
 @NgModule({
@@ -213,11 +219,17 @@ import { EditEventTelemetryComponent } from './components/device-template/device
     EditCarePlanMeasureDetailsComponent,
     CreateCareplanTargetComponent,
     CommandTypePipe,
-    EditTelemetrySpecificComponent,
+    TelemetrySpecificDetailComponent,
+    StateTelemetryDetailComponent,
+    EventTelemtryDetailComponent,
+    LocationTelemtryDetailComponent,
+    SensorTelemtryDetailComponent,
+    EditEventTelemetryComponent,
+    EditLocationTelemetryComponent,
     EditSensorTelemetryComponent,
     EditStateTelemetryComponent,
-    EditLocationTelemetryComponent,
-    EditEventTelemetryComponent
+    EditStateDeviceComponent,
+    CreateStateDeviceComponent
   ],
   imports: [
     BrowserModule,

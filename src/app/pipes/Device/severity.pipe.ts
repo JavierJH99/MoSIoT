@@ -8,14 +8,17 @@ export class SeverityPipe implements PipeTransform {
 
   transform(value: number): string {
     switch(value){
-      case 0:
+      case 1:
         this.severity = "Warning"
         break;
-      case 1:
+      case 2:
         this.severity = "Error"
         break;
-      case 2:
+      case 3:
         this.severity = "Info"
+        break;
+      default:
+        this.severity = "" + value;
         break;
     }
     return this.severity;

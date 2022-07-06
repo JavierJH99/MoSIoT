@@ -42,6 +42,12 @@ import { EditCarePlanTargetDetailComponent } from './components/care-plan/care-p
 import { CarePlanMeasureDetailComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-detail/care-plan-measure-detail.component';
 import { EditCarePlanMeasureDetailsComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-measure/care-plan-measure-details/edit-care-plan-measure-details/edit-care-plan-measure-details.component';
 import { CreateCareplanTargetComponent } from './components/care-plan/care-plan-goal/care-plan-goal-detail/care-plan-target-detail/create-careplan-target/create-careplan-target.component';
+import { EditEventTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/event-telemtry-detail/edit-event-telemetry/edit-event-telemetry.component';
+import { EditLocationTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/location-telemtry-detail/edit-location-telemetry/edit-location-telemetry.component';
+import { EditSensorTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/sensor-telemtry-detail/edit-sensor-telemetry/edit-sensor-telemetry.component';
+import { EditStateTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-telemetry/edit-state-telemetry.component';
+import { EditStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-device/edit-state-device.component';
+import { CreateStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/create-state-device/create-state-device.component';
 
 const routes: Routes = [
   {
@@ -69,6 +75,30 @@ const routes: Routes = [
   {
     path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/Edit',
     component:EditDeviceTelemetryComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/Event/:eventName/Edit',
+    component:EditEventTelemetryComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/Location/:locationName/Edit',
+    component:EditLocationTelemetryComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/Sensor/:locationName/Edit',
+    component:EditSensorTelemetryComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/State/:stateName/Edit',
+    component:EditStateTelemetryComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/State/:stateId/StateDevice/:stateDeviceId/Edit',
+    component:EditStateDeviceComponent
+  },
+  {
+    path:'DeviceTemplate/:deviceName/Telemetry/:telemetryId/State/:stateId/StateDevice/New',
+    component:CreateStateDeviceComponent
   },
   {
     path:'DeviceTemplate/:deviceName/Property/:propertyId',
