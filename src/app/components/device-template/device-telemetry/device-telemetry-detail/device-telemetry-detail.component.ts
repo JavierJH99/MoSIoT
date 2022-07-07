@@ -9,6 +9,7 @@ import { SchemaTypePipe } from 'src/app/pipes/Device/schema-type.pipe';
 import { TelemetryTypePipe } from 'src/app/pipes/Device/telemetry-type.pipe';
 import { TelemetryUnitTypePipe } from 'src/app/pipes/Device/telemetry-unit-type.pipe';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-device-telemetry-detail',
@@ -22,7 +23,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   tableProfileDataSource!:TableDataSource[];
   tableSpecificDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, 
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, 
     private deviceService: DeviceTemplateService, private telemetryTypePipe: TelemetryTypePipe, 
     private telemetryUnitType: TelemetryUnitTypePipe, private schemaTypePipe: SchemaTypePipe) { }
 
@@ -51,7 +52,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the device: " + error);
+        this.sweetAlert.removeError("telemetry",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -68,10 +69,10 @@ export class DeviceTelemetryDetailComponent implements OnInit {
         console.log("Removing device telemetry...");
       },
       error: error => {
-        alert("There was a problem removing the telemetry: " + error);
+        this.sweetAlert.removeError("telemetry",error);
       },
       complete: () => {
-        alert("Telemetry removed successfully");
+        this.sweetAlert.removeSuccess("Telemetry");
         this.router.navigateByUrl("/DeviceTemplate/" + this.device.Id);
       }
     })

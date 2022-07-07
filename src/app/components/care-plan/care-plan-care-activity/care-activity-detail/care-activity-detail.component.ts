@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { Appointment } from 'src/app/models/Care Plan/appointment';
 import { CareActivity } from 'src/app/models/Care Plan/care-activity';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
@@ -32,7 +33,7 @@ export class CareActivityDetailComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private carePlanService: CarePlanService, 
     private typePeriodicityPipe: TypePeriodicityPipe, private typeActivityPipe: TypeActivityPipe, private booleanToStringPipe: BooleanToStringPipe,
-    private formTypePipe: FormTypePipe) { }
+    private formTypePipe: FormTypePipe, private sweetAlert:SweetAlertsComponent) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['careActivtyId']);
@@ -64,7 +65,7 @@ export class CareActivityDetailComponent implements OnInit {
       }
     }
     else{
-      alert("Care Activity error");
+      this.sweetAlert.createError("care activity","care activity error");
       this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
     }
     
@@ -99,7 +100,7 @@ export class CareActivityDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the care activity: " + error);
+        this.sweetAlert.removeError("care activity",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -116,10 +117,10 @@ export class CareActivityDetailComponent implements OnInit {
         console.log("Removing care activity...");
       },
       error: error => {
-        alert("There was a problem removing the care activity: " + error);
+        this.sweetAlert.removeError("care activity",error);
       },
       complete: () => {
-        alert("Care activity removed successfully");
+        this.sweetAlert.removeSuccess("Care activity");
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
       }
     })

@@ -5,6 +5,7 @@ import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 import { Validators } from '@angular/forms';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-edit-device-profile',
@@ -28,7 +29,7 @@ export class EditDeviceProfileComponent implements OnInit {
   get IsEdge() { return this.deviceProfileForm.get('IsEdge'); }
   
   constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, private router:Router, private deviceTemplateAdapter: DeviceTemplateAdapterComponent,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute, private sweetAlert: SweetAlertsComponent) { }
 
   ngOnInit(): void {
     this.devices = JSON.parse('' + localStorage.getItem('devices'));
@@ -36,8 +37,7 @@ export class EditDeviceProfileComponent implements OnInit {
     this.devices.find(device => device.Id == this.idDevice);
 
     //If not exists, create new
-    if(this.device == undefined){
-      alert("Creating new device, fill in the fields");
+    if(this.device == undefined){      
       this.isNew = true;
       this.initDefaults();
     }
@@ -65,12 +65,13 @@ export class EditDeviceProfileComponent implements OnInit {
           this.device = result;
         },
         error: error => {
-          alert("There was a problem creating the device: " + error);
+          this.sweetAlert.createError("device",error);
         },
         complete: () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
           this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
-          alert(this.device.Name + " created");
+          
+          this.sweetAlert.createSuccess("device");
         }
       })
     }
@@ -80,12 +81,13 @@ export class EditDeviceProfileComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
           this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
-          alert("Changes saved");
+          
+          this.sweetAlert.updateSuccess();
         }
       });
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { State } from 'src/app/models/Device Template/state';
 import { StateDevice } from 'src/app/models/Device Template/state-device';
@@ -30,7 +31,7 @@ export class CreateStateDeviceComponent implements OnInit {
   get Name() { return this.stateDeviceForm.get('Name'); }
   get Value() { return this.stateDeviceForm.get('Value'); }
   
-  constructor(private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
 
   ngOnInit(): void {
@@ -62,9 +63,10 @@ export class CreateStateDeviceComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to create state device: " + error);
+        this.sweetAlert.createError("state device",error);
       },
       complete : () => {
+        this.sweetAlert.createSuccess("state device");
         this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
       }
     });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PatientProfileAdapterComponent } from 'src/app/adapters/patient-profile-adapter/patient-profile-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { Condition } from 'src/app/models/Patient Profile/condition';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
@@ -29,7 +30,7 @@ export class EditPatientProfileConditionComponent implements OnInit {
   get Disease() { return this.patientConditionForm.get('Disease'); }
   get Description() { return this.patientConditionForm.get('Description'); }
   
-  constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
   ngOnInit(): void {
@@ -39,7 +40,6 @@ export class EditPatientProfileConditionComponent implements OnInit {
 
     //If not exists, create new
     if(!this.patient.Condition.some(condition => condition.Id == this.id)){
-      alert("Creating new condition, fill in the fields");
       this.isNew = true;
       this.initDefaults();
     }
@@ -69,12 +69,12 @@ export class EditPatientProfileConditionComponent implements OnInit {
           this.condition = result;
         },
         error : error => {
-          alert("Failed to create condition: " + error);
+          this.sweetAlert.createError("condition",error);
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
           this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-          alert("New condition created");
+          this.sweetAlert.createSuccess("Condition");
         }
       });
     }
@@ -84,12 +84,12 @@ export class EditPatientProfileConditionComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
           this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }

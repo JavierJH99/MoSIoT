@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
+import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-patient-profile',
@@ -12,7 +13,7 @@ export class PatientProfileComponent implements OnInit {
   patientProfiles!: PatientProfile[];
   cargando!:boolean;
 
-  constructor(private router: Router, private patientProfileService: PatientProfileService) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private router: Router, private patientProfileService: PatientProfileService) { }
 
   ngOnInit(): void {
     this.cargando = true;
@@ -22,7 +23,7 @@ export class PatientProfileComponent implements OnInit {
       },
       error: error => {
         this.cargando = false;
-        alert("There was a problem getting the devices: " + error); 
+        this.sweetAlert.readError("patient profiles",error);
       },
       complete: () => {
         localStorage.setItem('patientProfiles',JSON.stringify(this.patientProfiles));

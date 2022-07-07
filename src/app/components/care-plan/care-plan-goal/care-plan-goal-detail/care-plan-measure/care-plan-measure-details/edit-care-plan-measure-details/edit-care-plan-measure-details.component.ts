@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarePlanAdapterComponent } from 'src/app/adapters/care-plan-adapter/care-plan-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Goal } from 'src/app/models/Care Plan/goal';
 import { Measure } from 'src/app/models/Care Plan/measure';
@@ -32,7 +33,7 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
   get LOIN() { return this.measureForm.get('LOIN'); }
   get Description() { return this.measureForm.get('Description'); }
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
 
   ngOnInit(): void {
@@ -46,7 +47,6 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
 
     //If not exists, create new
     if(this.measure == undefined){
-      alert("Creating new measure, fill in the fields");
       this.isNew = true;
       this.initDefaults();
     }
@@ -75,10 +75,11 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
           this.measure = result;
         },
         error : error => {
-          alert("Failed to create measure: " + error);
+          this.sweetAlert.createError("measure",error);
         },
         complete : () => {
           this.addMeasureToTarget(this.measure.Id);
+          this.sweetAlert.createSuccess("measure");
         }
       });
     }
@@ -88,12 +89,12 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('measureDetail',JSON.stringify(this.measure));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }
@@ -105,12 +106,12 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to create add measure to target: " + error);
+        this.sweetAlert.updateError(error);
       },
       complete : () => {
         localStorage.setItem('measureDetail',JSON.stringify(this.measure));
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-        alert("New measure created");
+        this.sweetAlert.updateSuccess();
       }
     });
   }

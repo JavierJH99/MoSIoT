@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { State } from 'src/app/models/Device Template/state';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -20,7 +21,7 @@ export class StateTelemetryDetailComponent implements OnInit {
   isNew:boolean = false;
   tableDataSource!:TableDataSource[];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private deviceTemplateService: DeviceTemplateService) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private deviceTemplateService: DeviceTemplateService) { }
 
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
@@ -72,7 +73,7 @@ export class StateTelemetryDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the state device: " + error);
+        this.sweetAlert.removeError("state device",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -89,10 +90,10 @@ export class StateTelemetryDetailComponent implements OnInit {
         console.log("Removing state device...");
       },
       error: error => {
-        alert("There was a problem removing the state device: " + error);
+        this.sweetAlert.removeError("state device",error);
       },
       complete: () => {
-        alert("State device removed successfully");
+        this.sweetAlert.removeSuccess("state device");
         this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
       }
     })

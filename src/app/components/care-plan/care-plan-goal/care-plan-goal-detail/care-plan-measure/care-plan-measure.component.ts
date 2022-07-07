@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Goal } from 'src/app/models/Care Plan/goal';
 import { Measure } from 'src/app/models/Care Plan/measure';
@@ -18,7 +19,7 @@ export class CarePlanMeasureComponent implements OnInit {
 
   idGoal!:number;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private carePlanService: CarePlanService) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router, private carePlanService: CarePlanService) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -32,7 +33,7 @@ export class CarePlanMeasureComponent implements OnInit {
         this.measures = result;
       },
       error: error => {
-        alert("There was a problem getting measures: " + error);
+        this.sweetAlert.readError("measures",error);
       },
       complete: () => {
         this.loading = false;

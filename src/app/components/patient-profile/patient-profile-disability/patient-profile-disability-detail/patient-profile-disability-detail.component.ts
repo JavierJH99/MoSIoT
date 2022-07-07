@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { Disability } from 'src/app/models/Patient Profile/disability';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -20,7 +21,7 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
   disability!:Disability;
   tableDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private patientProfileService: PatientProfileService, private severityPipe: PatientSeverityPipe,
     private disabilityTypePipe: DisabilityTypePipe) { }
 
@@ -67,7 +68,7 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the disability: " + error);
+        this.sweetAlert.removeError("disability", error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -85,10 +86,10 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
         console.log("Removing disability...");
       },
       error: error => {
-        alert("There was a problem removing the disability: " + error);
+        this.sweetAlert.removeError("disability", error);
       },
       complete: () => {
-        alert("Disability removed successfully");
+        this.sweetAlert.removeSuccess("Disability");
         this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
       }
     })

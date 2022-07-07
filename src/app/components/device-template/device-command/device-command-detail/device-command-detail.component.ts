@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { Command } from 'src/app/models/Device Template/command';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -20,7 +21,7 @@ export class DeviceCommandDetailComponent implements OnInit {
   command!:Command;
   tableDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private deviceService: DeviceTemplateService,
     private boolToString: BooleanToStringPipe, private commandTypePipe: CommandTypePipe) { }
 
@@ -67,7 +68,7 @@ export class DeviceCommandDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the command: " + error);
+        this.sweetAlert.removeError("command",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -84,10 +85,10 @@ export class DeviceCommandDetailComponent implements OnInit {
         console.log("Removing device command...");
       },
       error: error => {
-        alert("There was a problem removing the command: " + error);
+        this.sweetAlert.removeError("command",error);
       },
       complete: () => {
-        alert("Command removed successfully");
+        this.sweetAlert.removeSuccess("command");
         this.router.navigateByUrl("/DeviceTemplate/" + this.device.Id);
       }
     })

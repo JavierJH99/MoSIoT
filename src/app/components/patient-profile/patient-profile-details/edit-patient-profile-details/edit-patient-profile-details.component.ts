@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PatientProfileAdapterComponent } from 'src/app/adapters/patient-profile-adapter/patient-profile-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 
@@ -29,14 +30,13 @@ export class EditPatientProfileDetailsComponent implements OnInit {
   get Region() { return this.patientProfileForm.get('Region'); }
   get Language() { return this.patientProfileForm.get('Language'); }
   
-  constructor(private fb:FormBuilder, private patientService:PatientProfileService, private router:Router, private patientProfileAdapter: PatientProfileAdapterComponent) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, private router:Router, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
   ngOnInit(): void {
     this.patients = JSON.parse('' + localStorage.getItem('patientProfiles'));
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     //If not exists, create new
     if(!this.patients.some(patient => patient.Id == this.patient.Id)){
-      alert("Creating new patient, fill in the fields");
       this.newPatient = true;
     } 
 
@@ -57,12 +57,12 @@ export class EditPatientProfileDetailsComponent implements OnInit {
           this.patient = result;
         },
         error: error => {
-          alert("There was a problem creating the device: " + error);
+          this.sweetAlert.createError("patient profile", error);
         },
         complete: () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.newPatient));
           this.router.navigateByUrl("PatientProfile");
-          alert(this.patient.Name + " created");
+          this.sweetAlert.createSuccess("patient profile");
         }
       })
     }
@@ -72,12 +72,12 @@ export class EditPatientProfileDetailsComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
           this.router.navigateByUrl("PatientProfile/ " + this.patient.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }

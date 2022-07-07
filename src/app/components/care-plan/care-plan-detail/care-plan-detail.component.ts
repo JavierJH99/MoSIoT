@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { CarePlanService } from 'src/app/services/care-plan.service';import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from '../../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-care-plan-detail',
@@ -14,7 +15,7 @@ export class CarePlanDetailComponent implements OnInit {
   carePlan!:CarePlanTemplate;
   cargando!:boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private carePlanService: CarePlanService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private carePlanService: CarePlanService, 
     public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class CarePlanDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the patient profile: " + error);
+        this.sweetAlert.removeError("remove care plan",error);
         removeConfirm = 0;
       },
       complete: () => {

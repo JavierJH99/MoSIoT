@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { Property } from 'src/app/models/Device Template/property';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -19,7 +20,7 @@ export class DevicePropertyDetailComponent implements OnInit {
   property!:Property;
   tableDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private deviceService: DeviceTemplateService,
     private boolToString: BooleanToStringPipe) { }
 
@@ -61,7 +62,7 @@ export class DevicePropertyDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the property: " + error);
+        this.sweetAlert.removeError("property",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -79,10 +80,10 @@ export class DevicePropertyDetailComponent implements OnInit {
         console.log("Removing device property...");
       },
       error: error => {
-        alert("There was a problem removing the property: " + error);
+        this.sweetAlert.removeError("property",error);
       },
       complete: () => {
-        alert("Property removed successfully");
+        this.sweetAlert.removeSuccess("property");
         this.router.navigateByUrl("/DeviceTemplate/" + this.device.Id);
       }
     })

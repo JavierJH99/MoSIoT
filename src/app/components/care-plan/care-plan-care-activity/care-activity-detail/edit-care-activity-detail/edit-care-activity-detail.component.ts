@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarePlanAdapterComponent } from 'src/app/adapters/care-plan-adapter/care-plan-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CareActivity } from 'src/app/models/Care Plan/care-activity';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { CarePlanService } from 'src/app/services/care-plan.service';
@@ -33,7 +34,7 @@ export class EditCareActivityDetailComponent implements OnInit {
   get Location() { return this.careActivityForm.get('Location'); }
   get Description() { return this.careActivityForm.get('Description'); }
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
 
   ngOnInit(): void {
@@ -43,7 +44,6 @@ export class EditCareActivityDetailComponent implements OnInit {
 
     //If not exists, create new
     if(!this.carePlan.CareActivities?.some(careActivity => careActivity.Id == this.id)){
-      alert("Creating new care activity, fill in the fields");
       this.isNew = true;
       this.initDefaults();
     }
@@ -78,12 +78,12 @@ export class EditCareActivityDetailComponent implements OnInit {
           this.careActivity = result;
         },
         error : error => {
-          alert("Failed to create care activity: " + error);
+          this.sweetAlert.createError("care activity",error);
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("New care activity created");
+          this.sweetAlert.createSuccess("care activity");
         }
       });
     }
@@ -93,12 +93,12 @@ export class EditCareActivityDetailComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }

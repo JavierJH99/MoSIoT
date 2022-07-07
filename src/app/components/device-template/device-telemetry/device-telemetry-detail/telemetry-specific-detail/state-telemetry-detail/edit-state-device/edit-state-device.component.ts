@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { State } from 'src/app/models/Device Template/state';
 import { StateDevice } from 'src/app/models/Device Template/state-device';
@@ -31,8 +32,7 @@ export class EditStateDeviceComponent implements OnInit {
   get Name() { return this.stateDeviceForm.get('Name'); }
   get Value() { return this.stateDeviceForm.get('Value'); }
   
-  constructor(private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
-    private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService) { }
 
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
@@ -61,9 +61,10 @@ export class EditStateDeviceComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to save changes: " + error);
+        this.sweetAlert.updateError(error);
       },
       complete : () => {
+        this.sweetAlert.updateSuccess();
         this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
       }
     });
@@ -81,7 +82,7 @@ export class EditStateDeviceComponent implements OnInit {
         stateDevice = result;
       },
       error : error => {
-        alert("Failed to get State Device: " + error);
+        this.sweetAlert.readError("state device",error);
       },
       complete : () => { }
     });

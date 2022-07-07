@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { CarePlanService } from 'src/app/services/care-plan.service';
+import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-care-plan',
@@ -12,7 +13,7 @@ export class CarePlanComponent implements OnInit {
   carePlans!: CarePlanTemplate[];
   cargando!:boolean;
 
-  constructor(private router: Router, private carePlanService: CarePlanService) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private router: Router, private carePlanService: CarePlanService) { }
 
   ngOnInit(): void {
     this.cargando = true;
@@ -22,7 +23,7 @@ export class CarePlanComponent implements OnInit {
       },
       error: error => {
         this.cargando = false;
-        alert("There was a problem getting the care plan templates: " + error); 
+        this.sweetAlert.readError("care plan templates","error getting care plan templates");
       },
       complete: () => {
         localStorage.setItem('carePlanTemplates',JSON.stringify(this.carePlans));

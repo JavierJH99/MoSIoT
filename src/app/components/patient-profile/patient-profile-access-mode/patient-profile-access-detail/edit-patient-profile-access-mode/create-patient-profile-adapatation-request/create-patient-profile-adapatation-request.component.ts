@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { AccessMode } from 'src/app/models/Patient Profile/access-mode';
 import { AdaptationRequest } from 'src/app/models/Patient Profile/adaptation-request';
 import { NewAdaptationRequest } from 'src/app/models/Patient Profile/new-adaptation-request';
@@ -30,7 +31,7 @@ export class CreatePatientProfileAdapatationRequestComponent implements OnInit {
   get Language() { return this.patientAdaptationForm.get('Language'); }
   get Description() { return this.patientAdaptationForm.get('Description'); }
   
-  constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -62,11 +63,11 @@ export class CreatePatientProfileAdapatationRequestComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to create Adaptation Request: " + error);
+        this.sweetAlert.createError("adaptation request",error);
       },
       complete : () => {
+        this.sweetAlert.createSuccess("Adaptation request");
         this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-        alert("Adaptation Request created");
       }
     });
   }

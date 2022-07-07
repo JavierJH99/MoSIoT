@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { AccessMode } from 'src/app/models/Patient Profile/access-mode';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -19,7 +20,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
   accessMode!:AccessMode;
   tableDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private patientProfileService: PatientProfileService,
     private accessModeTypePipe: AccessModeTypePipe) { }
 
@@ -86,7 +87,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the access mode: " + error);
+        this.sweetAlert.removeError("acces mode property",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -105,7 +106,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
               this.removeAdaptationDetail(id!);
               break;
             default:
-              alert("There was a problem removing the access mode");
+              this.sweetAlert.removeError("access mode property", "There was a problem with the property")
               break;
           }
         }
@@ -121,10 +122,10 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         console.log(result);
       },
       error: error => {
-        alert("There was a problem removing the access mode: " + error);
+        this.sweetAlert.removeError("access mode",error);
       },
       complete: () => {
-        alert("Access mode removed successfully");
+        this.sweetAlert.removeSuccess("Access mode");
         this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
       }
     })
@@ -137,10 +138,10 @@ export class PatientProfileAccessDetailComponent implements OnInit {
           console.log("Removing adaptation request...");
         },
         error: error => {
-          alert("There was a problem removing the adaptation request: " + error);
+          this.sweetAlert.removeError("adaptation request",error);
         },
         complete: () => {
-          alert("Adaptation request removed successfully");
+          this.sweetAlert.removeSuccess("Adaptation request");
           this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
         }
       })
@@ -154,10 +155,10 @@ export class PatientProfileAccessDetailComponent implements OnInit {
           console.log("Removing adaptation type...");
         },
         error: error => {
-          alert("There was a problem removing the adaptation type: " + error);
+          this.sweetAlert.removeError("adaptation type",error);
         },
         complete: () => {
-          alert("Adaptation type removed successfully");
+          this.sweetAlert.removeSuccess("Adapatation type");
           this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
         }
       })
@@ -171,10 +172,10 @@ export class PatientProfileAccessDetailComponent implements OnInit {
           console.log("Removing adaptation detail...");
         },
         error: error => {
-          alert("There was a problem removing the adaptation detail: " + error);
+          this.sweetAlert.removeError("adaptation detail", error);
         },
         complete: () => {
-          alert("Adaptation detail removed successfully");
+          this.sweetAlert.removeSuccess("Adaptation detail");
           this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
         }
       })

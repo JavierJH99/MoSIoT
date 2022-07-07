@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from '../../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-device-template-detail',
@@ -15,7 +16,7 @@ export class DeviceTemplateDetailComponent implements OnInit {
   device!:DeviceTemplate;
   cargando!:boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private deviceService: DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private deviceService: DeviceTemplateService, 
     public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,7 +29,7 @@ export class DeviceTemplateDetailComponent implements OnInit {
       },
       error: error => {
         this.cargando = false;
-        alert("An error occurred while accessing the device: " + error);
+        this.sweetAlert.readError("device template",error);
       },
       complete: () => {
         this.cargando = false;
@@ -50,7 +51,7 @@ export class DeviceTemplateDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the device: " + error);
+        this.sweetAlert.removeError("device template",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -67,10 +68,10 @@ export class DeviceTemplateDetailComponent implements OnInit {
         console.log("Removing device...");
       },
       error: error => {
-        alert("There was a problem removing the device: " + error);
+        this.sweetAlert.removeError("device template",error);
       },
       complete: () => {
-        alert("Device removed successfully");
+        this.sweetAlert.removeSuccess("Device template");
         this.router.navigateByUrl("/DeviceTemplate");
       }
     })

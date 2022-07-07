@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { Sensor } from 'src/app/models/Device Template/sensor';
 import { Telemetry } from 'src/app/models/Device Template/telemetry';
@@ -28,7 +29,7 @@ export class EditSensorTelemetryComponent implements OnInit {
   get Name() { return this.sensorForm.get('Name'); }
   get Type() { return this.sensorForm.get('Type'); }
   
-  constructor(private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
 
   ngOnInit(): void {
@@ -39,7 +40,6 @@ export class EditSensorTelemetryComponent implements OnInit {
     this.sensor = this.telemetry.Sensor!;
     
     if(this.sensor == undefined){
-      alert("Creating new sensor, fill in the fields");
       this.isNew = true;
       this.initDefaults();    
     }
@@ -67,9 +67,10 @@ export class EditSensorTelemetryComponent implements OnInit {
           this.sensor = result;
         },
         error : error => {
-          alert("Failed to create new sensor: " + error);
+          this.sweetAlert.createError("sensor",error);
         },
         complete : () => {
+          this.sweetAlert.createSuccess("sensor");
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
       });
@@ -80,9 +81,10 @@ export class EditSensorTelemetryComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
+          this.sweetAlert.updateSuccess();
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
       });

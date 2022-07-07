@@ -6,6 +6,7 @@ import { DeviceTemplateService } from 'src/app/services/device-template.service'
 import { Validators } from '@angular/forms';
 import { Telemetry } from 'src/app/models/Device Template/telemetry';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-edit-device-telemetry',
@@ -32,7 +33,7 @@ export class EditDeviceTelemetryComponent implements OnInit {
   get Unit() { return this.telemtryProfileForm.get('Unit'); }
   get Schema() { return this.telemtryProfileForm.get('Schema'); }
   
-  constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private deviceService:DeviceTemplateService, 
     private router:Router, private activatedRoute: ActivatedRoute, private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
 
   ngOnInit(): void {
@@ -41,7 +42,6 @@ export class EditDeviceTelemetryComponent implements OnInit {
     this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.idTelemetry)!;
     
     if(this.telemetry == undefined){
-      alert("Creating new telemetry, fill in the fields");
       this.isNew = true;
       this.initDefaults();    
     }
@@ -78,9 +78,10 @@ export class EditDeviceTelemetryComponent implements OnInit {
           this.telemetry = result;
         },
         error : error => {
-          alert("Failed to create new telemetry: " + error);
+          this.sweetAlert.createError("telemetry",error);
         },
         complete : () => {
+          this.sweetAlert.createSuccess("telemetry");
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
@@ -92,9 +93,10 @@ export class EditDeviceTelemetryComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
+          this.sweetAlert.updateSuccess();
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }

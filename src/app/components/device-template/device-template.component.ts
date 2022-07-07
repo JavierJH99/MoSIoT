@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
+import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-device-template',
@@ -12,7 +13,7 @@ export class DeviceTemplateComponent implements OnInit {
   deviceTemplates!: DeviceTemplate[];
   cargando!:boolean;
 
-  constructor(private router: Router, private deviceTemplateService: DeviceTemplateService) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private router: Router, private deviceTemplateService: DeviceTemplateService) { }
 
   ngOnInit(): void {
     this.cargando = true;
@@ -23,7 +24,7 @@ export class DeviceTemplateComponent implements OnInit {
       },
       error: error => {
         this.cargando = false;
-        alert("There was a problem getting the devices: " + error); 
+        this.sweetAlert.readError("devices",error);
       },
       complete: () => {
         localStorage.setItem('devices',JSON.stringify(this.deviceTemplates));

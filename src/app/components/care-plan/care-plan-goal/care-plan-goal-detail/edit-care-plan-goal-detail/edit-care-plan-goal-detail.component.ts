@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarePlanAdapterComponent } from 'src/app/adapters/care-plan-adapter/care-plan-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Goal } from 'src/app/models/Care Plan/goal';
 import { Condition } from 'src/app/models/Patient Profile/condition';
@@ -37,7 +38,7 @@ export class EditCarePlanGoalDetailComponent implements OnInit {
   get Description() { return this.goalForm.get('Description'); }
   get Condition() { return this.goalForm.get('Condition'); }
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
 
   ngOnInit(): void {
@@ -49,11 +50,10 @@ export class EditCarePlanGoalDetailComponent implements OnInit {
     //If not exists, create new
     if(this.goal == undefined){
       if(this.conditions == undefined || this.conditions.length == 0){
-        alert("To create a goal you need at least one condition attached to this care plan, please assign one first");
+        this.sweetAlert.createError("goal","To create a goal you need at least one condition attached to this care plan, please assign one first");
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
       }
       else{
-        alert("Creating new goal, fill in the fields");
         this.isNew = true;
         this.initDefaults();
       }
@@ -91,12 +91,12 @@ export class EditCarePlanGoalDetailComponent implements OnInit {
           this.goal = result;
         },
         error : error => {
-          alert("Failed to create goal: " + error);
+          this.sweetAlert.createError("goal",error);
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("New goal created");
+          this.sweetAlert.createSuccess("goal");
         }
       });
     }
@@ -106,12 +106,12 @@ export class EditCarePlanGoalDetailComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }

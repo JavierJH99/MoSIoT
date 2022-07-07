@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarePlanAdapterComponent } from 'src/app/adapters/care-plan-adapter/care-plan-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Goal } from 'src/app/models/Care Plan/goal';
 import { Target } from 'src/app/models/Care Plan/target';
@@ -30,7 +31,7 @@ export class CreateCareplanTargetComponent implements OnInit {
   get DueDate() { return this.targetForm.get('DueDate'); }
   get Description() { return this.targetForm.get('Description'); }
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService,
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService,
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
 
   ngOnInit(): void {
@@ -64,11 +65,11 @@ export class CreateCareplanTargetComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to createTarget: " + error);
+        this.sweetAlert.createError("target",error);
       },
       complete : () => {
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-        alert("New Target Created");
+        this.sweetAlert.createSuccess("target");
       }
     });
   }

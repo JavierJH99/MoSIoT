@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { Condition } from 'src/app/models/Patient Profile/condition';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -20,7 +21,7 @@ export class PatientProfileConditionDetailComponent implements OnInit {
   condition!:Condition;
   tableDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private patientProfileService: PatientProfileService, private diseaseType: DiseaseTypePipe,
     private clinicalType: ClinicalStatusPipe) { }
 
@@ -66,7 +67,7 @@ export class PatientProfileConditionDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the condition: " + error);
+        this.sweetAlert.removeError("condition",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -84,10 +85,10 @@ export class PatientProfileConditionDetailComponent implements OnInit {
         console.log("Removing condition...");
       },
       error: error => {
-        alert("There was a problem removing the condition: " + error);
+        this.sweetAlert.removeError("condition",error);
       },
       complete: () => {
-        alert("Condition removed successfully");
+        this.sweetAlert.removeSuccess("Condition");
         this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
       }
     })

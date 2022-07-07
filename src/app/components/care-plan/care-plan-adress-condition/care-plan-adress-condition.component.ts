@@ -5,6 +5,7 @@ import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Condition } from 'src/app/models/Patient Profile/condition';
 import { CarePlanService } from 'src/app/services/care-plan.service';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
+import { SweetAlertsComponent } from '../../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'care-plan-adress-condition',
@@ -24,7 +25,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
 
   get Condition() { return this.adressConditionForm.get('Condition'); }
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService, private patientProfileService: PatientProfileService, private router:Router) { }
+  constructor(private sweetAlert: SweetAlertsComponent,private fb:FormBuilder, private carePlanService:CarePlanService, private patientProfileService: PatientProfileService, private router:Router) { }
 
   ngOnInit(): void {
     this.carePlans = JSON.parse('' + localStorage.getItem('carePlanTemplates'));
@@ -48,11 +49,11 @@ export class CarePlanAdressConditionComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to add condition: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           window.location.reload();
-          alert("Condition added");
+          this.sweetAlert.updateSuccess();
         }
       });
     }
@@ -68,7 +69,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
         this.conditions = result;
       },
       error: error => {
-        alert("There was a problem getting the conditions: " + error); 
+        this.sweetAlert.readError("conditions",error);
       },
       complete: () => { }
     })
@@ -86,21 +87,23 @@ export class CarePlanAdressConditionComponent implements OnInit {
   }
 
   removeCondition(idCondition:number){
-    this.carePlan.AddressConditions?.splice(this.carePlan.AddressConditions?.map(condition => condition.Id).indexOf(idCondition),1);
+    if(this.sweetAlert.removeQuestion("condition")){
+      this.carePlan.AddressConditions?.splice(this.carePlan.AddressConditions?.map(condition => condition.Id).indexOf(idCondition),1);
 
-    this.carePlanService.updateCarePlan(this.carePlan.Id,this.carePlan).subscribe({
-      next : result =>{
-        console.log(result);
-      },
-      error : error => {
-        alert("Failed to save changes: " + error);
-      },
-      complete : () => {
-        localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-        this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
-        alert("Changes saved");
-      }
-    });
+      this.carePlanService.updateCarePlan(this.carePlan.Id,this.carePlan).subscribe({
+        next : result =>{
+          console.log(result);
+        },
+        error : error => {
+          this.sweetAlert.removeError("condition",error);
+        },
+        complete : () => {
+          localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
+          this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+          this.sweetAlert.removeSuccess("condition");
+        }
+      });
+    }
   }
 
   details(id:number){

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarePlanAdapterComponent } from 'src/app/adapters/care-plan-adapter/care-plan-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { CarePlanService } from 'src/app/services/care-plan.service';
@@ -38,7 +39,7 @@ export class EditCarePlanDetailsComponent implements OnInit {
   get Status() { return this.carePlanForm.get('Status'); }
   get Patient() { return this.carePlanForm.get('Patient'); }
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService, private patientProfileService: PatientProfileService, private router:Router, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, private patientProfileService: PatientProfileService, private router:Router, 
     private carePlanAdapter: CarePlanAdapterComponent, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -49,7 +50,6 @@ export class EditCarePlanDetailsComponent implements OnInit {
 
     //If not exists, create new
     if(!this.carePlans.some(carePlan => carePlan.Id == this.carePlan.Id)){
-      alert("Creating new care plan, fill in the fields");
       this.newCarePlan = true;
     } 
 
@@ -73,13 +73,13 @@ export class EditCarePlanDetailsComponent implements OnInit {
           this.carePlan = result;
         },
         error: error => {
-          alert("There was a problem creating the care plan: " + error);
+          this.sweetAlert.createError("care plan",error);
         },
         complete: () => {
           this.patientAssigned();
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan");
-          alert(this.carePlan.Name + " created");
+          this.sweetAlert.createSuccess("care plan");
         }
       })
     }
@@ -89,13 +89,13 @@ export class EditCarePlanDetailsComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           this.patientAssigned();
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }
@@ -107,7 +107,7 @@ export class EditCarePlanDetailsComponent implements OnInit {
         this.patients = result;
       },
       error: error => {
-        alert("There was a problem getting the patients: " + error); 
+        this.sweetAlert.readError("patients",error);
       },
       complete: () => {
         localStorage.setItem('patientProfiles',JSON.stringify(this.patients));
@@ -124,9 +124,11 @@ export class EditCarePlanDetailsComponent implements OnInit {
           console.log( result );
         },
         error: error => {
-          alert("There was a problem to asssign the patient: " + error); 
+          this.sweetAlert.updateError(error);
         },
-        complete: () => { }
+        complete: () => {
+          this.sweetAlert.updateSuccess();
+         }
       });
     }
   }

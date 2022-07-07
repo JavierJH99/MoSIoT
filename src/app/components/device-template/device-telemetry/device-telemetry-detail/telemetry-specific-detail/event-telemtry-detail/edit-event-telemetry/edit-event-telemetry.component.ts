@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { Event } from 'src/app/models/Device Template/event';
 import { Telemetry } from 'src/app/models/Device Template/telemetry';
@@ -28,7 +29,7 @@ export class EditEventTelemetryComponent implements OnInit {
   get Name() { return this.eventForm.get('Name'); }
   get Severity() { return this.eventForm.get('Severity'); }
   
-  constructor(private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
 
   ngOnInit(): void {
@@ -39,7 +40,6 @@ export class EditEventTelemetryComponent implements OnInit {
     this.event = this.telemetry.Event_!;
     
     if(this.event == undefined){
-      alert("Creating new event, fill in the fields");
       this.isNew = true;
       this.initDefaults();    
     }
@@ -67,9 +67,10 @@ export class EditEventTelemetryComponent implements OnInit {
           this.event = result;
         },
         error : error => {
-          alert("Failed to create new event: " + error);
+          this.sweetAlert.createError("event",error);
         },
         complete : () => {
+          this.sweetAlert.createSuccess("event");
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
       });
@@ -80,9 +81,10 @@ export class EditEventTelemetryComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
+          this.sweetAlert.updateSuccess();
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
       });

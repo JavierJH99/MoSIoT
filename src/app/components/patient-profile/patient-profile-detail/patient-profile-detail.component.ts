@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from '../../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-patient-profile-detail',
@@ -15,7 +16,7 @@ export class PatientProfileDetailComponent implements OnInit {
   patientProfile!:PatientProfile;
   cargando!:boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private patientProfileService: PatientProfileService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private patientProfileService: PatientProfileService, 
     public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,7 +29,7 @@ export class PatientProfileDetailComponent implements OnInit {
       },
       error: error => {
         this.cargando = false;
-        alert("An error occurred while accessing the patient profile: " + error);
+        this.sweetAlert.readError("patient profile",error);
       },
       complete: () => {
         this.cargando = false;
@@ -50,7 +51,7 @@ export class PatientProfileDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the patient profile: " + error);
+        this.sweetAlert.removeError("patient profile",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -67,10 +68,10 @@ export class PatientProfileDetailComponent implements OnInit {
         console.log("Removing patient profile...");
       },
       error: error => {
-        alert("There was a problem removing the patient profile: " + error);
+        this.sweetAlert.removeError("patient profile",error);
       },
       complete: () => {
-        alert("Patient profile removed successfully");
+        this.sweetAlert.removeSuccess("Patient profile");
         this.router.navigateByUrl("/PatientProfile");
       }
     })

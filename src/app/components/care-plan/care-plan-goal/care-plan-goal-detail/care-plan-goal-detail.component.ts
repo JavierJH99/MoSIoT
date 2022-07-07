@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Goal } from 'src/app/models/Care Plan/goal';
 import { TableDataSource } from 'src/app/models/table-data-source';
@@ -21,7 +22,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
   goal!:Goal;
   tableDetailsDataSource!:TableDataSource[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private carePlanService: CarePlanService,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private carePlanService: CarePlanService,
     private categoryGoalPipe: CategoryGoalPipe, private priorityTypePipe: PriorityTypePipe, private careStatusPipe: CareStatusPipe) { }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing: " + error);
+        this.sweetAlert.removeError("goal",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -70,10 +71,10 @@ export class CarePlanGoalDetailComponent implements OnInit {
         console.log("Removing goal...");
       },
       error: error => {
-        alert("There was a problem removing the goal: " + error);
+        this.sweetAlert.removeError("goal",error);
       },
       complete: () => {
-        alert("Goal removed successfully");
+        this.sweetAlert.removeSuccess("goal");
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
       }
     })

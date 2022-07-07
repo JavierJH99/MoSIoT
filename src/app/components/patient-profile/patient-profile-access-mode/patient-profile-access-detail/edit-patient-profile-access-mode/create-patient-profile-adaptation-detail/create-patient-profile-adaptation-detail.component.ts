@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { AccessMode } from 'src/app/models/Patient Profile/access-mode';
 import { NewAdaptationDetail } from 'src/app/models/Patient Profile/new-adaptation-detail';
 import { PatientProfile } from 'src/app/models/Patient Profile/patient-profile';
@@ -27,7 +28,7 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
   get Type() { return this.patientAdaptationForm.get('Type'); }
   get Description() { return this.patientAdaptationForm.get('Description'); }
   
-  constructor(private fb:FormBuilder, private patientService:PatientProfileService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -57,11 +58,11 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to create Adaptation Detail Required: " + error);
+        this.sweetAlert.createError("adaptation detail required",error);
       },
       complete : () => {
         this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
-        alert("Adaptation Detail Required created");
+        this.sweetAlert.createSuccess("adaptation detail required");
       }
     });
   }

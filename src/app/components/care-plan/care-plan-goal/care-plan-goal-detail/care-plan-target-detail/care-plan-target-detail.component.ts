@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Goal } from 'src/app/models/Care Plan/goal';
 import { CarePlanService } from 'src/app/services/care-plan.service';
@@ -15,7 +16,7 @@ export class CarePlanTargetDetailComponent implements OnInit {
   @Input() goal!: Goal;
   carePlan!:CarePlanTemplate;
 
-  constructor(private router: Router, public dialog: MatDialog, private carePlanService: CarePlanService) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private router: Router, public dialog: MatDialog, private carePlanService: CarePlanService) { }
 
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
@@ -42,12 +43,12 @@ export class CarePlanTargetDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing: " + error);
+        this.sweetAlert.removeError("target",error);
         removeConfirm = 0;
       },
       complete: () => {
         if(removeConfirm == 1){
-              this.removeTarget(id!);
+          this.removeTarget(id!);
         }
       }
     });
@@ -59,10 +60,10 @@ export class CarePlanTargetDetailComponent implements OnInit {
         console.log("Removing target...");
       },
       error: error => {
-        alert("There was a problem removing the target: " + error);
+        this.sweetAlert.removeError("target",error);
       },
       complete: () => {
-        alert("Target removed successfully");
+        this.sweetAlert.removeSuccess("Target");
         this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
       }
     })

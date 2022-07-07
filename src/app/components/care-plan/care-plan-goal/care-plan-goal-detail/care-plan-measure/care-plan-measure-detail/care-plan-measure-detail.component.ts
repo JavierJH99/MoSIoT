@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/components/shared/confirmation-dialog/confirmation-dialog.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Measure } from 'src/app/models/Care Plan/measure';
 import { CarePlanService } from 'src/app/services/care-plan.service';
@@ -17,7 +18,7 @@ export class CarePlanMeasureDetailComponent implements OnInit {
   cargando!:boolean;
   idMeasure!:number;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private sweetAlert:SweetAlertsComponent, private activatedRoute: ActivatedRoute, private router: Router,
     public dialog: MatDialog, private carePlanService: CarePlanService) { }
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class CarePlanMeasureDetailComponent implements OnInit {
         this.measure = result;
       },
       error: error => {
-        alert("There was a problem getting measures: " + error);
+        this.sweetAlert.readError("measures",error);
       },
       complete: () => {
         this.cargando = false;
@@ -54,7 +55,7 @@ export class CarePlanMeasureDetailComponent implements OnInit {
         removeConfirm = result;
       },
       error: error => {
-        alert("There was a problem removing the measure: " + error);
+        this.sweetAlert.removeError("measure",error);
         removeConfirm = 0;
       },
       complete: () => {
@@ -71,11 +72,11 @@ export class CarePlanMeasureDetailComponent implements OnInit {
         console.log("Removing measure...");
       },
       error: error => {
-        alert("There was a problem removing the measure: " + error);
+        this.sweetAlert.removeError("measure",error);
       },
       complete: () => {
-        alert("Measure removed successfully");
         this.router.navigateByUrl("/CarePlan/" + this.carePlan.Id);
+        this.sweetAlert.removeSuccess("measure");
       }
     })
   }

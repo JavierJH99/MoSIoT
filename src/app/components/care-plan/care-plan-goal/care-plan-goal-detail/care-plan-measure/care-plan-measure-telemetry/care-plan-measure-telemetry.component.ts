@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Measure } from 'src/app/models/Care Plan/measure';
 import { Telemetry } from 'src/app/models/Device Template/telemetry';
@@ -29,7 +30,7 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
 
   get Condition() { return this.telemetryForm.get('Telemetry'); }
   
-  constructor(private fb:FormBuilder, private activatedRoute: ActivatedRoute, private carePlanService:CarePlanService, private deviceTemplateService: DeviceTemplateService, private router:Router) { }
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private activatedRoute: ActivatedRoute, private carePlanService:CarePlanService, private deviceTemplateService: DeviceTemplateService, private router:Router) { }
 
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
@@ -61,17 +62,17 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
             console.log(result);
           },
           error : error => {
-            alert("Failed to add condition: " + error);
+            this.sweetAlert.updateError(error);
           },
           complete : () => {
             this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
-            alert("Telemetry added to the Measure");
+            this.sweetAlert.updateSuccess();
           }
         });
       }
     }
     else{
-      alert("First create the Measure");
+      this.sweetAlert.createError("Telemtry","First create a Measure");
     }
   }
 
@@ -85,7 +86,7 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
         this.telemetries = result;
       },
       error: error => {
-        alert("There was a problem getting the telemetries: " + error); 
+        this.sweetAlert.readError("telemetries",error);
       },
       complete: () => { }
     })
@@ -110,12 +111,12 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
         console.log(result);
       },
       error : error => {
-        alert("Failed to save changes: " + error);
+        this.sweetAlert.updateError(error);
       },
       complete : () => {
         localStorage.setItem('measureDetail',JSON.stringify(this.measure));
         this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
-        alert("Changes saved");
+        this.sweetAlert.updateSuccess();
       }
     });
   }

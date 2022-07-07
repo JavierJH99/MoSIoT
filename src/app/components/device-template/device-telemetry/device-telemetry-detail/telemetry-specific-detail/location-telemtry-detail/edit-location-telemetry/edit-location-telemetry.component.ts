@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { Location } from 'src/app/models/Device Template/location';
 import { Telemetry } from 'src/app/models/Device Template/telemetry';
@@ -32,7 +33,7 @@ export class EditLocationTelemetryComponent implements OnInit {
   get Altitude() { return this.locationForm.get('Altitude'); }
   get Longitude() { return this.locationForm.get('Longitude'); }
   
-  constructor(private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
 
   ngOnInit(): void {
@@ -43,7 +44,6 @@ export class EditLocationTelemetryComponent implements OnInit {
     this.location = this.telemetry.Location!;
     
     if(this.location == undefined){
-      alert("Creating new location, fill in the fields");
       this.isNew = true;
       this.initDefaults();    
     }
@@ -77,9 +77,10 @@ export class EditLocationTelemetryComponent implements OnInit {
           this.location = result;
         },
         error : error => {
-          alert("Failed to create new location: " + error);
+          this.sweetAlert.createError("location",error);
         },
         complete : () => {
+          this.sweetAlert.createSuccess("location");
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
       });
@@ -90,9 +91,10 @@ export class EditLocationTelemetryComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
+          this.sweetAlert.updateSuccess();
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
         }
       });

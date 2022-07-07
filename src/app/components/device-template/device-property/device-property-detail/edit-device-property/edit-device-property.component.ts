@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ignoreElements } from 'rxjs';
 import { DeviceTemplateAdapterComponent } from 'src/app/adapters/device-template-adapter/device-template-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { DeviceTemplate } from 'src/app/models/Device Template/device-template';
 import { Property } from 'src/app/models/Device Template/property';
 import { DeviceTemplateService } from 'src/app/services/device-template.service';
@@ -28,7 +29,7 @@ export class EditDevicePropertyComponent implements OnInit {
   get Writable() { return this.devicePropertyForm.get('Writable'); }
   get Cloudable() { return this.devicePropertyForm.get('Cloudable'); }
   
-  constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private deviceService:DeviceTemplateService, 
     private router:Router, private activatedRoute: ActivatedRoute, private deviceAdapater: DeviceTemplateAdapterComponent) { }
 
   ngOnInit(): void {
@@ -38,7 +39,6 @@ export class EditDevicePropertyComponent implements OnInit {
 
     //If not exists create new one
     if(this.property == undefined){
-      alert("Creating new property, complete the field.");
       this.isNew = true;
       this.initDefaults();
     }
@@ -66,12 +66,12 @@ export class EditDevicePropertyComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to create property: " + error);
+          this.sweetAlert.createError("property",error);
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
-          alert("New property created");
+          this.sweetAlert.createSuccess("property");
         }
       });
     }
@@ -81,11 +81,13 @@ export class EditDevicePropertyComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError(error);
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
           this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Property/" + this.property.Id);
+
+          this.sweetAlert.updateSuccess();
         }
       });
     }

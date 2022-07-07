@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarePlanAdapterComponent } from 'src/app/adapters/care-plan-adapter/care-plan-adapter.component';
+import { SweetAlertsComponent } from 'src/app/components/shared/sweet-alerts/sweet-alerts.component';
 import { Appointment } from 'src/app/models/Care Plan/appointment';
 import { CareActivity } from 'src/app/models/Care Plan/care-activity';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
@@ -32,7 +33,7 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
   get IsVirtual() { return this.careActivityAppointmentForm.get('IsVirtual'); }
 
   
-  constructor(private fb:FormBuilder, private carePlanService:CarePlanService, 
+  constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
 
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
     this.careActivity = this.carePlan.CareActivities?.find(careActivity => careActivity.Id == this.id)!;
 
     if(this.careActivity == undefined){
-      alert("Failed to load care activity");
+      this.sweetAlert.readError("care activity","care activity error");
       this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
     }
     else{
@@ -49,7 +50,6 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
 
       //If not exists, create new
       if(this.careActivityAppointment == undefined){
-        alert("Creating care activity appointment properties, fill in the fields");
         this.isNew = true;
         this.initDefaults();
       }
@@ -81,12 +81,12 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
           this.careActivityAppointment = result;
         },
         error : error => {
-          alert("Failed to create care activity Appointment: " + error);
+          this.sweetAlert.createError("care activity appointment",error);
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("New care activity Appointment created");
+          this.sweetAlert.createSuccess("care activity appointment");
         }
       });
     }
@@ -96,12 +96,12 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
           console.log(result);
         },
         error : error => {
-          alert("Failed to save changes: " + error);
+          this.sweetAlert.updateError("care activity appointment");
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
           this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
-          alert("Changes saved");
+          this.sweetAlert.updateSuccess();
         }
       });
     }

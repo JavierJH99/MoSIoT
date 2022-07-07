@@ -128,6 +128,7 @@ import { EditSensorTelemetryComponent } from './components/device-template/devic
 import { EditStateTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-telemetry/edit-state-telemetry.component';
 import { EditStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-device/edit-state-device.component';
 import { CreateStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/create-state-device/create-state-device.component';
+import { SweetAlertsComponent } from './components/shared/sweet-alerts/sweet-alerts.component';
 //#endregion Pipes
 
 @NgModule({
@@ -229,7 +230,8 @@ import { CreateStateDeviceComponent } from './components/device-template/device-
     EditSensorTelemetryComponent,
     EditStateTelemetryComponent,
     EditStateDeviceComponent,
-    CreateStateDeviceComponent
+    CreateStateDeviceComponent,
+    SweetAlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -277,6 +279,7 @@ import { CreateStateDeviceComponent } from './components/device-template/device-
     CarePlanAdapterComponent,
     DeviceTemplateAdapterComponent,
     CommandTypePipe,
+    SweetAlertsComponent,
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
