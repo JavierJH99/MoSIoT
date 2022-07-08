@@ -101,7 +101,7 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
   }
 
   addMeasureToTarget(idMeasure: number){
-    this.carePlanService.updateTargetMeasure(this.carePlan.Id, this.idGoal, this.idTarget, idMeasure).subscribe({
+    this.carePlanService.updateTargetMeasure(this.idTarget, idMeasure).subscribe({
       next : result =>{
         console.log(result);
       },

@@ -86,12 +86,12 @@ export class CarePlanService {
     return this.http.put(environment.base_url + '/CarePlanTemplate/AddCondition?p_careplantemplate_oid=' + idCarePlanTemplate, idAdressCondition);
   }
 
-  updateTargetMeasure(idCarePlanTemplate:number, idGoal:number, idTarget: number, idMeasure: number){
-    return this.http.put(environment.base_url + '/CarePlanTemplate/' + idCarePlanTemplate + '/Goals/' + idGoal + '/Targets/AddMeasure?p_target_oid=' + idTarget + '&p_measure_oid=' + idMeasure, null);
+  updateTargetMeasure(idTarget: number, idMeasure: number){
+    return this.http.put(environment.base_url + '/Target/AddMeasure?p_target_oid=' + idTarget + '&p_measure_oid=' + idMeasure, null);
   }
 
-  updateMeasureTelemtry(idCarePlanTemplate:number, idGoal:number, idTarget:number ,idMeasure:number, idTelemetries: number[]){
-    return this.http.put(environment.base_url + '/CarePlanTemplate/' + idCarePlanTemplate + '/Goals/' + idGoal + '/Targets/' + idTarget + '/Measure/AddTelemetries?p_measure_oid=' + idMeasure, idTelemetries);
+  updateMeasureTelemtry(idMeasure:number, idTelemetries: number[]){
+    return this.http.put(environment.base_url + '/Measure/AddTelemetries?p_measure_oid=' + idMeasure, idTelemetries);
   }
 
   updateCareActivity(id: number, data: NewCareActivity){

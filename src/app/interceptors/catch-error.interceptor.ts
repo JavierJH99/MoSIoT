@@ -18,28 +18,31 @@ export class CatchErrorInterceptor implements HttpInterceptor {
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
+    console.log("Error message: " + error.message + ". Error status: " +  error.status);
+    let errorMessage = "(" + error.status + ") --> ";
 
-    if (error.status == 204) {
-      errorMessage = "(" + error.status + ") --> NoContent.";
-    }
-    else if(error.status == 400){
-      errorMessage = "(" + error.status + ") --> BadRequest";
-    }
-    else if(error.status == 401){
-      errorMessage = "(" + error.status + ") --> Unauthorized";
-    }
-    else if(error.status == 403){
-      errorMessage = "(" + error.status + ") --> Forbidden";
-    }
-    else if(error.status == 404){
-      errorMessage = "(" + error.status + ") --> Not found";
-    } 
-    else if(error.status == 500){
-      errorMessage = "(" + error.status + ") --> Internal server error";
-    }
-    else{
-      errorMessage = "(" + error.status + ") --> Fatal error";
+    switch(error.status){
+      case 204:
+        errorMessage += "NoContent";
+        break;
+      case 400:
+        errorMessage += "BadRequest";
+        break;
+      case 401:
+        errorMessage += "Unauthorized";
+        break;
+      case 403:
+        errorMessage += "Forbidden";
+        break;
+      case 404:
+        errorMessage += "Not found";
+        break;
+      case 500:
+        errorMessage += "Internal server error";
+        break;
+      default:
+        errorMessage += "Fatal error";
+        break;
     }
 
     return throwError(() => new Error(errorMessage));

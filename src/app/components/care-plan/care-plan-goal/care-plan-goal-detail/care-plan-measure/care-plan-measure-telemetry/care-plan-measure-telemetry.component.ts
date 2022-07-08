@@ -57,7 +57,7 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
       idTelemetry = this.deleteDuplicates(idTelemetry);
 
       if(idTelemetry != []){
-        this.carePlanService.updateMeasureTelemtry(this.carePlan.Id, this.idGoal, this.idTarget, this.measure.Id,idTelemetry).subscribe({
+        this.carePlanService.updateMeasureTelemtry(this.measure.Id,idTelemetry).subscribe({
           next : result =>{
             console.log(result);
           },
@@ -93,12 +93,13 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
   }
 
   deleteDuplicates(newTelemetries:number[]){
+    let telemetry!: Telemetry;
     newTelemetries.forEach(newTelemetry => {
-      this.measure.TelemetriesMeasure?.find(telemetry => {
-        if(telemetry.Id == newTelemetry){
+      telemetry = this.measure.TelemetriesMeasure?.find(telemetry => telemetry.Id == newTelemetry)!;
+      if(newTelemetry == telemetry.Id){
+          this.sweetAlert.createError("Telemetry: " + telemetry.Name,"The telemetry was already added to this Measure");
           newTelemetries.splice(newTelemetries.indexOf(newTelemetry),1);
-        }
-      })
+      }
     });
     return newTelemetries;
   }
