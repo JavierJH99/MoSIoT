@@ -29,7 +29,7 @@ export class CarePlanComponent implements OnInit {
         localStorage.setItem('carePlanTemplates',JSON.stringify(this.carePlans));
         this.cargando = false;
       }
-    })
+    });
   }
 
   details(id:number){

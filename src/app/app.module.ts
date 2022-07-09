@@ -129,6 +129,7 @@ import { EditStateTelemetryComponent } from './components/device-template/device
 import { EditStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-device/edit-state-device.component';
 import { CreateStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/create-state-device/create-state-device.component';
 import { SweetAlertsComponent } from './components/shared/sweet-alerts/sweet-alerts.component';
+import { HomeComponent } from './components/home/home.component';
 //#endregion Pipes
 
 @NgModule({
@@ -231,7 +232,8 @@ import { SweetAlertsComponent } from './components/shared/sweet-alerts/sweet-ale
     EditStateTelemetryComponent,
     EditStateDeviceComponent,
     CreateStateDeviceComponent,
-    SweetAlertsComponent
+    SweetAlertsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
