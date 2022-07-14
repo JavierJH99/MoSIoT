@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CarePlanTemplate } from 'src/app/models/Care Plan/care-plan-template';
 import { Condition } from 'src/app/models/Patient Profile/condition';
 import { CarePlanService } from 'src/app/services/care-plan.service';
 import { PatientProfileService } from 'src/app/services/patient-profile.service';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 import { SweetAlertsComponent } from '../../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
@@ -25,7 +27,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
 
   get Condition() { return this.adressConditionForm.get('Condition'); }
   
-  constructor(private sweetAlert: SweetAlertsComponent,private fb:FormBuilder, private carePlanService:CarePlanService, private patientProfileService: PatientProfileService, private router:Router) { }
+  constructor(private sweetAlert: SweetAlertsComponent,private fb:FormBuilder, private carePlanService:CarePlanService, public dialog: MatDialog, private patientProfileService: PatientProfileService, private router:Router) { }
 
   ngOnInit(): void {
     this.carePlans = JSON.parse('' + localStorage.getItem('carePlanTemplates'));
@@ -86,8 +88,31 @@ export class CarePlanAdressConditionComponent implements OnInit {
     return newConditionsId;
   }
 
+  removeDialog(idCondition:number){
+    let removeConfirm:number = 0;
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+      width: '250px',
+      data: "adress condition"
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: result => {
+        removeConfirm = result;
+      },
+      error: error => {
+        this.sweetAlert.removeError("address condition",error);
+        removeConfirm = 0;
+      },
+      complete: () => {
+        if(removeConfirm == 1){
+            this.removeCondition(idCondition);
+        }
+      }
+    });
+  }
+
   removeCondition(idCondition:number){
-    if(this.sweetAlert.removeQuestion("condition")){
       this.carePlan.AddressConditions?.splice(this.carePlan.AddressConditions?.map(condition => condition.Id).indexOf(idCondition),1);
 
       this.carePlanService.updateCarePlan(this.carePlan.Id,this.carePlan).subscribe({
@@ -103,7 +128,6 @@ export class CarePlanAdressConditionComponent implements OnInit {
           this.sweetAlert.removeSuccess("condition");
         }
       });
-    }
   }
 
   details(id:number){

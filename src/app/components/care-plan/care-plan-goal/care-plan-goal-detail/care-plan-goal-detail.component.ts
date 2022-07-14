@@ -46,7 +46,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: name
+      data: "goal"
     });
 
     dialogRef.afterClosed().subscribe({
