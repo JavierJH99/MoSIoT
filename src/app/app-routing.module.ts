@@ -238,7 +238,7 @@ const routes: Routes = [
   },
   //#endregion
   {
-    path:'Login',
+    path:'login',
     component:LoginComponent
   },
   {
