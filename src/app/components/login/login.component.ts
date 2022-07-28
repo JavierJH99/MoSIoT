@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import { UserLogin } from 'src/app/models/User/user-login';
+import { UserService } from 'src/app/services/user.service';
+import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-login',
@@ -8,35 +11,36 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email!: string;
-  password!: string;
+  user!:UserLogin;
+  token!:any;
 
-  form: any;
-  users = [
-    {
-      user:'admin',
-      password:'admin'
-    }
-  ];
+  loginForm = this.fb.group({
+    email:['',Validators.required],
+    password:['', Validators.required]
+  })
 
-  constructor(private formBuilder: FormBuilder,
-              private router: Router) {
-  }
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService, private sweetAlert: SweetAlertsComponent) { }
 
-
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      user: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+  ngOnInit(): void { }
 
   login() {
-    const userFind = this.users.find((user:any) => user.user === this.form.get('user').value && user.password === this.form.get('password').value);
-    if(userFind)
-    {
-      alert('Usuario Logeado!');
-      this.router.navigateByUrl('/');
-    }
+    this.user = {
+      Email: this.loginForm.get("email")?.value,
+      Pass: this.loginForm.get("password")?.value
+    };
+
+    this.userService.adminLogin(this.user).subscribe({
+      next : result =>{
+        this.token = result;
+      },
+      error : error => {
+        this.sweetAlert.loginError(error);
+      },
+      complete : () => {
+        localStorage.setItem('token',this.token);
+        this.router.navigateByUrl("Home");
+        this.sweetAlert.loginSuccess();
+      }
+    });
   }
 }

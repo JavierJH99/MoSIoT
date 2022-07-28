@@ -14,9 +14,9 @@ import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.compon
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  devices!:DeviceTemplate[];
-  patients!:PatientProfile[];
-  carePlans!:CarePlanTemplate[];
+  devices:DeviceTemplate[] = [];
+  patients:PatientProfile[] = [];
+  carePlans:CarePlanTemplate[] = [];
 
   cargando!:boolean;
 

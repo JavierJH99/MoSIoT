@@ -8,9 +8,11 @@
                     <div class="align-self-center p-3" *ngIf="cargando">
                         <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
                     </div>
-                    <h2 class="text-center" *ngIf="!cargando">{{devices.length}}</h2>
                 </div>
                 <a class="btn btn-outline-primary" (click)="goDevice()">Device templates</a>
+                <div class="card-footer text-muted">
+                    <h2 class="text-center" *ngIf="!cargando && devices != []">{{devices.length}}</h2>
+                </div>
             </div>
         </div>
         <div class="col-4">
@@ -21,9 +23,11 @@
                     <div class="align-self-center p-3" *ngIf="cargando">
                         <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
                     </div>
-                    <h2 class="text-center" *ngIf="!cargando">{{patients.length}}</h2>
                 </div>
                 <a class="btn btn-outline-primary" (click)="goPatient()" >Patient profiles</a>
+                <div class="card-footer text-muted">
+                    <h2 class="text-center" *ngIf="!cargando">{{patients.length}}</h2>
+                </div>
             </div>
         </div>
         <div class="col-4">
@@ -34,9 +38,12 @@
                     <div class="align-self-center p-3" *ngIf="cargando">
                         <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
                     </div>
-                    <h2 class="text-center" *ngIf="!cargando">{{carePlans.length}}</h2>
+                    
                 </div>
                 <a class="btn btn-outline-primary" (click)="goCarePlan()">Care Plans</a>
+            </div>
+            <div class="card-footer text-muted">
+                <h2 class="text-center" *ngIf="!cargando">{{carePlans.length}}</h2>
             </div>
         </div>
         

@@ -1,4 +1,3 @@
-import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
@@ -64,22 +63,6 @@ export class SweetAlertsComponent implements OnInit {
     });
   }
 
-  removeQuestion(objectToRemove:string):boolean{
-    let isConfirmed:boolean = false;
-    Swal.fire({
-      title: 'Do you want to delete ' + objectToRemove + ' ?',
-      showDenyButton: true,
-      confirmButtonText: 'Remove',
-      denyButtonText: 'Cancel',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        isConfirmed = true;
-      }
-    });
-
-    return isConfirmed;
-  }
-
   removeSuccess(objectToRemove:string){
     Swal.fire({
       title: objectToRemove + ' successfully removed',
@@ -95,6 +78,36 @@ export class SweetAlertsComponent implements OnInit {
       title: 'Error',
       text: 'A problem occurred while removing ' + objectToRemove + '. Error: ' + error,
       icon: 'error',
+      confirmButtonColor: '#0d6efd',
+      showCloseButton: true
+    });
+  }
+
+  loginSuccess(){
+    Swal.fire({
+      title: 'Successful login',
+      icon: 'success',
+      timer: 2500,
+      confirmButtonColor: '#0d6efd',
+      showCloseButton: true
+    });
+  }
+  
+  loginError(error:string){
+    Swal.fire({
+      title: 'Error',
+      text: 'A problem occurred while trying to login. Error: ' + error,
+      icon: 'error',
+      confirmButtonColor: '#0d6efd',
+      showCloseButton: true
+    });
+  }
+
+  logOutSuccess(){
+    Swal.fire({
+      title: 'Successful logout',
+      icon: 'success',
+      timer: 2500,
       confirmButtonColor: '#0d6efd',
       showCloseButton: true
     });

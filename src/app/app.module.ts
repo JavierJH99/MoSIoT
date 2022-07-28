@@ -130,6 +130,7 @@ import { EditStateDeviceComponent } from './components/device-template/device-te
 import { CreateStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/create-state-device/create-state-device.component';
 import { SweetAlertsComponent } from './components/shared/sweet-alerts/sweet-alerts.component';
 import { HomeComponent } from './components/home/home.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 //#endregion Pipes
 
 @NgModule({
@@ -282,6 +283,7 @@ import { HomeComponent } from './components/home/home.component';
     DeviceTemplateAdapterComponent,
     CommandTypePipe,
     SweetAlertsComponent,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
