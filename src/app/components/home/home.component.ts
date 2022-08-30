@@ -23,46 +23,53 @@ export class HomeComponent implements OnInit {
   constructor(private sweetAlert: SweetAlertsComponent, private router: Router, private deviceTemplateService:DeviceTemplateService, private carePlanService: CarePlanService, private patientProfileService: PatientProfileService) { }
 
   ngOnInit(): void {
-    this.cargando = true;
+    let token = sessionStorage.getItem('token');
+    if(token == null || token == ''){
+      this.sweetAlert.loginRequired();
+    }
 
-    this.carePlanService.getAllCarePlanTemplate().subscribe({
-      next: result => {
-        this.carePlans = result;
-      },
-      error: error => {
-        this.cargando = false;
-        this.sweetAlert.readError("care plan templates","error getting care plan templates");
-      },
-      complete: () => {
-        localStorage.setItem('carePlanTemplates',JSON.stringify(this.carePlans));
-      }
-    })
+    else{
+      this.cargando = true;
 
-    this.deviceTemplateService.getAllDeviceTemplate().subscribe({
-      next: result => {
-        this.devices = result;
-      },
-      error: error => {
-        this.cargando = false;
-        this.sweetAlert.readError("devices",error);
-      },
-      complete: () => {
-      }
-    })
+      this.carePlanService.getAllCarePlanTemplate().subscribe({
+        next: result => {
+          this.carePlans = result;
+        },
+        error: error => {
+          this.cargando = false;
+          this.sweetAlert.readError("care plan templates","error getting care plan templates");
+        },
+        complete: () => {
+          localStorage.setItem('carePlanTemplates',JSON.stringify(this.carePlans));
+        }
+      })
 
-    this.patientProfileService.getAllPatientProfile().subscribe({
-      next: result => {
-        this.patients = result;
-      },
-      error: error => {
-        this.cargando = false;
-        this.sweetAlert.readError("patient profiles",error);
-      },
-      complete: () => {
-      }
-    })
+      this.deviceTemplateService.getAllDeviceTemplate().subscribe({
+        next: result => {
+          this.devices = result;
+        },
+        error: error => {
+          this.cargando = false;
+          this.sweetAlert.readError("devices",error);
+        },
+        complete: () => {
+        }
+      })
 
-    this.cargando = false;
+      this.patientProfileService.getAllPatientProfile().subscribe({
+        next: result => {
+          this.patients = result;
+        },
+        error: error => {
+          this.cargando = false;
+          this.sweetAlert.readError("patient profiles",error);
+        },
+        complete: () => {
+        }
+      })
+
+      this.cargando = false;
+    }
   }
   
   goDevice(){

@@ -34,6 +34,7 @@ export class EditDeviceProfileComponent implements OnInit {
   ngOnInit(): void {
     this.devices = JSON.parse('' + localStorage.getItem('devices'));
     this.activatedRoute.params.subscribe((params: Params) => this.idDevice = params['deviceId']);
+    console.log(this.idDevice + 'id device');
     this.device = this.devices.find(device => device.Id == this.idDevice)!;
 
     //If not exists, create new

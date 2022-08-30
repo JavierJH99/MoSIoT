@@ -1,3 +1,4 @@
+//#region imports
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -48,6 +49,7 @@ import { EditSensorTelemetryComponent } from './components/device-template/devic
 import { EditStateTelemetryComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-telemetry/edit-state-telemetry.component';
 import { EditStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/edit-state-device/edit-state-device.component';
 import { CreateStateDeviceComponent } from './components/device-template/device-telemetry/device-telemetry-detail/telemetry-specific-detail/state-telemetry-detail/create-state-device/create-state-device.component';
+//#endregion imports
 
 const routes: Routes = [
   {

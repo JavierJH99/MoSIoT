@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
         this.sweetAlert.loginError(error);
       },
       complete : () => {
-        localStorage.setItem('token',this.token);
+        sessionStorage.setItem('token',this.token);
+        window.location.reload();
         this.router.navigateByUrl("Home");
         this.sweetAlert.loginSuccess();
       }

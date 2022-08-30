@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.token = localStorage.getItem('token');
+    this.token = sessionStorage.getItem('token');
     if(this.token != "" && this.token != undefined){
       console.log("Añadiendo token a la llamada: ", this.token);
       const authorizationReq = request.clone({

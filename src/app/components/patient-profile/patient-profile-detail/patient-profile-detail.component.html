@@ -1,10 +1,10 @@
 <div class="row" *ngIf="!cargando">
     <div class="col">
-        <h1>{{this.patientProfile.Name | titlecase}}</h1>
+        <h1 id="patientProfileName">{{this.patientProfile.Name | titlecase}}</h1>
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-danger" (click)="removeDialog()">Remove patient profile</button>
+            <button id="deletebtn" class="btn btn-outline-danger" (click)="removeDialog()">Remove patient profile</button>
         </div>
     </div>    
 </div>

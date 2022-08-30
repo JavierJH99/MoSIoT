@@ -13,6 +13,20 @@ export class SweetAlertsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loginRequired(){
+    Swal.fire({
+      title: 'Warning',
+      text: '',
+      icon: 'warning',
+      html: 'To use all the functions of the application you need to <a href="/Login">Login</a>.',
+      showConfirmButton: false,
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Later',
+      showCloseButton: true
+    });
+  }
+
   readError(objetcToLoad:string ,error:string){
     Swal.fire({
       title: 'Error',

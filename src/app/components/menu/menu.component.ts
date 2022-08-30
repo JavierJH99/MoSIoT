@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.component';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'menu',
@@ -12,10 +13,10 @@ export class MenuComponent implements OnInit {
   loggeado:boolean = false;
   token!:string;
 
-  constructor(private router: Router, private sweetAlert: SweetAlertsComponent) { }
+  constructor(public dialog: MatDialog, private router: Router, private sweetAlert: SweetAlertsComponent) { }
 
   ngOnInit(): void {
-    this.token = localStorage.getItem('token')!;
+    this.token = sessionStorage.getItem('token')!;
     if(this.token != undefined && this.token != ""){
       this.loggeado = true;
     }
@@ -37,8 +38,9 @@ export class MenuComponent implements OnInit {
       denyButtonText: 'No',
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.setItem('token','');
+        sessionStorage.setItem('token','');
         this.sweetAlert.logOutSuccess();
+        window.location.reload();
       }
     });
   }

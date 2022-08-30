@@ -31,7 +31,7 @@
                 <td>
                     <div>
                         <b>Title</b><br>
-                        <input type="text" class="form-control" formControlName="Title" required>
+                        <input id="title" type="text" class="form-control" formControlName="Title" required>
                         <div *ngIf="Title?.invalid && (Title?.dirty || Title?.touched)">
                             <div *ngIf="Title?.errors?.['required']">
                                 <div class="invalid-feedback">A title is required</div>
@@ -44,7 +44,7 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea class="form-control" formControlName="Description" required></textarea>
+                        <textarea id="description" class="form-control" formControlName="Description" required></textarea>
                         <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
                             <div *ngIf="Description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
@@ -113,6 +113,6 @@
     <div class="d-flex justify-content-end mt-2">
         <button type="reset" class="btn btn-outline-secondary" (click)="cancelCarePlan()">Cancel</button>
         &nbsp;
-        <button type="submit" class="btn btn-primary" [disabled]="!carePlanForm.valid">Save</button>
+        <button id="btnsave" type="submit" class="btn btn-primary" [disabled]="!carePlanForm.valid">Save</button>
     </div>
 </form>

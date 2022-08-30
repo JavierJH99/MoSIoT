@@ -4,6 +4,6 @@
     <input type="email" class="form-control" formControlName="email" id="email" name="email" placeholder="Email" required/>
     <input type="password" class="form-control" formControlName="password" id="password" name="password" placeholder="Password" required/>
 
-    <button type="submit" class="btn btn-primary" (click)="login()" [disabled]="!loginForm.valid">Log in</button>
+    <button id="btnlogin" type="submit" class="btn btn-primary" (click)="login()" [disabled]="!loginForm.valid">Log in</button>
   </form>
 </div>

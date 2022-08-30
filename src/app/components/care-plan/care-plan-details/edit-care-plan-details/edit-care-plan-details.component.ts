@@ -118,7 +118,7 @@ export class EditCarePlanDetailsComponent implements OnInit {
   patientAssigned(){
     let idPatient:number = this.carePlanForm.get('Patient')?.value;
 
-    if(this.carePlan.Patient?.Id != idPatient){
+    if(this.carePlan.Patient?.Id != undefined && this.carePlan.Patient?.Id != idPatient){
       this.carePlanService.updateCarePlanPatient(this.carePlan.Id,idPatient).subscribe({
         next: result => {
           console.log( result );

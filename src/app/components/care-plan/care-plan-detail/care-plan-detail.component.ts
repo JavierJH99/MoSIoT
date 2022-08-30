@@ -55,13 +55,13 @@ export class CarePlanDetailComponent implements OnInit {
       },
       complete: () => {
         if(removeConfirm == 1){
-          this.removePatientProfile();
+          this.removeCarePlan();
         }
       }
     });
   }
 
-  removePatientProfile(){
+  removeCarePlan(){
     this.carePlanService.deleteCarePlan(this.carePlan.Id).subscribe({
       next: result => {
         console.log("Removing care plan...");
@@ -70,7 +70,7 @@ export class CarePlanDetailComponent implements OnInit {
         alert("There was a problem removing the care plan: " + error);
       },
       complete: () => {
-        alert("Care plan removed successfully");
+        this.sweetAlert.removeSuccess("Care Plan");
         this.router.navigateByUrl("/CarePlan");
       }
     })
