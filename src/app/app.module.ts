@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from "./components/login/login.component";
 import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
+import { NgChartsModule } from 'ng2-charts';
 //#endregion Utilities
 //#region Angular Material
 import { MatMenuModule } from '@angular/material/menu';
@@ -131,6 +132,12 @@ import { CreateStateDeviceComponent } from './components/device-template/device-
 import { SweetAlertsComponent } from './components/shared/sweet-alerts/sweet-alerts.component';
 import { HomeComponent } from './components/home/home.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { DashboarToCopyComponent } from './components/home/dashboar-to-copy/dashboar-to-copy.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
 //#endregion Pipes
 
 @NgModule({
@@ -234,7 +241,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     EditStateDeviceComponent,
     CreateStateDeviceComponent,
     SweetAlertsComponent,
-    HomeComponent
+    HomeComponent,
+    DashboardComponent,
+    DashboarToCopyComponent
   ],
   imports: [
     BrowserModule,
@@ -250,7 +259,12 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    LayoutModule
   ],
   providers: [
     MatDatepickerModule,

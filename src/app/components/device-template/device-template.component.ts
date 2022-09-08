@@ -12,25 +12,33 @@ import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.compon
 export class DeviceTemplateComponent implements OnInit {
   deviceTemplates!: DeviceTemplate[];
   cargando!:boolean;
+  token!:string;
 
   constructor(private sweetAlert:SweetAlertsComponent, private router: Router, private deviceTemplateService: DeviceTemplateService) { }
 
   ngOnInit(): void {
-    this.cargando = true;
+    this.token = sessionStorage.getItem('token')!;
+    if(this.token == null || this.token == ''){
+      this.sweetAlert.loginRequired();
+    }
 
-    this.deviceTemplateService.getAllDeviceTemplate().subscribe({
-      next: result => {
-        this.deviceTemplates = result;
-      },
-      error: error => {
-        this.cargando = false;
-        this.sweetAlert.readError("devices",error);
-      },
-      complete: () => {
-        localStorage.setItem('devices',JSON.stringify(this.deviceTemplates));
-        this.cargando = false;
-      }
-    })
+    else{
+      this.cargando = true;
+
+      this.deviceTemplateService.getAllDeviceTemplate().subscribe({
+        next: result => {
+          this.deviceTemplates = result;
+        },
+        error: error => {
+          this.cargando = false;
+          this.sweetAlert.readError("devices",error);
+        },
+        complete: () => {
+          localStorage.setItem('devices',JSON.stringify(this.deviceTemplates));
+          this.cargando = false;
+        }
+      })
+    }
   }
 
   details(id:number){

@@ -17,14 +17,15 @@ export class HomeComponent implements OnInit {
   devices:DeviceTemplate[] = [];
   patients:PatientProfile[] = [];
   carePlans:CarePlanTemplate[] = [];
+  token!:string;
 
   cargando!:boolean;
 
   constructor(private sweetAlert: SweetAlertsComponent, private router: Router, private deviceTemplateService:DeviceTemplateService, private carePlanService: CarePlanService, private patientProfileService: PatientProfileService) { }
 
   ngOnInit(): void {
-    let token = sessionStorage.getItem('token');
-    if(token == null || token == ''){
+    this.token = sessionStorage.getItem('token')!;
+    if(this.token == null || this.token == ''){
       this.sweetAlert.loginRequired();
     }
 
@@ -73,15 +74,30 @@ export class HomeComponent implements OnInit {
   }
   
   goDevice(){
+    if(this.token == null || this.token == ''){
+      this.sweetAlert.loginRequired();
+    }
+    else{
     this.router.navigateByUrl("/DeviceTemplate");
+    }
   }
   
   goPatient(){
-    this.router.navigateByUrl("/PatientProfile");
+    if(this.token == null || this.token == ''){
+      this.sweetAlert.loginRequired();
+    }
+    else{
+      this.router.navigateByUrl("/PatientProfile");
+    }
   }
 
   goCarePlan(){
-    this.router.navigateByUrl("/CarePlan");
+    if(this.token == null || this.token == ''){
+      this.sweetAlert.loginRequired();
+    }
+    else{
+      this.router.navigateByUrl("/CarePlan");
+    }
   }
 
 }

@@ -12,24 +12,32 @@ import { SweetAlertsComponent } from '../shared/sweet-alerts/sweet-alerts.compon
 export class PatientProfileComponent implements OnInit {
   patientProfiles!: PatientProfile[];
   cargando!:boolean;
+  token!:string;
 
   constructor(private sweetAlert:SweetAlertsComponent, private router: Router, private patientProfileService: PatientProfileService) { }
 
   ngOnInit(): void {
-    this.cargando = true;
-    this.patientProfileService.getAllPatientProfile().subscribe({
-      next: result => {
-        this.patientProfiles = result;
-      },
-      error: error => {
-        this.cargando = false;
-        this.sweetAlert.readError("patient profiles",error);
-      },
-      complete: () => {
-        localStorage.setItem('patientProfiles',JSON.stringify(this.patientProfiles));
-        this.cargando = false;
-      }
-    })
+    this.token = sessionStorage.getItem('token')!;
+    if(this.token == null || this.token == ''){
+      this.sweetAlert.loginRequired();
+    }
+
+    else{
+      this.cargando = true;
+      this.patientProfileService.getAllPatientProfile().subscribe({
+        next: result => {
+          this.patientProfiles = result;
+        },
+        error: error => {
+          this.cargando = false;
+          this.sweetAlert.readError("patient profiles",error);
+        },
+        complete: () => {
+          localStorage.setItem('patientProfiles',JSON.stringify(this.patientProfiles));
+          this.cargando = false;
+        }
+      })
+    }
   }
 
   details(id:number){

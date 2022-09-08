@@ -22,7 +22,7 @@ export class UserService {
   }
 
   getAllUsers(){
-    return this.http.get<User[]>(environment.base_url + 'User/ReadAll');
+    return this.http.get<User[]>(environment.base_url + '/User/ReadAll');
   }
 
   getAdminUser(){
@@ -34,19 +34,19 @@ export class UserService {
   }
 
   getAllUserActions(id: number){
-    return this.http.get(environment.base_url + 'UserAction/Actions?idUser=' + id);
+    return this.http.get(environment.base_url + '/UserAction/Actions?idUser=' + id);
   }
 
   getTotalUserActions(id: number){
-    return this.http.get<number>(environment.base_url + 'UserAction/DameTotalAccionesUsuario?p_iduser=' + id);
+    return this.http.get<number>(environment.base_url + '/UserAction/DameTotalAccionesUsuario?p_iduser=' + id);
   }
 
   getAllUserSessions(id: number){
-    return this.http.get<Session>(environment.base_url + 'UserSession/Sessions?idUser=' + id);
+    return this.http.get<Session[]>(environment.base_url + '/UserSession/Sessions?idUser=' + id);
   }
 
   getTotalUserSessions(id: number){
-    return this.http.get<number>(environment.base_url + 'UserSession/DameNumSessionsByUser?p_iduser=' + id);
+    return this.http.get<number>(environment.base_url + '/UserSession/DameNumSessionsByUser?p_iduser=' + id);
   }
 
   createAdminUser(data: UserAdmin){
