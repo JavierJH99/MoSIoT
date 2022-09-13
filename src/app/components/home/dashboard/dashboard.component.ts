@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
 
   loadLineSessionDashboard(){
     this.sessions.forEach(session =>{
-      this.lineChartDataset[new Date(session.StartTime).getDate() - 1] += 1;
+      this.lineChartDataset[new Date(session.StartTime).getDay() - 1] += 1;
     })
 
     this.lineChartData = {

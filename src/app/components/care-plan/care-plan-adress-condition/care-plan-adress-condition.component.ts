@@ -45,7 +45,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
 
     idCondition = this.deleteDuplicates(idCondition);
 
-    if(idCondition != []){
+    if(idCondition != undefined){
       this.carePlanService.updateCarePlanAdressCondition(this.carePlan.Id,idCondition).subscribe({
         next : result =>{
           console.log(result);
