@@ -141,4 +141,8 @@ export class CarePlanService {
   deleteMeasure(id:number) {
     return this.http.delete(environment.base_url + '/Measure/Destroy?p_measure_oid=' + id);
   }
+
+  deleteAdressCondition(id:number){
+    return this.http.delete(environment.base_url + '/Condition_CarePlan/Destroy?p_condition_oid=' + id);
+  }
 }

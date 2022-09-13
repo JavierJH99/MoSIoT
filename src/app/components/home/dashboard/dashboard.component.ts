@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   users!:User[];
   sessions!:Session[];
   cargando:boolean = false;
+  token!:string;
 
   public lineChartData!: ChartConfiguration<'line'>['data'];
   public lineChartOptions: ChartOptions<'line'> = { responsive: false };
@@ -25,32 +26,31 @@ export class DashboardComponent implements OnInit {
   public pieChartDatasets!:any;
   public pieChartLegend = true;
   public pieChartPlugins = [];
-
+  
   public barChartLegend = true;
   public barChartPlugins = [];
-
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['2020', '2021', '2022'],
-    datasets: [
-      { data: [0, 10, 25], label: 'Caregiver' },
-      { data: [0, 20, 50], label: 'Patient' },
-      { data: [0, 5, 10], label: 'Administrator' },
-    ],
-  };
-
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
-  };
-  
+  public barChartData!: ChartConfiguration<'bar'>['data'];
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = { responsive: false };
 
   constructor(private sweetAlert: SweetAlertsComponent, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.cargando = true;
-
-    this.loadDashboard();
-
-    this.cargando = false;
+    this.token = sessionStorage.getItem('token')!;
+    if(this.token == null || this.token == ''){
+      this.sweetAlert.loginRequired();
+    }
+    else{
+      this.loadDashboard();
+    
+      this.barChartData = {
+        labels: ['2020', '2021', '2022'],
+        datasets: [
+          { data: [0, 10, 25], label: 'Caregiver' },
+          { data: [0, 20, 50], label: 'Patient' },
+          { data: [0, 5, 10], label: 'Administrator' },
+        ],
+      };
+    }
   }
 
   loadDashboard(){

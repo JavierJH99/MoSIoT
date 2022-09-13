@@ -115,7 +115,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
   removeCondition(idCondition:number){
       this.carePlan.AddressConditions?.splice(this.carePlan.AddressConditions?.map(condition => condition.Id).indexOf(idCondition),1);
 
-      this.carePlanService.updateCarePlan(this.carePlan.Id,this.carePlan).subscribe({
+      this.carePlanService.deleteAdressCondition(idCondition).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -127,7 +127,20 @@ export class CarePlanAdressConditionComponent implements OnInit {
           this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
           this.sweetAlert.removeSuccess("condition");
         }
-      });
+      })
+      // this.carePlanService.updateCarePlan(this.carePlan.Id,this.carePlan).subscribe({
+      //   next : result =>{
+      //     console.log(result);
+      //   },
+      //   error : error => {
+      //     this.sweetAlert.removeError("condition",error);
+      //   },
+      //   complete : () => {
+      //     localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
+      //     this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+      //     this.sweetAlert.removeSuccess("condition");
+      //   }
+      // });
   }
 
   details(id:number){

@@ -133,7 +133,6 @@ import { SweetAlertsComponent } from './components/shared/sweet-alerts/sweet-ale
 import { HomeComponent } from './components/home/home.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
-import { DashboarToCopyComponent } from './components/home/dashboar-to-copy/dashboar-to-copy.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -242,8 +241,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     CreateStateDeviceComponent,
     SweetAlertsComponent,
     HomeComponent,
-    DashboardComponent,
-    DashboarToCopyComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

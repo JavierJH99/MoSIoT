@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit {
   constructor(private sweetAlert: SweetAlertsComponent, private router: Router, private deviceTemplateService:DeviceTemplateService, private carePlanService: CarePlanService, private patientProfileService: PatientProfileService) { }
 
   ngOnInit(): void {
-    this.token = sessionStorage.getItem('token')!;
-    if(this.token == null || this.token == ''){
-      this.sweetAlert.loginRequired();
-    }
+    // this.token = sessionStorage.getItem('token')!;
+    // if(this.token == null || this.token == ''){
+    //   this.sweetAlert.loginRequired();
+    // }
 
-    else{
+    // else{
       this.cargando = true;
 
       this.carePlanService.getAllCarePlanTemplate().subscribe({
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
       })
 
       this.cargando = false;
-    }
+    // }
   }
   
   goDevice(){
